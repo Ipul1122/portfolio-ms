@@ -36,36 +36,7 @@
 
 <body class="bg-white text-gray-900 font-sans antialiased">
 
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                
-                <a href="#home" class="flex items-center space-x-2 hover:opacity-80 transition duration-300">
-                    <div class="bg-primary text-white font-bold text-lg px-3 py-1.5 rounded-lg">MS</div>
-                </a>
-
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-primary transition duration-300 font-medium">About</a>
-                    <a href="#services" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Services</a>
-                    <a href="#work" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Work</a>
-                    <a href="#contact" class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium">Contact</a>
-                </div>
-
-                <button id="menu-btn" class="md:hidden focus:outline-none text-gray-700">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </nav>
-
-        <div id="menu-mobile" class="hidden md:hidden nav-blur">
-            <div class="container mx-auto px-6 py-4 space-y-2">
-                <a href="#about" class="block py-2 text-gray-600 hover:text-primary transition">About</a>
-                <a href="#services" class="block py-2 text-gray-600 hover:text-primary transition">Services</a>
-                <a href="#work" class="block py-2 text-gray-600 hover:text-primary transition">Work</a>
-                <a href="#contact" class="block py-2 text-gray-600 hover:text-primary transition">Contact</a>
-            </div>
-        </div>
-    </header>
+    <div id="navbar-placeholder"></div>
 
     <main>
 
@@ -249,7 +220,7 @@
             </div>
         </section>
 
-       <section id="work" class="py-24 bg-white">
+      <section id="work" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-hidden fade-up">
                     <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Project</h2>
@@ -258,25 +229,23 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
-                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg">
+                    <a href="project-kami.html?project=masjid" class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg">
                         
                         <img src="image/project/masjid_nurul_haq.png" 
-                             alt="Nama Proyek 1" 
-                             class="w-full h-full object-cover object-fit transition-transform duration-300 group-hover:scale-105">
+                             alt="Website Masjid Nurul Haq" 
+                             class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                             <div>
-                                <h3 class="text-white font-bold text-xl mb-2">Masjid</h3>
+                                <h3 class="text-white font-bold text-xl mb-2">Website Masjid</h3>
                                 <p class="text-gray-200 text-sm">Pembuatan Website Masjid Nurul Haq</p>
-                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 100ms;">
+                    </a> <a href="project-kami.html?project=tpa" class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 100ms;">
                         
                         <img src="image/project/tpa_masjid.png" 
-                             alt="Nama Proyek 2" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                             alt="Absensi TPA Masjid" 
+                             class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
 
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                             <div>
@@ -284,13 +253,11 @@
                                 <p class="text-gray-200 text-sm">Absensi Digital Berbasis Web</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 200ms;">
+                    </a> <a href="project-kami.html?project=travel" class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 200ms;">
                         
                         <img src="image/project/pellor_trans_travel.png" 
-                             alt="Nama Proyek 3" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                             alt="Pellor Trans Travel" 
+                             class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
 
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                             <div>
@@ -298,9 +265,7 @@
                                 <p class="text-gray-200 text-sm">Pelayanan pemesanan transportasi</p>
                             </div>
                         </div>
-                    </div>
-
-                </div>
+                    </a> </div>
             </div>
         </section>
 
