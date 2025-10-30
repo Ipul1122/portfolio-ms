@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Proyek - Muhammad Syaifulloh</title>
+    
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563eb',
+                        'secondary': '#1e40af',
+                        'accent': '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+
+<body class="bg-white text-gray-900 font-sans antialiased">
+
+   <div id="navbar-placeholder"></div>
+
+    <main>
+        <section id="project-detail" class="pt-32 pb-24 bg-gray-50 min-h-screen">
+            <div class="container mx-auto px-6">
+
+                <div id="project-default" class="text-center">
+                    <h1 class="text-4xl font-bold font-heading mb-4">Proyek Tidak Ditemukan</h1>
+                    <p class="text-xl text-gray-600 mb-8">Silakan kembali ke halaman utama untuk melihat portofolio kami.</p>
+                    <a href="index.html#work" class="px-8 py-3.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium">
+                        Kembali ke Portofolio
+                    </a>
+                </div>
+
+
+                <article id="project-masjid" class="hidden max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Website Masjid Nurul Haq</h1>
+                    <p class="text-xl text-gray-600 mb-8">Sistem Informasi dan Manajemen Keuangan Masjid Berbasis Web</p>
+
+                    <img src="image/project/masjid_nurul_haq.png" alt="Masjid Nurul Haq" class="w-full rounded-2xl shadow-xl mb-12 border">
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-2">
+                            <h3 class="text-2xl font-bold font-heading mb-4">Tentang Proyek</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                Website ini dibuat untuk Masjid Nurul Haq sebagai pusat informasi digital. Tujuannya adalah untuk mempermudah jamaah mendapatkan informasi kajian, melihat laporan keuangan secara transparan, dan mengelola data konten dakwah.
+                            </p>
+                            
+                            <h3 class="text-2xl font-bold font-heading mb-4">Fitur Utama</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                                <li>Manajemen Konten (Artikel, Jadwal Kajian)</li>
+                                <li>Sistem Keuangan (Pemasukan & Pengeluaran)</li>
+                                <li>Laporan Keuangan Transparan untuk Publik</li>
+                                <li>Manajemen Donasi Digital</li>
+                                <li>Galeri Kegiatan Masjid</li>
+                                <li>Profil Pengurus DKM</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold font-heading mb-4">Info Teknis</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-700"><strong>Klien:</strong> DKM Masjid Nurul Haq</p>
+                                <p class="text-gray-700"><strong>Layanan:</strong> Fullstack Development</p>
+                                <p class="text-gray-700"><strong>Tahun:</strong> 2024</p>
+                                
+                                <h4 class="font-bold pt-2">Teknologi:</h4>
+                                <ul class="list-disc list-inside text-gray-600 text-sm">
+                                    <li>HTML, CSS, JavaScript</li>
+                                    <li>TailwindCSS</li>
+                                    <li>PHP (Natif)</li>
+                                    <li>MySQL</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article id="project-tpa" class="hidden max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Absensi Digital TPA Nurul Haq</h1>
+                    <p class="text-xl text-gray-600 mb-8">Sistem Pendaftaran dan Absensi Santri TPA Berbasis Web</p>
+
+                    <img src="image/project/tpa_masjid.png" alt="TPA Masjid" class="w-full rounded-2xl shadow-xl mb-12 border">
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-2">
+                            <h3 class="text-2xl font-bold font-heading mb-4">Tentang Proyek</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                Aplikasi web ini dirancang untuk menggantikan sistem absensi manual di TPA Nurul Haq. Orang tua dapat mendaftarkan anak mereka secara online, dan guru dapat dengan mudah mencatat absensi harian serta memantau perkembangan santri.
+                            </p>
+                            
+                            <h3 class="text-2xl font-bold font-heading mb-4">Fitur Utama</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                                <li>Formulir Pendaftaran Santri Baru (Online)</li>
+                                <li>Panel Admin (Manajemen Data Santri & Guru)</li>
+                                <li>Sistem Absensi Harian oleh Guru</li>
+                                <li>Laporan Absensi per Santri (Bulanan)</li>
+                                <li>Informasi Kegiatan TPA</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold font-heading mb-4">Info Teknis</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-700"><strong>Klien:</strong> Pengurus TPA Nurul Haq</p>
+                                <p class="text-gray-700"><strong>Layanan:</strong> Web Application</p>
+                                <p class="text-gray-700"><strong>Tahun:</strong> 2024</p>
+                                
+                                <h4 class="font-bold pt-2">Teknologi:</h4>
+                                <ul class="list-disc list-inside text-gray-600 text-sm">
+                                    <li>HTML, CSS</li>
+                                    <li>Bootstrap 5</li>
+                                    <li>PHP</li>
+                                    <li>MySQL</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article id="project-travel" class="hidden max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Pellor Trans Travel</h1>
+                    <p class="text-xl text-gray-600 mb-8">Website Company Profile untuk Jasa Transportasi & Travel</p>
+
+                    <img src="image/project/pellor_trans_travel.png" alt="Pellor Trans Travel" class="w-full rounded-2xl shadow-xl mb-12 border">
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-2">
+                            <h3 class="text-2xl font-bold font-heading mb-4">Tentang Proyek</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                Ini adalah proyek studi kasus untuk membuat website company profile modern bagi perusahaan travel. Fokus utamanya adalah pada desain yang menarik, informasi layanan yang jelas, dan kemudahan untuk menghubungi (Call to Action).
+                            </p>
+                            
+                            <h3 class="text-2xl font-bold font-heading mb-4">Fitur Utama</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                                <li>Desain Landing Page yang Menarik</li>
+                                <li>Daftar Layanan (Pemesanan Tiket, Antar Jemput)</li>
+                                <li>Galeri Armada Kendaraan</li>
+                                CSS
+                                <li>Halaman "Tentang Kami" dan "Kontak"</li>
+                                <li>Tombol WhatsApp terintegrasi</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold font-heading mb-4">Info Teknis</h3>
+                            <div class="space-y-3">
+                                <p class="text-gray-700"><strong>Klien:</strong> (Proyek Pribadi / Portofolio)</p>
+                                <p class="text-gray-700"><strong>Layanan:</strong> Web Design & Development</p>
+                                <p class="text-gray-700"><strong>Tahun:</strong> 2023</p>
+                                
+                                <h4 class="font-bold pt-2">Teknologi:</h4>
+                                <ul class="list-disc list-inside text-gray-600 text-sm">
+                                    <li>HTML</li>
+                                    <li>CSS (Natif)</li>
+                                    <li>JavaScript (untuk slider)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 py-12 text-gray-400">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2025 Muhammad Syaifulloh. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Jalankan script setelah halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Ambil URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectNama = urlParams.get('project'); // akan berisi 'masjid', 'tpa', atau 'travel'
+
+            // Sembunyikan konten default
+            const projectDefault = document.getElementById('project-default');
+            
+            // 2. Tentukan elemen mana yang akan ditampilkan
+            let elemenToShow = null;
+
+            if (projectNama === 'masjid') {
+                elemenToShow = document.getElementById('project-masjid');
+            } else if (projectNama === 'tpa') {
+                elemenToShow = document.getElementById('project-tpa');
+            } else if (projectNama === 'travel') {
+                elemenToShow = document.getElementById('project-travel');
+            }
+
+            // 3. Tampilkan elemen yang dipilih (jika ada)
+            if (elemenToShow) {
+                // Sembunyikan pesan default
+                projectDefault.classList.add('hidden');
+                // Tampilkan proyek yang benar
+                elemenToShow.classList.remove('hidden');
+            } else {
+                // Jika parameter tidak ada atau salah, biarkan pesan default terlihat
+                projectDefault.classList.remove('hidden');
+            }
+        });
+    </script>
+    
+    </body>
+</html>
