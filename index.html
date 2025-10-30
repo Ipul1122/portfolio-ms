@@ -11,6 +11,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <script>
@@ -31,63 +32,10 @@
         }
     </script>
     
-    <style>
-        .animate-hidden {
-            opacity: 0;
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        
-        .animate-hidden.fade-up {
-            transform: translateY(30px);
-        }
-        
-        .animate-hidden.from-left {
-            transform: translateX(-30px);
-        }
-        
-        .animate-hidden.from-right {
-            transform: translateX(30px);
-        }
-        
-        .animate-visible {
-            opacity: 1;
-            transform: translateY(0) translateX(0);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-        }
-
-        .nav-blur {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-    </style>
-
 </head>
 
 <body class="bg-white text-gray-900 font-sans antialiased">
 
-    <!-- Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
@@ -100,7 +48,6 @@
                     <a href="#about" class="text-gray-600 hover:text-primary transition duration-300 font-medium">About</a>
                     <a href="#services" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Services</a>
                     <a href="#work" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Work</a>
-                    <a href="#blog" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Blog</a>
                     <a href="#contact" class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium">Contact</a>
                 </div>
 
@@ -115,7 +62,6 @@
                 <a href="#about" class="block py-2 text-gray-600 hover:text-primary transition">About</a>
                 <a href="#services" class="block py-2 text-gray-600 hover:text-primary transition">Services</a>
                 <a href="#work" class="block py-2 text-gray-600 hover:text-primary transition">Work</a>
-                <a href="#blog" class="block py-2 text-gray-600 hover:text-primary transition">Blog</a>
                 <a href="#contact" class="block py-2 text-gray-600 hover:text-primary transition">Contact</a>
             </div>
         </div>
@@ -123,9 +69,8 @@
 
     <main>
 
-        <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50">
-            <div class="container mx-auto px-6">
+            <div class="container mx-auto">
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     
@@ -182,14 +127,45 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-hidden fade-up">
-                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">About Me</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Passionate about creating exceptional digital experiences</p>
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Tentang Saya</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto italic">Passionate about creating exceptional digital experiences</p>
                 </div>
 
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+                    
+                    <div class="animate-hidden from-left text-center lg:text-left">
+                        <h3 class="text-3xl font-bold font-heading mb-6">
+                            Kenalin, Saya Muhammad Syaifulloh
+                        </h3>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                           Saya adalah seorang Pengembang web yang berdidikasi dalam menciptakan solusi digital yang inovatif dan efisien.
+                           Saya merupakan lulusan terbadi dari kampus Akademi Teknik Informatika Tunas Bangsa dengan gelar A.md.Kom
+                        </p>
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                            Tujuan saya adalah membangun aplikasi web yang tidak hanya fungsional dan cepat, tetapi juga memberikan pengalaman pengguna yang menyenangkan dan intuitif.
+                        </p>
+                        <div class="flex justify-center lg:justify-start">
+                            <a href="#contact" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium shadow-lg shadow-blue-500/30">
+                                Hubungi Saya
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center items-center animate-hidden from-right">
+                        <div class="relative w-full max-w-xs md:max-w-sm">
+                            <img src="image/foto_lulusan.JPG" 
+                                 alt="Foto Muhammad Syaifulloh" 
+                                 class="relative w-full h-auto object-cover rounded-2xl shadow-xl"
+                                 style="aspect-ratio: 4/5; object-fit: cover;">
+                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-lg -z-10 opacity-60"></div>
+                            <div class="absolute -top-4 -left-4 w-24 h-24 bg-gray-100 rounded-lg -z-10 opacity-60"></div>
+                        </div>
+                    </div>
+                    
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="p-8 bg-gradient-to-br from-blue-50 to-white rounded-2xl card-hover animate-hidden fade-up">
                         <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
@@ -203,7 +179,7 @@
                         <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                             <i class="fas fa-project-diagram text-primary text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">15+ Projects</h3>
+                        <h3 class="text-xl font-bold mb-3">10+ Projects</h3>
                         <p class="text-gray-600">Successfully Completed</p>
                     </div>
 
@@ -211,146 +187,124 @@
                         <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                             <i class="fas fa-users text-primary text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">10+ Clients</h3>
+                        <h3 class="text-xl font-bold mb-3">5+ Clients</h3>
                         <p class="text-gray-600">Satisfied Worldwide</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="py-24 bg-gray-50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-hidden fade-up">
-                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Services</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive web solutions tailored to your needs</p>
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Layanan Jasa Pembuatan Website</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Solusi digital untuk membantu bisnis dan brand Anda tumbuh.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up">
+                    
+                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up card-hover">
                         <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-code text-primary text-xl"></i>
+                            <i class="fas fa-building text-primary text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Web Development</h3>
-                        <p class="text-gray-600 mb-4">Custom websites built with modern technologies and best practices.</p>
+                        <h3 class="text-xl font-bold mb-3">Website Company Profile</h3>
+                        <p class="text-gray-600 mb-4">Tampilkan bisnis Anda secara profesional. Cocok untuk UMKM, startup, dan portofolio pribadi.</p>
                         <ul class="space-y-2 text-sm text-gray-600">
-                            <li><i class="fas fa-check text-primary mr-2"></i>Responsive Design</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>Fast Performance</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>SEO Optimized</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Desain Modern & Profesional</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Tampil Sempurna di HP (Responsive)</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Halaman Kontak & Galeri</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Teroptimasi SEO Dasar</li>
                         </ul>
                     </div>
 
-                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up" style="transition-delay: 100ms;">
+                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up card-hover" style="transition-delay: 100ms;">
                         <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-paint-brush text-primary text-xl"></i>
+                            <i class="fas fa-shopping-cart text-primary text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">UI/UX Design</h3>
-                        <p class="text-gray-600 mb-4">Beautiful and intuitive interfaces that users love to interact with.</p>
+                        <h3 class="text-xl font-bold mb-3">Website Toko Online (E-Commerce)</h3>
+                        <p class="text-gray-600 mb-4">Mulai jual produk Anda secara online dengan sistem manajemen yang mudah digunakan.</p>
                         <ul class="space-y-2 text-sm text-gray-600">
-                            <li><i class="fas fa-check text-primary mr-2"></i>User Research</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>Wireframing</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>Prototyping</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Katalog Produk & Keranjang Belanja</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Integrasi Pembayaran (Payment Gateway)</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Panel Admin (Kelola Stok & Pesanan)</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Desain User-Friendly</li>
                         </ul>
                     </div>
 
-                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up" style="transition-delay: 200ms;">
+                    <div class="p-8 bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up card-hover" style="transition-delay: 200ms;">
                         <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-mobile-alt text-primary text-xl"></i>
+                            <i class="fas fa-cogs text-primary text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Mobile Responsive</h3>
-                        <p class="text-gray-600 mb-4">Ensuring perfect display across all devices and screen sizes.</p>
+                        <h3 class="text-xl font-bold mb-3">Aplikasi Web Kustom</h3>
+                        <p class="text-gray-600 mb-4">Punya ide atau kebutuhan spesifik? Saya bisa membangun sistem kustom untuk Anda.</p>
                         <ul class="space-y-2 text-sm text-gray-600">
-                            <li><i class="fas fa-check text-primary mr-2"></i>Mobile First</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>Cross-browser</li>
-                            <li><i class="fas fa-check text-primary mr-2"></i>Touch Optimized</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Sistem Booking / Reservasi</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Portal Berita atau Blog Kustom</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Website Landing Page Event</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i>Solusi Sesuai Kebutuhan Anda</li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Work Section -->
-        <section id="work" class="py-24 bg-white">
+       <section id="work" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-hidden fade-up">
-                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Featured Work</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Some of my recent projects and achievements</p>
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Project</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Beberapa hasil project kami</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="group relative overflow-hidden rounded-2xl bg-gray-100 aspect-square animate-hidden fade-up">
+
+                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg">
+                        
+                        <img src="image/project/masjid_nurul_haq.png" 
+                             alt="Nama Proyek 1" 
+                             class="w-full h-full object-cover object-fit transition-transform duration-300 group-hover:scale-105">
+                        
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                             <div>
-                                <h3 class="text-white font-bold text-xl mb-2">Project Name</h3>
-                                <p class="text-gray-200 text-sm">Web Development</p>
+                                <h3 class="text-white font-bold text-xl mb-2">Masjid</h3>
+                                <p class="text-gray-200 text-sm">Pembuatan Website Masjid Nurul Haq</p>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 100ms;">
+                        
+                        <img src="image/project/tpa_masjid.png" 
+                             alt="Nama Proyek 2" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
+                            <div>
+                                <h3 class="text-white font-bold text-xl mb-2">TPA Masjid</h3>
+                                <p class="text-gray-200 text-sm">Absensi Digital Berbasis Web</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-2xl bg-gray-100 aspect-square animate-hidden fade-up" style="transition-delay: 100ms;">
+                    <div class="group relative overflow-hidden rounded-2xl aspect-square animate-hidden fade-up shadow-lg" style="transition-delay: 200ms;">
+                        
+                        <img src="image/project/pellor_trans_travel.png" 
+                             alt="Nama Proyek 3" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                             <div>
-                                <h3 class="text-white font-bold text-xl mb-2">Project Name</h3>
-                                <p class="text-gray-200 text-sm">UI/UX Design</p>
+                                <h3 class="text-white font-bold text-xl mb-2">Pellor Trans Travel</h3>
+                                <p class="text-gray-200 text-sm">Pelayanan pemesanan transportasi</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-2xl bg-gray-100 aspect-square animate-hidden fade-up" style="transition-delay: 200ms;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
-                            <div>
-                                <h3 class="text-white font-bold text-xl mb-2">Project Name</h3>
-                                <p class="text-gray-200 text-sm">Fullstack App</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Blog Section -->
-        <section id="blog" class="py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-hidden fade-up">
-                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4">Latest Articles</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Thoughts, tutorials, and insights about web development</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up">
-                        <div class="h-48 bg-gradient-to-br from-blue-100 to-blue-200"></div>
-                        <div class="p-6">
-                            <span class="text-sm text-primary font-medium">Oct 30, 2025</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3">Getting Started with Modern Web Development</h3>
-                            <p class="text-gray-600 mb-4">Learn the fundamentals of building modern web applications...</p>
-                            <a href="#" class="text-primary font-medium hover:underline">Read More →</a>
-                        </div>
-                    </article>
-
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up" style="transition-delay: 100ms;">
-                        <div class="h-48 bg-gradient-to-br from-purple-100 to-purple-200"></div>
-                        <div class="p-6">
-                            <span class="text-sm text-primary font-medium">Oct 25, 2025</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3">Best Practices for UI/UX Design</h3>
-                            <p class="text-gray-600 mb-4">Discover essential principles for creating user-friendly interfaces...</p>
-                            <a href="#" class="text-primary font-medium hover:underline">Read More →</a>
-                        </div>
-                    </article>
-
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 animate-hidden fade-up" style="transition-delay: 200ms;">
-                        <div class="h-48 bg-gradient-to-br from-green-100 to-green-200"></div>
-                        <div class="p-6">
-                            <span class="text-sm text-primary font-medium">Oct 20, 2025</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3">JavaScript Tips & Tricks</h3>
-                            <p class="text-gray-600 mb-4">Boost your productivity with these useful JavaScript techniques...</p>
-                            <a href="#" class="text-primary font-medium hover:underline">Read More →</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
+       
         <section id="contact" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto">
@@ -407,7 +361,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 py-12 text-gray-400">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -420,64 +373,7 @@
         </div>
     </footer>
 
-    <script>
-        // Navbar scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('nav-blur');
-            } else {
-                header.classList.remove('nav-blur');
-            }
-        });
-
-        // Mobile menu
-        const menuBtn = document.getElementById('menu-btn');
-        const menuMobile = document.getElementById('menu-mobile');
-
-        menuBtn.addEventListener('click', () => {
-            menuMobile.classList.toggle('hidden');
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    if (!menuMobile.classList.contains('hidden')) {
-                        menuMobile.classList.add('hidden');
-                    }
-                    const headerOffset = 80;
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.animate-hidden').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <script src="js/navbar.js"></script>
 
 </body>
 </html>
