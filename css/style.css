@@ -41,3 +41,59 @@
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
+
+
+/* SWIPPER */
+/* --- Tambahan CSS untuk Swiper Navigation --- */
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #2563eb; /* Warna primary */
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: #2563eb; /* Warna primary */
+    color: #ffffff; /* Warna putih */
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 1.25rem; /* 20px */
+    font-weight: bold;
+}
+
+.swiper-button-prev {
+    left: -10px;
+}
+
+.swiper-button-next {
+    right: -10px;
+}
+
+@media (max-width: 768px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 1rem; /* 16px */
+    }
+
+    .swiper-button-prev {
+        left: 5px;
+    }
+
+    .swiper-button-next {
+        right: 5px;
+    }
+}
