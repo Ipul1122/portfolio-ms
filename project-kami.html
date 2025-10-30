@@ -51,6 +51,7 @@
                 </div>
 
 
+                <!-- MASJID NURUL HAQ -->
                 <article id="project-masjid" class="hidden max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Website Masjid Nurul Haq</h1>
                     <p class="text-xl text-gray-600 mb-8">Aplikasi web monolithic yang dibangun menggunakan Laravel untuk mengelola semua aspek informasi, kegiatan, dan keuangan masjid.</p>
@@ -104,7 +105,7 @@
                     </div>
                 </article>
 
-
+                <!-- ABSENSI DIGITAL -->
                 <article id="project-tpa" class="hidden max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Absensi Digital TPA Nurul Haq</h1>
                     <p class="text-xl text-gray-600 mb-8">Sistem Pendaftaran dan Absensi Santri TPA Berbasis Web</p>
@@ -153,7 +154,7 @@
                     </div>
                 </article>
 
-
+                <!-- PELLOR TRANS TRAVEL -->
                 <article id="project-travel" class="hidden max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Pellor Trans Travel</h1>
                     <p class="text-xl text-gray-600 mb-8">Website Company Profile untuk Jasa Transportasi & Travel</p>
@@ -200,6 +201,7 @@
                     </div>
                 </article>
                 
+                <!-- LAUNTEC -->
                 <article id="project-launtec" class="hidden max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Launtec - Website Laundry</h1>
                     <p class="text-xl text-gray-600 mb-8">Company profile modern untuk jasa laundry, menampilkan layanan dan paket harga.</p>
@@ -243,6 +245,8 @@
                     </div>
                 </article>
                 
+
+                <!-- NYI RORO GREEN -->
                 <article id="project-nyi-roro-green" class="hidden max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">Nyi Roro Green</h1>
                     <p class="text-xl text-gray-600 mb-8">Landing page elegan untuk promosi dengan fokus pada visual dan booking.</p>
@@ -305,46 +309,7 @@
         </div>
     </footer>
 
-    <script>
-        // Jalankan script setelah halaman selesai dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Ambil URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const projectNama = urlParams.get('project'); // akan berisi 'masjid', 'tpa', 'travel', 'launtec', 'nyi-roro-green'
-
-            // Sembunyikan konten default
-            const projectDefault = document.getElementById('project-default');
-            
-            // 2. Tentukan elemen mana yang akan ditampilkan
-            let elemenToShow = null;
-
-            if (projectNama === 'masjid') {
-                elemenToShow = document.getElementById('project-masjid');
-            } else if (projectNama === 'tpa') {
-                elemenToShow = document.getElementById('project-tpa');
-            } else if (projectNama === 'travel') {
-                elemenToShow = document.getElementById('project-travel');
-            
-            // --- Tambahan untuk project baru ---
-            } else if (projectNama === 'launtec') {
-                elemenToShow = document.getElementById('project-launtec');
-            } else if (projectNama === 'nyi-roro-green') {
-                elemenToShow = document.getElementById('project-nyi-roro-green');
-            }
-            // -------------------------------------
-
-            // 3. Tampilkan elemen yang dipilih (jika ada)
-            if (elemenToShow) {
-                // Sembunyikan pesan default
-                projectDefault.classList.add('hidden');
-                // Tampilkan proyek yang benar
-                elemenToShow.classList.remove('hidden');
-            } else {
-                // Jika parameter tidak ada atau salah, biarkan pesan default terlihat
-                projectDefault.classList.remove('hidden');
-            }
-        });
-    </script>
+    <script src="js/project-kami.js"></script>
     
     </body>
 </html>
