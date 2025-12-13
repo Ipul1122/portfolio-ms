@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Arahkan /artikel/judul-slug ke detail-artikel.php?slug=judul-slug
+RewriteRule ^artikel/([a-zA-Z0-9-]+)$ detail-artikel.php?slug=$1 [L]
