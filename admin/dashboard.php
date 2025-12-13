@@ -49,8 +49,8 @@ if (!isset($_SESSION['user_id'])) {
             <?php endif; ?>
             
             <div class="mt-6">
-                <a href="tambah_artikel.php" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block">
-                    + Buat Artikel Baru
+                <a href="artikel/index.php" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block">
+                    + Lihat artikel
                 </a>
             </div>
         </div>
