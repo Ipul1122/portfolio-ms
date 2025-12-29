@@ -44,7 +44,7 @@
 
 <body class="bg-white text-gray-900 font-sans antialiased">
 
-    <div id="navbar-placeholder"></div>
+    <?php include 'component/templates/navbar.php'; ?>
 
     <main>
 
