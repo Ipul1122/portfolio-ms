@@ -60,12 +60,14 @@
         <!-- Work -->
         <?php include 'component/section-work.php'; ?>
 
+        <!-- Sample MVP -->
+        <?php include 'component/sample-mvp/coffe-shop.php'; ?>
+
         <!-- Artikel -->
         <?php include 'component/section-artikel.php'; ?>
 
         <!-- Contact -->
         <?php include 'component/section-contact.php'; ?>
-       
        
 
     </main>

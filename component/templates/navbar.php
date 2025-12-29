@@ -19,6 +19,7 @@ $prefix = $is_home ? '' : 'index.php';
                 <a href="<?= $prefix ?>#about" class="text-gray-600 hover:text-primary transition duration-300 font-medium">About</a>
                 <a href="<?= $prefix ?>#services" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Services</a>
                 <a href="<?= $prefix ?>#work" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Work</a>
+                <a href="<?= $prefix ?>#mvp-showcase" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Sample</a>
                 <a href="<?= $prefix ?>#blog" class="text-gray-600 hover:text-primary transition duration-300 font-medium">Blog</a>
                 <a href="<?= $prefix ?>#contact" class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium">Contact</a>
             </div>
@@ -34,6 +35,7 @@ $prefix = $is_home ? '' : 'index.php';
             <a href="<?= $prefix ?>#about" class="block py-2 text-gray-600 hover:text-primary transition">About</a>
             <a href="<?= $prefix ?>#services" class="block py-2 text-gray-600 hover:text-primary transition">Services</a>
             <a href="<?= $prefix ?>#work" class="block py-2 text-gray-600 hover:text-primary transition">Work</a>
+            <a href="<?= $prefix ?>#mvp-showcase" class="block py-2 text-gray-600 hover:text-primary transition">Sample</a>
             <a href="<?= $prefix ?>#blog" class="block py-2 text-gray-600 hover:text-primary transition">Blog</a>
             <a href="<?= $prefix ?>#contact" class="block py-2 text-gray-600 hover:text-primary transition">Contact</a>
         </div>
