@@ -251,7 +251,7 @@
                 <div class="swiper-wrapper">
                     
                     <div class="swiper-slide">
-                        <a href="project-kami.html?project=masjid" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
+                        <a href="project-kami.php?project=masjid" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
                             <img src="image/project/masjid_nurul_haq.png" 
                                  alt="Website Masjid Nurul Haq" 
                                  class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
@@ -265,7 +265,7 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <a href="project-kami.html?project=tpa" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
+                        <a href="project-kami.php?project=tpa" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
                             <img src="image/project/tpa_masjid.png" 
                                  alt="Absensi TPA Masjid" 
                                  class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
@@ -279,7 +279,7 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <a href="project-kami.html?project=travel" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
+                        <a href="project-kami.php?project=travel" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
                             <img src="image/project/pellor_trans_travel.png" 
                                  alt="Pellor Trans Travel" 
                                  class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
@@ -293,7 +293,7 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <a href="project-kami.html?project=launtec" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
+                        <a href="project-kami.php?project=launtec" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
                             <img src="image/project/launtec.png" 
                                  alt="Launtec Website Laundry" 
                                  class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
@@ -307,7 +307,7 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <a href="project-kami.html?project=nyi-roro-green" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
+                        <a href="project-kami.php?project=nyi-roro-green" class="group relative block overflow-hidden rounded-2xl aspect-square shadow-lg">
                             <img src="image/project/nyirorogreen.png" 
                                  alt="Nyi Roro Green Hotel" 
                                  class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">

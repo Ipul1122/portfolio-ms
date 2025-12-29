@@ -16,9 +16,9 @@ if (isset($_GET['slug'])) {
 
         // --- SEO LOGIC ---
         $meta_description = substr(strip_tags($article['content']), 0, 160) . "...";
-        $base_url = "http://localhost/portfolio-ms/"; // Ganti dengan domain asli saat live
+        $base_url = "https://msyaifulloh.my.id/"; // Ganti dengan domain asli saat live
         $image_url = $article['image'] ? $base_url . "uploads/" . $article['image'] : $base_url . "image/foto_ipul.png";
-        $page_url = $base_url . "detail-artikel.php?slug=" . $article['slug'];
+        $page_url = $base_url . "artikel/" . $article['slug'];
 
     } else {
         header("Location: index.php");
@@ -43,14 +43,25 @@ $result_latest = mysqli_query($conn, $query_latest);
     <title><?= htmlspecialchars($article['title']); ?> - Muhammad Syaifulloh</title>
     <meta name="description" content="<?= htmlspecialchars($meta_description); ?>">
     <meta name="author" content="Muhammad Syaifulloh">
+    <meta property="og:title" content="<?= htmlspecialchars($article['title']); ?>" />
+    <meta property="og:description" content="Simak fakta fatal kenapa bisnis wajib punya website di 2026!" />
+    <meta property="og:image" content="<?= $base_url; ?>uploads/<?= $article['image']; ?>" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="<?= $page_url; ?>" />
+    <meta property="twitter:title" content="<?= htmlspecialchars($article['title']); ?>" />
+    <meta property="twitter:description" content="Simak fakta fatal kenapa bisnis wajib punya website di 2026!" />
+    <meta property="twitter:image" content="<?= $base_url; ?>uploads/<?= $article['image']; ?>" />
     
     <meta property="og:type" content="article">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']); ?>">
+    
     <meta property="og:description" content="<?= htmlspecialchars($meta_description); ?>">
     <meta property="og:image" content="<?= $image_url; ?>">
     <meta property="og:url" content="<?= $page_url; ?>">
 
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="canonical" href="<?= $page_url; ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
