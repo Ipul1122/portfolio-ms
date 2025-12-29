@@ -2,3 +2,10 @@ RewriteEngine On
 
 # Arahkan /artikel/judul-slug ke detail-artikel.php?slug=judul-slug
 RewriteRule ^artikel/([a-zA-Z0-9-]+)$ detail-artikel.php?slug=$1 [L]
+
+
+# Jika terjadi error 403 (Forbidden), arahkan ke 403.php
+ErrorDocument 403 /403.php
+
+# Arahkan /artikel/judul-slug ke detail-artikel.php?slug=judul-slug
+RewriteRule ^artikel/([a-zA-Z0-9-]+)$ detail-artikel.php?slug=$1 [L]
