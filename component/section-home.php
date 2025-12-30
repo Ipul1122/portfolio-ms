@@ -22,8 +22,8 @@
                             <a href="#work" class="px-8 py-3.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium shadow-lg shadow-blue-500/30">
                                 View My Work
                             </a>
-                            <a href="#contact" class="px-8 py-3.5 bg-white text-primary border-2 border-primary rounded-lg hover:bg-primary hover:text-white transition duration-300 font-medium">
-                                Get In Touch
+                            <a href="../image/CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" download="CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" class="px-8 py-3.5 bg-white text-primary border-2 border-primary rounded-lg hover:bg-primary hover:text-white transition duration-300 font-medium">
+                                Download My CV
                             </a>
                         </div>
 
