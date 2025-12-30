@@ -2,7 +2,7 @@
         
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 animate-hidden fade-up gap-6">
             <div class="text-center md:text-left">
-                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-gray-900">Project Pilihan</h2>
+                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-gray-900">Portfolio</h2>
                 <p class="text-lg text-gray-600 max-w-xl">
                     Eksplorasi hasil karya terbaik kami dalam menciptakan solusi digital yang berdampak.
                 </p>

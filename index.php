@@ -54,14 +54,11 @@
         <!-- About -->
         <?php include 'component/section-about.php'; ?>
         
-        <!-- Services -->
-        <?php include 'component/section-services.php'; ?>
-        
+        <!-- skills -->
+        <?php include 'component/section-skills.php'; ?>
+
         <!-- Work -->
         <?php include 'component/section-work.php'; ?>
-
-        <!-- Sample MVP -->
-        <?php include 'component/sample-mvp/coffe-shop.php'; ?>
 
         <!-- Artikel -->
         <?php include 'component/section-artikel.php'; ?>
