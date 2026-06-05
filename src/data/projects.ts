@@ -12,9 +12,89 @@ export interface Project {
   technologies: string[];
   features: string[];
   demoUrl?: string;
+  githubUrl?: string;
+  isPublic: boolean;
 }
 
 export const projects: Project[] = [
+  // ==========================================
+  // PROYEK PUBLIK — Bisa dilihat oleh publik
+  // ==========================================
+  {
+    id: "tpa",
+    title: "Absensi Digital TPA Nurul Haq",
+    subtitle: "Sistem Pendaftaran dan Absensi Santri TPA Berbasis Web menggunakan Laravel & Blade",
+    description: "Aplikasi web ini dirancang untuk menggantikan sistem absensi manual di TPA Nurul Haq. Dibangun dengan framework Laravel dan template engine Blade, aplikasi ini memungkinkan orang tua mendaftarkan anak mereka secara online, sementara guru dapat dengan mudah mencatat absensi harian serta memantau perkembangan santri melalui dashboard yang interaktif.",
+    image: "/image/project/tpa_masjid.png",
+    category: "Sistem Absensi",
+    client: "Pengurus TPA Nurul Haq",
+    service: "Aplikasi Web Custom",
+    year: "2025",
+    price: "Rp. 2.000.000",
+    technologies: ["PHP", "Laravel", "Blade", "Bootstrap 5", "TailwindCSS", "JavaScript", "ChartJs", "CSS", "MySQL"],
+    features: [
+      "Formulir Pendaftaran Santri Baru (Online)",
+      "Panel Admin (Manajemen Data Santri & Guru)",
+      "Sistem Absensi Harian oleh Guru",
+      "Laporan Absensi per Santri (Bulanan)",
+      "Informasi Kegiatan TPA"
+    ],
+    demoUrl: "https://tpanurhaq.com",
+    githubUrl: "https://github.com/Ipul1122/management-presensi-",
+    isPublic: true
+  },
+  {
+    id: "compro",
+    title: "PT Cakrawala Internasional",
+    subtitle: "Website Company Profile modern yang dibangun dengan Vue.js, Laravel & MySQL",
+    description: "Website company profile profesional untuk PT Cakrawala Internasional. Dibangun menggunakan arsitektur SPA dengan Vue.js di frontend dan Laravel sebagai RESTful API backend. Website ini menampilkan profil perusahaan, layanan, dan informasi bisnis dengan desain modern dan performa tinggi.",
+    image: "/image/project/pt-cakrawala-internasional.jpeg",
+    category: "Company Profile",
+    client: "PT Cakrawala Internasional",
+    service: "Website Company Profile",
+    year: "2025",
+    price: "—",
+    technologies: ["Vue.js", "PHP", "Laravel", "Blade", "JavaScript", "HTML", "CSS", "MySQL"],
+    features: [
+      "Single Page Application (SPA) dengan Vue.js",
+      "RESTful API Backend dengan Laravel",
+      "Profil Perusahaan & Layanan",
+      "Desain Modern dan Responsif",
+      "SEO Friendly & Fast Loading",
+      "Content Management System (CMS)"
+    ],
+    demoUrl: "https://cakrawala-internasional.co.id",
+    githubUrl: "https://github.com/Ipul1122/compro",
+    isPublic: true
+  },
+  {
+    id: "portfolio",
+    title: "Portfolio Website",
+    subtitle: "Website portfolio pribadi modern yang dibangun dengan React, TypeScript & Vite",
+    description: "Website portfolio pribadi yang dirancang untuk menampilkan karya dan pengalaman profesional. Dibangun menggunakan React dengan TypeScript untuk type-safety, Vite sebagai build tool yang cepat, dan TailwindCSS untuk styling yang responsif. Website ini menampilkan animasi halus, slider interaktif, dan desain dark-mode yang elegan.",
+    image: "/image/project/portfolio.jpeg",
+    category: "Portfolio",
+    client: "Personal Project",
+    service: "Website Portfolio",
+    year: "2025",
+    price: "—",
+    technologies: ["TypeScript", "React", "Vite", "TailwindCSS", "CSS", "JavaScript", "Swiper.js"],
+    features: [
+      "Desain Dark Mode yang Modern & Elegan",
+      "Animasi Scroll & Micro-interactions",
+      "Slider Portfolio Interaktif dengan Swiper.js",
+      "Skills Section dengan Auto-sliding Tracks",
+      "Fully Responsive untuk Semua Perangkat",
+      "SEO Optimized & Fast Loading"
+    ],
+    demoUrl: "https://github.com/Ipul1122/portfolio-ms",
+    githubUrl: "https://github.com/Ipul1122/portfolio-ms",
+    isPublic: true
+  },
+
+  // ==========================================
+  // PROYEK LAINNYA — Belum tersedia publik
+  // ==========================================
   {
     id: "masjid",
     title: "Website Masjid Nurul Haq",
@@ -35,28 +115,8 @@ export const projects: Project[] = [
       "Profil Masjid: Halaman untuk melihat Sejarah serta Visi & Misi masjid.",
       "Donasi: Halaman untuk informasi donasi, formulir kirim bukti transfer, dan melihat donasi yang telah terverifikasi.",
       "Jadwal Sholat: Menampilkan jadwal sholat harian (melalui API internal)."
-    ]
-  },
-  {
-    id: "tpa",
-    title: "Absensi Digital TPA Nurul Haq",
-    subtitle: "Sistem Pendaftaran dan Absensi Santri TPA Berbasis Web",
-    description: "Aplikasi web ini dirancang untuk menggantikan sistem absensi manual di TPA Nurul Haq. Orang tua dapat mendaftarkan anak mereka secara online, dan guru dapat dengan mudah mencatat absensi harian serta memantau perkembangan santri.",
-    image: "/image/project/tpa_masjid.png",
-    category: "Sistem Absensi",
-    client: "Pengurus TPA Nurul Haq",
-    service: "Aplikasi Web Custom",
-    year: "2025",
-    price: "Rp. 2.000.000",
-    technologies: ["HTML", "CSS", "Bootstrap 5", "TailwindCSS", "JavaScript", "ChartJs", "PHP", "Laravel", "MySQL"],
-    features: [
-      "Formulir Pendaftaran Santri Baru (Online)",
-      "Panel Admin (Manajemen Data Santri & Guru)",
-      "Sistem Absensi Harian oleh Guru",
-      "Laporan Absensi per Santri (Bulanan)",
-      "Informasi Kegiatan TPA"
     ],
-    demoUrl: "https://tpanurhaq.com"
+    isPublic: false
   },
   {
     id: "travel",
@@ -77,7 +137,8 @@ export const projects: Project[] = [
       "Halaman 'Tentang Kami' dan 'Kontak'",
       "Tombol WhatsApp terintegrasi"
     ],
-    demoUrl: "https://ipul1122.github.io/pellortranstravel.io/index.html"
+    demoUrl: "https://ipul1122.github.io/pellortranstravel.io/index.html",
+    isPublic: false
   },
   {
     id: "launtec",
@@ -98,7 +159,8 @@ export const projects: Project[] = [
       "Galeri Hasil Cucian",
       "Formulir Kontak dan Peta Lokasi"
     ],
-    demoUrl: "https://ipul1122.github.io/launtec/"
+    demoUrl: "https://ipul1122.github.io/launtec/",
+    isPublic: false
   },
   {
     id: "nyi-roro-green",
@@ -119,6 +181,11 @@ export const projects: Project[] = [
       "Kategori sampah di daerah Yogyakarta",
       "Sebaran Volume Sampah di Yogyakarta"
     ],
-    demoUrl: "https://ipul1122.github.io/Nyi_Roro_Green/"
+    demoUrl: "https://ipul1122.github.io/Nyi_Roro_Green/",
+    isPublic: false
   }
 ];
+
+// Helper exports
+export const publicProjects = projects.filter(p => p.isPublic);
+export const otherProjects = projects.filter(p => !p.isPublic);

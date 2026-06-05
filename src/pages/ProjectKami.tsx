@@ -55,17 +55,30 @@ const ProjectKami: React.FC = () => {
                 {project.description}
               </p>
 
-              {project.demoUrl && (
-                <a 
-                  href={project.demoUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-full sm:w-auto mb-5 inline-flex justify-center items-center gap-2 px-8 py-3 bg-white text-black border border-transparent rounded hover:bg-black hover:text-white hover:border-white transition-all duration-300 font-bold tracking-wide"
-                >
-                  <i className="fas fa-external-link-alt"></i>
-                  Lihat Live Demo
-                </a>
-              )}
+              <div className="flex flex-wrap gap-3 mb-5">
+                {project.demoUrl && (
+                  <a 
+                    href={project.demoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3 bg-white text-black border border-transparent rounded hover:bg-black hover:text-white hover:border-white transition-all duration-300 font-bold tracking-wide"
+                  >
+                    <i className="fas fa-external-link-alt"></i>
+                    Lihat Live Demo
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3 bg-transparent text-white border border-white/30 rounded hover:bg-white hover:text-black hover:border-white transition-all duration-300 font-bold tracking-wide"
+                  >
+                    <i className="fab fa-github"></i>
+                    Lihat Source Code
+                  </a>
+                )}
+              </div>
               
               <h3 className="text-2xl font-bold font-heading mb-4 text-white mt-8">Fitur Utama</h3>
               <ul className="list-disc list-inside text-gray-400 space-y-2 mb-6 font-light">
