@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
       return (
         <a
           href={hash}
-          className="text-gray-600 hover:text-primary transition duration-300 font-medium"
+          className="text-gray-400 hover:text-white transition duration-300 font-medium"
           onClick={(e) => {
             e.preventDefault();
             const targetId = hash.replace('#', '');
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
       return (
         <Link
           to={`/${hash}`}
-          className="text-gray-600 hover:text-primary transition duration-300 font-medium"
+          className="text-gray-400 hover:text-white transition duration-300 font-medium"
         >
           {label}
         </Link>
@@ -65,10 +65,10 @@ const Navbar: React.FC = () => {
       }`}
       id="header"
     >
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container-fluid py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition duration-300">
-            <div className="bg-primary text-white font-bold text-lg px-3 py-1.5 rounded-lg">MS</div>
+            <div className="bg-white text-black font-black text-lg px-3 py-1.5 rounded">MS</div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -78,17 +78,17 @@ const Navbar: React.FC = () => {
             
             <Link
               to="/bisnis"
-              className={`hover:text-primary transition duration-300 font-medium flex items-center gap-1 ${
-                location.pathname === '/bisnis' ? 'text-primary font-bold' : 'text-gray-600'
+              className={`hover:text-white transition duration-300 font-medium ${
+                location.pathname === '/bisnis' ? 'text-white font-bold' : 'text-gray-400'
               }`}
             >
-             
+              <span>Layanan & Produk</span>
             </Link>
 
             {isHome ? (
               <a
                 href="#contact"
-                className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium"
+                className="px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium"
                 onClick={(e) => {
                   e.preventDefault();
                   const element = document.getElementById('contact');
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/#contact"
-                className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300 font-medium"
+                className="px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium"
               >
                 Contact
               </Link>
@@ -114,7 +114,7 @@ const Navbar: React.FC = () => {
 
           <button
             id="menu-btn"
-            className="md:hidden focus:outline-none text-gray-700"
+            className="md:hidden focus:outline-none text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`}></i>
@@ -124,11 +124,11 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div className={`md:hidden nav-blur ${isMobileMenuOpen ? 'block' : 'hidden'}`} id="menu-mobile">
-        <div className="container mx-auto px-6 py-4 space-y-2">
+        <div className="container-fluid py-4 space-y-2">
           {isHome ? (
             <a
               href="#about"
-              className="block py-2 text-gray-600 hover:text-primary transition"
+              className="block py-2 text-gray-400 hover:text-white transition"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('about');
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
               About
             </a>
           ) : (
-            <Link to="/#about" className="block py-2 text-gray-600 hover:text-primary transition">
+            <Link to="/#about" className="block py-2 text-gray-400 hover:text-white transition">
               About
             </Link>
           )}
@@ -147,7 +147,7 @@ const Navbar: React.FC = () => {
           {isHome ? (
             <a
               href="#skills"
-              className="block py-2 text-gray-600 hover:text-primary transition"
+              className="block py-2 text-gray-400 hover:text-white transition"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('skills');
@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
               Skills
             </a>
           ) : (
-            <Link to="/#skills" className="block py-2 text-gray-600 hover:text-primary transition">
+            <Link to="/#skills" className="block py-2 text-gray-400 hover:text-white transition">
               Skills
             </Link>
           )}
@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
           {isHome ? (
             <a
               href="#work"
-              className="block py-2 text-gray-600 hover:text-primary transition"
+              className="block py-2 text-gray-400 hover:text-white transition"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('work');
@@ -177,22 +177,22 @@ const Navbar: React.FC = () => {
               Portfolio
             </a>
           ) : (
-            <Link to="/#work" className="block py-2 text-gray-600 hover:text-primary transition">
+            <Link to="/#work" className="block py-2 text-gray-400 hover:text-white transition">
               Portfolio
             </Link>
           )}
 
           <Link
             to="/bisnis"
-            className="block py-2 text-primary font-bold hover:text-secondary transition bg-gray-50 px-4 rounded-lg -mx-4"
+            className="block py-2 text-white font-bold hover:text-gray-300 transition bg-white/5 px-4 rounded -mx-4"
           >
-            Layanan & Produk Bisnis
+            Layanan & Produk
           </Link>
 
           {isHome ? (
             <a
               href="#contact"
-              className="block py-2 text-gray-600 hover:text-primary transition"
+              className="block py-2 text-gray-400 hover:text-white transition"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('contact');
@@ -203,7 +203,7 @@ const Navbar: React.FC = () => {
               Contact
             </a>
           ) : (
-            <Link to="/#contact" className="block py-2 text-gray-600 hover:text-primary transition">
+            <Link to="/#contact" className="block py-2 text-gray-400 hover:text-white transition">
               Contact
             </Link>
           )}
