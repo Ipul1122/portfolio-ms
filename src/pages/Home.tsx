@@ -78,152 +78,162 @@ const Home: React.FC = () => {
   return (
     <div className="bg-black text-white font-sans min-h-screen">
       {/* Home Section */}
-      <section id="home" className="min-h-screen flex items-center pt-28 pb-16 relative overflow-hidden bg-black">
-        {/* Stark ambient glow */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <section id="home" className="min-h-screen flex items-center pt-24 pb-12 relative overflow-hidden bg-black">
+  {/* Stark ambient glow */}
+  <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
+  <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div className="container-fluid relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="text-center lg:text-left animate-hidden from-left">
-              <div className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 text-white rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
-                <i className="fas fa-code mr-2"></i>Web Developer & UI/UX Designer
-              </div>
-              
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading leading-tight mb-6">
-                Hai, Saya
-                <br />
-                <span className="gradient-text">Muhammad Syaifulloh</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl font-sans font-light">
-                Pengembang web profesional dengan pengalaman 1+ tahun dalam menciptakan solusi digital yang inovatif. Spesialisasi dalam HTML, CSS, JavaScript, dan framework modern.
-              </p>
-              
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
-                <a 
-                  href="#work" 
-                  className="px-8 py-3.5 bg-white text-black border border-transparent rounded hover:bg-black hover:text-white hover:border-white transition-all duration-300 font-bold tracking-wide"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  View My Work
-                </a>
-                <a 
-                  href="/image/CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
-                  download="CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
-                  className="px-8 py-3.5 bg-transparent text-white border border-white rounded hover:bg-white hover:text-black transition-all duration-300 font-bold tracking-wide"
-                >
-                  Download My CV
-                </a>
-              </div>
-
-              <div className="flex justify-center lg:justify-start items-center space-x-4">
-                <a href="https://www.instagram.com/pul_ipul_pul?igsh=MWJ5eXV3eTVsN2N3dA==" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" target="_blank" rel="noreferrer">
-                  <i className="fa-brands fa-instagram text-xl"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/muhammad-syaifulloh-99a233305?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" rel="noreferrer">
-                  <i className="fa-brands fa-linkedin text-xl"></i>
-                </a>
-                <a href="https://github.com/Ipul1122/" target="_blank" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" rel="noreferrer">
-                  <i className="fa-brands fa-github text-xl"></i>
-                </a>
-              </div>
-            </div>
-
-            <div className="flex justify-center animate-hidden from-right">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-white/5 rounded-2xl blur-2xl group-hover:bg-white/10 transition duration-500"></div>
-                <img 
-                  src="/image/foto_ipul.png" 
-                  alt="Muhammad Syaifulloh" 
-                  className="relative max-w-sm md:max-w-md h-auto object-cover rounded border border-white/10 shadow-2xl transition duration-500 group-hover:border-white/20"
-                />
-              </div>
-            </div>
-          </div>
+  {/* Menggunakan px-4 sampai px-8 agar tidak mepet di mobile */}
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      {/* Kolon Konten Teks */}
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left animate-hidden from-left pt-6">
+        <div className="inline-flex items-center px-4 py-1.5 bg-white/5 border border-white/10 text-white rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+          <i className="fas fa-code mr-2"></i>Web Developer & UI/UX Designer
         </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-24 bg-black border-t border-white/5">
-        <div className="container-fluid">
-          <div className="text-center mb-16 animate-hidden fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">Tentang Saya</h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">Menciptakan pengalaman digital yang luar biasa</p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-            <div className="animate-hidden from-left text-center lg:text-left">
-              <h3 className="text-3xl font-bold font-heading mb-6 text-white leading-tight">
-                Kenalin, Saya Muhammad Syaifulloh
-              </h3>
-              <p className="text-lg text-gray-400 mb-6 leading-relaxed font-light">
-                Saya adalah seorang pengembang web yang berdedikasi dalam menciptakan solusi digital yang inovatif dan efisien.
-                Saya merupakan <strong className="text-white font-bold">Lulusan Terbaik</strong> pada kampus Akademi Teknik Informatika Tunas Bangsa dengan gelar A.md.Kom.
-              </p>
-              <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 font-light">
-                Tujuan saya adalah membangun aplikasi web yang tidak hanya fungsional dan cepat, tetapi juga memberikan pengalaman pengguna yang menyenangkan dan intuitif.
-              </p>
-              <div className="flex justify-center lg:justify-start">
-                <a 
-                  href="#contact" 
-                  className="px-6 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition-all duration-300 font-bold"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Hubungi Saya
-                </a>
-              </div>
-            </div>
-            
-            <div className="flex justify-center items-center animate-hidden from-right">
-              <div className="relative w-full max-w-xs md:max-w-sm group">
-                <a href="/image/foto_kelulusan.jpg" target="_blank" rel="noreferrer">
-                  <img 
-                    src="/image/foto_kelulusan.jpg" 
-                    alt="Foto Muhammad Syaifulloh" 
-                    className="relative w-full h-auto object-cover rounded border border-white/10 group-hover:border-white/30 transition duration-500 shadow-xl"
-                    style={{ aspectRatio: '4/5', objectFit: 'cover' }}
-                  />
-                </a>    
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/5 rounded border border-white/5 -z-10 group-hover:bg-white/10 transition duration-500"></div>
-                <div className="absolute -top-4 -left-4 w-24 h-24 bg-white/5 rounded border border-white/5 -z-10 group-hover:bg-white/10 transition duration-500"></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up">
-              <div className="w-16 h-16 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6">
-                <i className="fas fa-trophy text-white text-2xl"></i>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-white">1+ Tahun</h3>
-              <p className="text-gray-400 font-light text-sm">Pengalaman Profesional</p>
-            </div>
-
-            <div className="p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up" style={{ transitionDelay: '100ms' }}>
-              <div className="w-16 h-16 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6">
-                <i className="fas fa-project-diagram text-white text-2xl"></i>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-white">10+ Proyek</h3>
-              <p className="text-gray-400 font-light text-sm">Selesai dengan Sukses</p>
-            </div>
-
-            <div className="p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up" style={{ transitionDelay: '200ms' }}>
-              <div className="w-16 h-16 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6">
-                <i className="fas fa-users text-white text-2xl"></i>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-white">5+ Klien</h3>
-              <p className="text-gray-400 font-light text-sm">Puas dengan Layanan</p>
-            </div>
-          </div>
+        
+        {/* Ukuran font disesuaikan agar tidak merusak layout mobile */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-heading leading-tight mb-6 text-white">
+          Hai, Saya
+          <br />
+          <span className="gradient-text block mt-1">Muhammad Syaifulloh</span>
+        </h1>
+        
+        <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans font-light">
+          Pengembang web profesional dengan pengalaman 1+ tahun dalam menciptakan solusi digital yang inovatif. Spesialisasi dalam HTML, CSS, JavaScript, dan framework modern.
+        </p>
+        
+        {/* Tombol dibuat w-full di mobile agar rapi, dan kembali normal di tablet/desktop */}
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start mb-8">
+          <a 
+            href="#work" 
+            className="w-full sm:w-auto text-center px-8 py-3.5 bg-white text-black border border-transparent rounded hover:bg-black hover:text-white hover:border-white transition-all duration-300 font-bold tracking-wide及"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            View My Work
+          </a>
+          <a 
+            href="/image/CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
+            download="CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
+            className="w-full sm:w-auto text-center px-8 py-3.5 bg-transparent text-white border border-white rounded hover:bg-white hover:text-black transition-all duration-300 font-bold tracking-wide"
+          >
+            Download My CV
+          </a>
         </div>
-      </section>
+
+        <div className="flex justify-center lg:justify-start items-center space-x-4">
+          <a href="https://www.instagram.com/pul_ipul_pul?igsh=MWJ5eXV3eTVsN2N3dA==" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" target="_blank" rel="noreferrer">
+            <i className="fa-brands fa-instagram text-xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/muhammad-syaifulloh-99a233305?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" rel="noreferrer">
+            <i className="fa-brands fa-linkedin text-xl"></i>
+          </a>
+          <a href="https://github.com/Ipul1122/" target="_blank" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 transition duration-300" rel="noreferrer">
+            <i className="fa-brands fa-github text-xl"></i>
+          </a>
+        </div>
+      </div>
+
+      {/* Kolon Foto Home - Diberikan margin top & padding bawah di mobile agar tidak terpotong */}
+      <div className="flex justify-center animate-hidden from-right mt-8 lg:mt-0 pb-12 lg:pb-0">
+        <div className="relative group max-w-xs sm:max-w-sm w-full px-4 sm:px-0">
+          <div className="absolute inset-0 bg-white/5 rounded-2xl blur-2xl group-hover:bg-white/10 transition duration-500"></div>
+          <img 
+            src="/image/foto_ipul.png" 
+            alt="Muhammad Syaifulloh" 
+            className="relative w-full h-auto object-cover rounded border border-white/10 shadow-2xl transition duration-500 group-hover:border-white/20"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* About Section */}
+<section id="about" className="py-20 bg-black border-t border-white/5">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16 animate-hidden fade-up">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading mb-4 text-white">Tentang Saya</h2>
+      <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light">Menciptakan pengalaman digital yang luar biasa</p>
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center justify-items-center lg:justify-items-start mb-16">
+      
+      {/* Konten Teks About - Ukuran font responsif mencegah teks terpotong kesamping */}
+      <div className="animate-hidden from-left text-center lg:text-left max-w-xl mx-auto lg:mx-0 w-full">
+        <h3 className="text-2xl sm:text-3xl font-bold font-heading mb-6 text-white leading-snug break-words">
+          Kenalin, Saya <span className="block sm:inline">Muhammad Syaifulloh</span>
+        </h3>
+        <p className="text-base sm:text-lg text-gray-400 mb-6 leading-relaxed font-light text-justify sm:text-left">
+          Saya adalah seorang pengembang web yang berdedikasi dalam menciptakan solusi digital yang inovatif dan efisien.
+          Saya merupakan <strong className="text-white font-bold">Lulusan Terbaik</strong> pada kampus Akademi Teknik Informatika Tunas Bangsa dengan gelar A.md.Kom.
+        </p>
+        <p className="text-base sm:text-lg text-gray-400 mb-8 leading-relaxed font-light text-justify sm:text-left">
+          Tujuan saya adalah membangun aplikasi web yang tidak hanya fungsional dan cepat, tetapi juga memberikan pengalaman pengguna yang menyenangkan dan intuitif.
+        </p>
+        <div className="flex justify-center lg:justify-start w-full">
+          <a 
+            href="#contact" 
+            className="w-full sm:w-auto text-center px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition-all duration-300 font-bold"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Hubungi Saya
+          </a>
+        </div>
+      </div>
+      
+      {/* Foto Kelulusan - Penyesuaian margin agar efek box bayangan (-z-10) tidak keluar layar mobile */}
+      <div className="flex justify-center items-center animate-hidden from-right py-4 w-full">
+        <div className="relative w-full max-w-[260px] sm:max-w-sm group mx-auto">
+          <a href="/image/foto_kelulusan.jpg" target="_blank" rel="noreferrer" className="block w-full">
+            <img 
+              src="/image/foto_kelulusan.jpg" 
+              alt="Foto Muhammad Syaifulloh" 
+              className="relative w-full h-auto object-cover rounded border border-white/10 group-hover:border-white/30 transition duration-500 shadow-xl"
+              style={{ aspectRatio: '4/5', objectFit: 'cover' }}
+            />
+          </a>    
+          <div className="absolute -bottom-3 -right-3 w-16 h-16 sm:w-24 sm:h-24 bg-white/5 rounded border border-white/5 -z-10 group-hover:bg-white/10 transition duration-500"></div>
+          <div className="absolute -top-3 -left-3 w-16 h-16 sm:w-24 sm:h-24 bg-white/5 rounded border border-white/5 -z-10 group-hover:bg-white/10 transition duration-500"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Section Counter Card */}
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
+      <div className="p-6 sm:p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up">
+        <div className="w-14 h-14 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6 mx-auto sm:mx-0">
+          <i className="fas fa-trophy text-white text-xl"></i>
+        </div>
+        <h3 className="text-xl font-bold mb-2 text-white text-center sm:text-left">1+ Tahun</h3>
+        <p className="text-gray-400 font-light text-sm text-center sm:text-left">Pengalaman Profesional</p>
+      </div>
+
+      <div className="p-6 sm:p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up" style={{ transitionDelay: '100ms' }}>
+        <div className="w-14 h-14 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6 mx-auto sm:mx-0">
+          <i className="fas fa-project-diagram text-white text-xl"></i>
+        </div>
+        <h3 className="text-xl font-bold mb-2 text-white text-center sm:text-left">10+ Proyek</h3>
+        <p className="text-gray-400 font-light text-sm text-center sm:text-left">Selesai dengan Sukses</p>
+      </div>
+
+      <div className="p-6 sm:p-8 bg-white/5 border border-white/5 rounded card-hover animate-hidden fade-up" style={{ transitionDelay: '200ms' }}>
+        <div className="w-14 h-14 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6 mx-auto sm:mx-0">
+          <i className="fas fa-users text-white text-xl"></i>
+        </div>
+        <h3 className="text-xl font-bold mb-2 text-white text-center sm:text-left">5+ Klien</h3>
+        <p className="text-gray-400 font-light text-sm text-center sm:text-left">Puas dengan Layanan</p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Skills Section */}
       <section id="skills" className="py-24 bg-black border-t border-white/5 overflow-hidden">

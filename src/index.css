@@ -23,28 +23,41 @@ body {
   color: #ffffff;
 }
 
+/* --- PERBAIKAN ANIMASI --- */
 .animate-hidden {
     opacity: 0;
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Gunakan overflow-x-hidden pada parent section di HTML untuk keamanan ganda */
 }
 
 .animate-hidden.fade-up {
-    transform: translateY(30px);
+    transform: translateY(20px);
 }
 
+/* Di mobile geser sedikit saja (15px) agar tidak merusak lebar viewport */
 .animate-hidden.from-left {
-    transform: translateX(-50px);
+    transform: translateX(-15px);
 }
 
 .animate-hidden.from-right {
-    transform: translateX(50px);
+    transform: translateX(15px);
+}
+
+/* Ketika layar berukuran minimal tablet/desktop (768px+), baru gunakan geser 50px */
+@media (min-width: 768px) {
+    .animate-hidden.from-left {
+        transform: translateX(-50px);
+    }
+    
+    .animate-hidden.from-right {
+        transform: translateX(50px);
+    }
 }
 
 .animate-visible {
     opacity: 1;
     transform: translateY(0) translateX(0);
 }
-
 /* Glassmorphism Stark Mode */
 .glass-effect {
     background: rgba(0, 0, 0, 0.8);
