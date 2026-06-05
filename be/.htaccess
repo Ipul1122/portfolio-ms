@@ -1,4 +1,0 @@
-
-# Blokir semua akses langsung via browser
-Order Deny,Allow
-Deny from all
