@@ -504,3 +504,269 @@ body {
   }
 }
 
+/* ========================================
+   Navbar — Active Section Highlight
+   ======================================== */
+
+/* The animated underline span inside every desktop nav link */
+.nav-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.4) 100%);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+/* Hover — grow underline */
+a:hover .nav-underline,
+.group:hover .nav-underline {
+  width: 100%;
+}
+
+/* ── Active state ────────────────────────────────────────────── */
+.nav-link-active {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Active underline — always full width + shimmer */
+.nav-link-active .nav-underline {
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #ffffff 30%,
+    #ffffff 70%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: nav-shimmer 2s linear infinite;
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes nav-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Contact button active glow */
+.nav-contact-active {
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.5),
+    0 0 24px rgba(255, 255, 255, 0.2);
+}
+
+/* ── Mobile active state ────────────────────────────────────── */
+.nav-link-active-mobile {
+  color: #ffffff !important;
+  padding-left: 0.75rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 6px 6px 0;
+}
+
+
+/* ========================================
+   Footer — Premium Redesign
+   ======================================== */
+.footer-root {
+  position: relative;
+  background: #000;
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+  margin-top: auto;
+}
+
+/* Gradient separator line at the very top */
+.footer-top-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent 100%
+  );
+  margin-bottom: 3rem;
+}
+
+/* Three-column inner layout */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
+/* Brand */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  border-radius: 8px;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6;
+  max-width: 220px;
+  margin: 0;
+}
+
+/* Nav links */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+}
+
+.footer-nav-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  position: relative;
+}
+
+.footer-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-nav-link:hover {
+  color: #fff;
+}
+
+.footer-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Social icons */
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .footer-social {
+    justify-content: flex-end;
+  }
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-social-btn:hover {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.12);
+}
+
+/* Bottom copyright row */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-made {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-heart {
+  color: rgba(255, 255, 255, 0.6);
+  display: inline-block;
+  animation: heart-beat 1.8s ease-in-out infinite;
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  20%       { transform: scale(1.25); }
+  40%       { transform: scale(1); }
+  60%       { transform: scale(1.15); }
+}

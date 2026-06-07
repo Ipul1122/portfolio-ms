@@ -1,73 +1,19 @@
 import React from 'react';
-
-interface ExperienceItem {
-  period: string;
-  role: string;
-  company: string;
-  type: string;
-  descriptions: string[];
-  tech?: string[];
-}
-
-const experiences: ExperienceItem[] = [
-  {
-    period: 'Januari - Juni 2026',
-    role: 'Fullstack Developer',
-    company: 'PT Cakrawala Parama Internasional',
-    type: 'Full-time',
-    descriptions: [
-      'Merancang RESTful API berbasis Laravel 12 dan Vue 3 menggunakan Laravel Sanctum untuk mengamankan data serta membangun approval workflow bilingual khusus peran Direktur.',
-      'Mengoptimalkan struktur database MySQL untuk konten interaktif dan menerapkan mekanisme short-term caching pada hitungan artikel guna meminimalkan beban query database.',
-      'Mengeksekusi pengujian fungsionalitas secara menyeluruh (Whitebox dan Blackbox testing) pada API endpoint dan penanganan error frontend.',
-    ],
-    tech: ['Laravel 12', 'Vue 3', 'MySQL', 'Sanctum', 'REST API'],
-  },
-  {
-    period: 'Juli 2025 - Sekarang',
-    role: 'Asisten Dosen',
-    company: 'Akademi Teknik Informatika Tunas Bangsa',
-    type: 'Part-time',
-    descriptions: [
-      'Membimbing dan mentransfer pengetahuan kepada 10+ mahasiswa mengenai logika pemrograman dasar serta implementasi Fullstack Web Development.',
-      'Melakukan code review, membantu proses debugging/troubleshooting, serta mengajarkan teknik clean code untuk memastikan aplikasi mudah dipelihara.',
-      'Mengarahkan mahasiswa dalam perancangan arsitektur sistem (Flowchart, DFD, ERD), penggunaan Git/GitHub untuk kolaborasi tim.',
-    ],
-    tech: ['PHP', 'MySQL', 'Bootstrap', 'Git', 'GitHub'],
-  },
-  {
-    period: 'September 2024 - Sekarang',
-    role: 'Koordinator Utama & IT Support',
-    company: 'TPA Masjid Nurul Haq',
-    type: 'Volunteer',
-    descriptions: [
-      'Memimpin kegiatan operasional harian institusi pendidikan, mencakup penyusunan jadwal pengajaran dan manajemen data murid.',
-      'Melakukan digitalisasi administrasi dengan menginisiasi dan mengelola platform web (tpanurhaq.com) untuk efisiensi rekapitulasi jadwal serta absensi.',
-      'Menangani kendala teknis (hosting maintenance) secara mandiri untuk memastikan platform edukasi dapat diakses tanpa hambatan.',
-    ],
-    tech: ['Laravel 12', 'MySQL', 'Tailwind CSS'],
-  },
-  {
-    period: 'Maret - Mei 2025',
-    role: 'Fullstack Developer (Laravel)',
-    company: 'PT. Radar Teknologi Komputer',
-    type: 'Magang',
-    descriptions: [
-      'Merancang dan membangun arsitektur website portofolio dinamis menggunakan Laravel 12 (terbaru) dengan fitur CRUD yang optimal.',
-      'Mengembangkan modul web untuk visualisasi data lingkungan (studi kasus: Polusi Laut Pantai Selatan).',
-      'Melakukan Black Box Testing dan debugging kode sebelum deployment, mengurangi risiko error pada tahap produksi.',
-    ],
-    tech: ['Laravel 12', 'MySQL', 'Bootstrap'],
-  },
-];
+import { useLanguage } from '../context/LanguageContext';
+import { experiencesTranslations } from '../data/translations';
 
 const typeColors: Record<string, string> = {
   'Full-time': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
   'Part-time': 'bg-blue-500/15 text-blue-400 border-blue-500/20',
   'Magang': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
+  'Internship': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
   'Volunteer': 'bg-purple-500/15 text-purple-400 border-purple-500/20',
 };
 
 const ExperienceSection: React.FC = () => {
+  const { language, t } = useLanguage();
+  const experiences = experiencesTranslations[language];
+
   return (
     <section id="experience" className="py-20 bg-black border-t border-white/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,10 +21,10 @@ const ExperienceSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16 animate-hidden fade-up">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading mb-4 text-white">
-            Pengalaman Kerja
+            {t('expHeading')}
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light">
-            Perjalanan karir dan kontribusi profesional saya
+            {t('expSubheading')}
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const languages = [
   { name: 'HTML5', image: '/image/languange/html.png' },
@@ -25,14 +26,16 @@ const repeatedLanguages = [...languages, ...languages];
 const repeatedTools = [...tools, ...tools, ...tools];
 
 const SkillsSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
-    <section id="skills" className="py-24 bg-black border-t border-white/5 overflow-hidden">
+    <section id="skills" className="py-24 bg-zinc-950 border-t border-white/5 overflow-hidden">
       <div className="container-fluid">
         <div className="text-center mb-16 animate-hidden fade-up">
-          <span className="text-gray-400 font-semibold tracking-wider uppercase text-xs">Kemampuan Teknis</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mt-2">Skills & Tools</h2>
+          <span className="text-gray-400 font-semibold tracking-wider uppercase text-xs">{t('skillsHeading')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mt-2">{t('skillsTitle')}</h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto font-light">
-            Teknologi dan perangkat lunak yang saya gunakan untuk mengubah ide menjadi produk digital yang fungsional.
+            {t('skillsSubheading')}
           </p>
         </div>
 
@@ -40,12 +43,12 @@ const SkillsSection: React.FC = () => {
           {/* Languages Slider (Right to Left) */}
           <div className="animate-hidden fade-up">
             <h3 className="text-lg font-bold mb-6 text-white/70 font-heading tracking-wide pl-4 flex items-center gap-2">
-              <i className="fas fa-code text-white/50"></i> Programming Languages & Frameworks
+              <i className="fas fa-code text-white/50"></i> {t('skillsSectionLang')}
             </h3>
             <div className="relative w-full overflow-hidden hover-pause py-2">
               {/* Edge Fading Overlays */}
-              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
               
               <div className="flex w-max animate-marquee-left">
                 <div className="flex gap-6 pr-6 shrink-0">
@@ -85,12 +88,12 @@ const SkillsSection: React.FC = () => {
           {/* Tools Slider (Left to Right) */}
           <div className="animate-hidden fade-up" style={{ transitionDelay: '150ms' }}>
             <h3 className="text-lg font-bold mb-6 text-white/70 font-heading tracking-wide pl-4 flex items-center gap-2">
-              <i className="fas fa-tools text-white/50"></i> Tools & Workflow
+              <i className="fas fa-tools text-white/50"></i> {t('skillsSectionTools')}
             </h3>
             <div className="relative w-full overflow-hidden hover-pause py-2">
               {/* Edge Fading Overlays */}
-              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
               
               <div className="flex w-max animate-marquee-right">
                 <div className="flex gap-6 pr-6 shrink-0">

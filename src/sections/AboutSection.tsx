@@ -1,13 +1,16 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const AboutSection: React.FC = () => {
+  const { language, t } = useLanguage();
+
   return (
-    <section id="about" className="py-20 bg-black border-t border-white/5">
+    <section id="about" className="py-20 bg-zinc-950 border-t border-white/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-hidden fade-up">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading mb-4 text-white">Tentang Saya</h2>
-          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light">Menciptakan pengalaman digital yang luar biasa</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('aboutHeading')}</h2>
+          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light">{t('aboutSubheading')}</p>
         </div>
 
         {/* 2×2 Grid with visible grid lines */}
@@ -17,11 +20,20 @@ const AboutSection: React.FC = () => {
           <div className="about-grid__cell animate-hidden fade-up">
             <div className="about-grid__cell-inner">
               <h3 className="text-2xl sm:text-3xl font-bold font-heading mb-6 text-white leading-snug">
-                Kenalin, Saya <span className="block sm:inline">Muhammad Syaifulloh</span>
+                {t('aboutIntroTitle')} <span className="block sm:inline">{t('aboutIntroName')}</span>
               </h3>
               <p className="text-base sm:text-lg text-gray-400 mb-6 leading-relaxed font-light">
-                Saya adalah seorang pengembang web yang berdedikasi dalam menciptakan solusi digital yang inovatif dan efisien.
-                Saya merupakan <strong className="text-white font-bold">Lulusan Terbaik</strong> pada kampus Akademi Teknik Informatika Tunas Bangsa dengan gelar A.md.Kom.
+                {language === 'en' ? (
+                  <>
+                    I am a dedicated web developer focused on creating innovative and efficient digital solutions.
+                    I was the <strong className="text-white font-bold">Best Graduate</strong> of the Akademi Teknik Informatika Tunas Bangsa with an Associate Degree in Computer Science (A.md.Kom.).
+                  </>
+                ) : (
+                  <>
+                    Saya adalah seorang pengembang web yang berdedikasi dalam menciptakan solusi digital yang inovatif dan efisien.
+                    Saya merupakan <strong className="text-white font-bold">Lulusan Terbaik</strong> pada kampus Akademi Teknik Informatika Tunas Bangsa dengan gelar A.md.Kom.
+                  </>
+                )}
               </p>
               <div>
                 <a
@@ -32,7 +44,7 @@ const AboutSection: React.FC = () => {
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Hubungi Saya
+                  {t('aboutBtnContact')}
                 </a>
               </div>
             </div>
@@ -62,9 +74,9 @@ const AboutSection: React.FC = () => {
               <div className="w-14 h-14 bg-white/5 rounded border border-white/10 flex items-center justify-center mb-6">
                 <i className="fas fa-rocket text-white text-xl"></i>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold font-heading mb-4 text-white">Visi & Misi</h3>
+              <h3 className="text-xl sm:text-2xl font-bold font-heading mb-4 text-white">{t('aboutVisionTitle')}</h3>
               <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-light">
-                Tujuan saya adalah membangun aplikasi web yang tidak hanya fungsional dan cepat, tetapi juga memberikan pengalaman pengguna yang menyenangkan dan intuitif.
+                {t('aboutVisionDesc')}
               </p>
             </div>
           </div>
@@ -72,7 +84,7 @@ const AboutSection: React.FC = () => {
           {/* Row 2, Col 2 — Stats */}
           <div className="about-grid__cell animate-hidden fade-up" style={{ transitionDelay: '300ms' }}>
             <div className="about-grid__cell-inner">
-              <h3 className="text-xl sm:text-2xl font-bold font-heading mb-6 text-white">Pencapaian</h3>
+              <h3 className="text-xl sm:text-2xl font-bold font-heading mb-6 text-white">{t('aboutAchievementsTitle')}</h3>
               <div className="space-y-6">
                 {/* Stat item */}
                 <div className="flex items-center gap-4">
@@ -80,8 +92,8 @@ const AboutSection: React.FC = () => {
                     <i className="fas fa-trophy text-white"></i>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-white">1+ Tahun</p>
-                    <p className="text-sm text-gray-400 font-light">Pengalaman Profesional</p>
+                    <p className="text-lg font-bold text-white">{t('aboutExpVal')}</p>
+                    <p className="text-sm text-gray-400 font-light">{t('aboutExpLabel')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -89,8 +101,8 @@ const AboutSection: React.FC = () => {
                     <i className="fas fa-project-diagram text-white"></i>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-white">10+ Proyek</p>
-                    <p className="text-sm text-gray-400 font-light">Selesai dengan Sukses</p>
+                    <p className="text-lg font-bold text-white">{t('aboutProjVal')}</p>
+                    <p className="text-sm text-gray-400 font-light">{t('aboutProjLabel')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -98,8 +110,8 @@ const AboutSection: React.FC = () => {
                     <i className="fas fa-users text-white"></i>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-white">5+ Klien</p>
-                    <p className="text-sm text-gray-400 font-light">Puas dengan Layanan</p>
+                    <p className="text-lg font-bold text-white">{t('aboutClientVal')}</p>
+                    <p className="text-sm text-gray-400 font-light">{t('aboutClientLabel')}</p>
                   </div>
                 </div>
               </div>

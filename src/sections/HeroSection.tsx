@@ -1,6 +1,17 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const HeroSection: React.FC = () => {
+  const { language, t } = useLanguage();
+
+  const cvPath = language === 'en'
+    ? '/image/CV_MUHAMMAD_SYAIFULLOH_ENGLISH_.pdf'
+    : '/image/CV_MUHAMMAD_SYAIFULLOH_INDO_.pdf';
+
+  const cvFileName = language === 'en'
+    ? 'CV_MUHAMMAD_SYAIFULLOH_ENGLISH_.pdf'
+    : 'CV_MUHAMMAD_SYAIFULLOH_INDO_.pdf';
+
   return (
     <section id="home" className="min-h-screen flex items-center pt-24 pb-12 relative overflow-hidden bg-black">
       {/* Stark ambient glow */}
@@ -13,7 +24,7 @@ const HeroSection: React.FC = () => {
           
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-1.5 bg-white/5 border border-white/10 text-white rounded-full text-xs font-semibold uppercase tracking-wider mb-6 animate-hidden from-left">
-            <i className="fas fa-code mr-2"></i>Web Developer & UI/UX Designer
+            <i className="fas fa-code mr-2"></i>{t('heroBadge')}
           </div>
 
           {/* Overlapping Text & Image Area (1 Column grid overlay) */}
@@ -22,7 +33,7 @@ const HeroSection: React.FC = () => {
             {/* TEXT IN THE BACK */}
             <div className="col-start-1 row-start-1 z-0 select-text animate-hidden from-left">
               <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[12rem] 2xl:text-[13rem] font-bold font-heading leading-[0.9] tracking-tighter text-white">
-                Hai, Saya
+                {t('heroGreeting')}
                 <br />
                 <span className="gradient-text block mt-2">Muhammad Syaifulloh</span>
               </h1>
@@ -47,7 +58,7 @@ const HeroSection: React.FC = () => {
           {/* Content below the overlap */}
           <div className="flex flex-col items-center text-center max-w-2xl  z-20 animate-hidden fade-up">
             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 leading-relaxed font-sans font-light">
-              Pengembang web profesional dengan pengalaman 1+ tahun dalam menciptakan solusi digital yang inovatif. Spesialisasi dalam HTML, CSS, JavaScript, dan framework modern.
+              {t('heroDesc')}
             </p>
             
             {/* Tombol dibuat w-full di mobile agar rapi, dan kembali normal di tablet/desktop */}
@@ -60,14 +71,14 @@ const HeroSection: React.FC = () => {
                   document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                View My Work
+                {t('heroBtnView')}
               </a>
               <a 
-                href="/image/CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
-                download="CV_MUHAMMAD_SYAIFULLOH_ENGLISH-pemrogramman.pdf" 
+                href={cvPath} 
+                download={cvFileName} 
                 className="w-full sm:w-auto text-center px-8 py-3.5 bg-transparent text-white border border-white rounded hover:bg-white hover:text-black transition-all duration-300 font-bold tracking-wide"
               >
-                Download My CV
+                {t('heroBtnDownload')}
               </a>
             </div>
 

@@ -7,6 +7,7 @@ import Bisnis from './pages/Bisnis';
 import ProjectKami from './pages/ProjectKami';
 import KebijakanPrivasi from './pages/KebijakanPrivasi';
 import SyaratKetentuan from './pages/SyaratKetentuan';
+import { LanguageProvider } from './context/LanguageContext';
 
 // Helper component to handle scrolling to hash element on route change
 const ScrollToHashElement: React.FC = () => {
@@ -37,23 +38,26 @@ const ScrollToHashElement: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToHashElement />
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/bisnis" element={<Bisnis />} />
-            <Route path="/project-kami" element={<ProjectKami />} />
-            <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
-            <Route path="/syarat-dan-ketentuan" element={<SyaratKetentuan />} />
-          </Routes>
+    <LanguageProvider>
+      <Router>
+        <ScrollToHashElement />
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/bisnis" element={<Bisnis />} />
+              <Route path="/project-kami" element={<ProjectKami />} />
+              <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
+              <Route path="/syarat-dan-ketentuan" element={<SyaratKetentuan />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </LanguageProvider>
   );
 };
 
 export default App;
+

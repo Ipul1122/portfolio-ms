@@ -1,62 +1,134 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection,    setActiveSection]    = useState<string>('');
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const { language, setLanguage, t } = useLanguage();
 
+  const navSections = [
+    { id: 'about',      label: t('navAbout')       },
+    { id: 'experience', label: t('navExperience')  },
+    { id: 'skills',     label: t('navSkills')      },
+    { id: 'work',       label: t('navWork')        },
+  ];
+
+  /* ── Scroll → blur navbar ─────────────────────────────────────── */
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  /* ── Active-section detection via IntersectionObserver ────────── */
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location]);
+    if (!isHome) return;
 
-  const navLink = (hash: string, label: string) => {
+    const sectionIds = [...navSections.map(s => s.id), 'contact'];
+
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        {
+          rootMargin: '-10% 0px -70% 0px', // active when section enters top 30% of viewport
+          threshold: 0,
+        }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach(o => o.disconnect());
+  }, [isHome, language]); // added language to trigger observer re-bind when language switches (since elements labels re-render)
+
+  /* ── Close mobile menu on route change ───────────────────────── */
+  useEffect(() => setIsMobileMenuOpen(false), [location]);
+
+  /* ── Smooth-scroll helper ─────────────────────────────────────── */
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  /* ── Link class helper ────────────────────────────────────────── */
+  const linkClass = (id: string) =>
+    `relative transition-all duration-300 font-medium group ${
+      activeSection === id
+        ? 'nav-link-active'
+        : 'text-gray-400 hover:text-white'
+    }`;
+
+  const mobileLinkClass = (id: string) =>
+    `block py-2 transition-all duration-300 font-medium ${
+      activeSection === id
+        ? 'text-white nav-link-active-mobile'
+        : 'text-gray-400 hover:text-white'
+    }`;
+
+  /* ── Render desktop nav link ──────────────────────────────────── */
+  const desktopNavLink = (id: string, label: string) => {
     if (isHome) {
       return (
         <a
-          href={hash}
-          className="text-gray-400 hover:text-white transition duration-300 font-medium"
-          onClick={(e) => {
-            e.preventDefault();
-            const targetId = hash.replace('#', '');
-            const element = document.getElementById(targetId);
-            if (element) {
-              const headerOffset = 80;
-              const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-              const offsetPosition = elementPosition - headerOffset;
-              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-            setIsMobileMenuOpen(false);
-          }}
+          key={id}
+          href={`#${id}`}
+          className={linkClass(id)}
+          onClick={e => { e.preventDefault(); scrollTo(id); }}
+        >
+          {label}
+          <span className="nav-underline" />
+        </a>
+      );
+    }
+    return (
+      <Link key={id} to={`/#${id}`} className={linkClass(id)}>
+        {label}
+        <span className="nav-underline" />
+      </Link>
+    );
+  };
+
+  /* ── Render mobile nav link ───────────────────────────────────── */
+  const mobileNavLink = (id: string, label: string) => {
+    if (isHome) {
+      return (
+        <a
+          key={id}
+          href={`#${id}`}
+          className={mobileLinkClass(id)}
+          onClick={e => { e.preventDefault(); scrollTo(id); }}
         >
           {label}
         </a>
       );
-    } else {
-      return (
-        <Link
-          to={`/${hash}`}
-          className="text-gray-400 hover:text-white transition duration-300 font-medium"
-        >
-          {label}
-        </Link>
-      );
     }
+    return (
+      <Link key={id} to={`/#${id}`} className={mobileLinkClass(id)}>
+        {label}
+      </Link>
+    );
   };
+
+  /* ── Contact button class ─────────────────────────────────────── */
+  const contactBtnClass =
+    activeSection === 'contact'
+      ? 'px-6 py-2.5 rounded font-medium transition duration-300 bg-white text-black border border-white nav-contact-active'
+      : 'px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium';
 
   return (
     <header
@@ -67,146 +139,88 @@ const Navbar: React.FC = () => {
     >
       <nav className="container-fluid py-4">
         <div className="flex justify-between items-center">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition duration-300">
             <div className="bg-white text-black font-black text-lg px-3 py-1.5 rounded">MS</div>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navLink('#about', 'About')}
-            {navLink('#skills', 'Skills')}
-            {navLink('#work', 'Portfolio')}
-            
-            <Link
-              to="/bisnis"
-              className={`hover:text-white transition duration-300 font-medium ${
-                location.pathname === '/bisnis' ? 'text-white font-bold' : 'text-gray-400'
-              }`}
+          {/* Desktop & Mobile Actions */}
+          <div className="flex items-center space-x-4 md:space-x-8">
+            {/* Desktop Links */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navSections.map(({ id, label }) => desktopNavLink(id, label))}
+            </div>
+
+            {/* Language Selector (Visible on both desktop & mobile) */}
+            <div className="inline-flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 text-[10px] select-none">
+              <button
+                onClick={() => setLanguage('id')}
+                className={`px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer ${language === 'id' ? 'bg-white text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+              >
+                ID
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer ${language === 'en' ? 'bg-white text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+              >
+                EN
+              </button>
+            </div>
+
+            {/* Desktop Contact CTA */}
+            <div className="hidden md:block">
+              {isHome ? (
+                <a
+                  href="#contact"
+                  className={contactBtnClass}
+                  onClick={e => { e.preventDefault(); scrollTo('contact'); }}
+                >
+                  {t('navContact')}
+                </a>
+              ) : (
+                <Link to="/#contact" className={contactBtnClass}>
+                  {t('navContact')}
+                </Link>
+              )}
+            </div>
+
+            {/* Hamburger */}
+            <button
+              id="menu-btn"
+              className="md:hidden focus:outline-none text-white cursor-pointer"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <span>Layanan & Produk</span>
-            </Link>
-
-            {isHome ? (
-              <a
-                href="#contact"
-                className="px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    const headerOffset = 80;
-                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                  }
-                }}
-              >
-                Contact
-              </a>
-            ) : (
-              <Link
-                to="/#contact"
-                className="px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium"
-              >
-                Contact
-              </Link>
-            )}
+              <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`} />
+            </button>
           </div>
-
-          <button
-            id="menu-btn"
-            className="md:hidden focus:outline-none text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`}></i>
-          </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden nav-blur ${isMobileMenuOpen ? 'block' : 'hidden'}`} id="menu-mobile">
-        <div className="container-fluid py-4 space-y-2">
-          {isHome ? (
-            <a
-              href="#about"
-              className="block py-2 text-gray-400 hover:text-white transition"
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('about');
-                if (element) window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              About
-            </a>
-          ) : (
-            <Link to="/#about" className="block py-2 text-gray-400 hover:text-white transition">
-              About
-            </Link>
-          )}
+      <div
+        className={`md:hidden nav-blur transition-all duration-300 ${isMobileMenuOpen ? 'block' : 'hidden'}`}
+        id="menu-mobile"
+      >
+        <div className="container-fluid py-4 space-y-4">
+          <div className="space-y-2">
+            {navSections.map(({ id, label }) => mobileNavLink(id, label))}
+          </div>
 
-          {isHome ? (
-            <a
-              href="#skills"
-              className="block py-2 text-gray-400 hover:text-white transition"
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('skills');
-                if (element) window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              Skills
-            </a>
-          ) : (
-            <Link to="/#skills" className="block py-2 text-gray-400 hover:text-white transition">
-              Skills
-            </Link>
-          )}
-
-          {isHome ? (
-            <a
-              href="#work"
-              className="block py-2 text-gray-400 hover:text-white transition"
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('work');
-                if (element) window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              Portfolio
-            </a>
-          ) : (
-            <Link to="/#work" className="block py-2 text-gray-400 hover:text-white transition">
-              Portfolio
-            </Link>
-          )}
-
-          <Link
-            to="/bisnis"
-            className="block py-2 text-white font-bold hover:text-gray-300 transition bg-white/5 px-4 rounded -mx-4"
-          >
-            Layanan & Produk
-          </Link>
-
-          {isHome ? (
-            <a
-              href="#contact"
-              className="block py-2 text-gray-400 hover:text-white transition"
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('contact');
-                if (element) window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              Contact
-            </a>
-          ) : (
-            <Link to="/#contact" className="block py-2 text-gray-400 hover:text-white transition">
-              Contact
-            </Link>
-          )}
+          <div className="pt-2 border-t border-white/5">
+            {isHome ? (
+              <a
+                href="#contact"
+                className={mobileLinkClass('contact')}
+                onClick={e => { e.preventDefault(); scrollTo('contact'); }}
+              >
+                {t('navContact')}
+              </a>
+            ) : (
+              <Link to="/#contact" className={mobileLinkClass('contact')}>
+                {t('navContact')}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </header>

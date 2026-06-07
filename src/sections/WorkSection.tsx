@@ -4,61 +4,72 @@ import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper/modules';
 import { publicProjects, otherProjects } from '../data/projects';
 import type { Project } from '../data/projects';
+import { useLanguage } from '../context/LanguageContext';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-  <Link 
-    to={`/project-kami?project=${project.id}`} 
-    className="group bg-white/5 rounded border border-white/5 hover:border-white/30 hover:bg-white/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
-  >
-    <div className="relative overflow-hidden aspect-[4/3] bg-neutral-900 border-b border-white/5">
-      <img 
-        src={project.image} 
-        alt={project.title} 
-        className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100"
-      />
-      <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white border border-white/10 uppercase tracking-wide">
-        {project.category}
-      </div>
-      {project.isPublic && (
-        <div className="absolute top-4 left-4 bg-emerald-500/90 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-wide flex items-center gap-1">
-          <i className="fas fa-globe text-[8px]"></i> Live
+const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+  const { language, t } = useLanguage();
+
+  const title = language === 'en' && project.titleEn ? project.titleEn : project.title;
+  const subtitle = language === 'en' && project.subtitleEn ? project.subtitleEn : project.subtitle;
+  const category = language === 'en' && project.categoryEn ? project.categoryEn : project.category;
+
+  return (
+    <Link 
+      to={`/project-kami?project=${project.id}`} 
+      className="group bg-white/5 rounded border border-white/5 hover:border-white/30 hover:bg-white/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
+    >
+      <div className="relative overflow-hidden aspect-[4/3] bg-neutral-900 border-b border-white/5">
+        <img 
+          src={project.image} 
+          alt={title} 
+          className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100"
+        />
+        <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white border border-white/10 uppercase tracking-wide">
+          {category}
         </div>
-      )}
-    </div>
-    <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold font-heading mb-2 group-hover:text-white transition text-white">
-        {project.title}
-      </h3>
-      <p className="text-gray-400 text-sm mb-4 line-clamp-2 font-light">
-        {project.subtitle}
-      </p>
-      {project.isPublic && (project.demoUrl || project.githubUrl) && (
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.demoUrl && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded px-2 py-0.5">
-              <i className="fas fa-external-link-alt text-[8px]"></i> Demo
-            </span>
-          )}
-          {project.githubUrl && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-300 bg-white/5 border border-white/10 rounded px-2 py-0.5">
-              <i className="fab fa-github text-[8px]"></i> Source
-            </span>
-          )}
-        </div>
-      )}
-      <div className="mt-auto flex items-center text-white font-semibold text-sm group-hover:underline">
-        Lihat Studi Kasus <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+        {project.isPublic && (
+          <div className="absolute top-4 left-4 bg-emerald-500/90 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-wide flex items-center gap-1">
+            <i className="fas fa-globe text-[8px]"></i> Live
+          </div>
+        )}
       </div>
-    </div>
-  </Link>
-);
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold font-heading mb-2 group-hover:text-white transition text-white">
+          {title}
+        </h3>
+        <p className="text-gray-400 text-sm mb-4 line-clamp-2 font-light">
+          {subtitle}
+        </p>
+        {project.isPublic && (project.demoUrl || project.githubUrl) && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.demoUrl && (
+              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded px-2 py-0.5">
+                <i className="fas fa-external-link-alt text-[8px]"></i> Demo
+              </span>
+            )}
+            {project.githubUrl && (
+              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-300 bg-white/5 border border-white/10 rounded px-2 py-0.5">
+                <i className="fab fa-github text-[8px]"></i> Source
+              </span>
+            )}
+          </div>
+        )}
+        <div className="mt-auto flex items-center text-white font-semibold text-sm group-hover:underline">
+          {t('workViewCaseStudy')} <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 const WorkSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="work" className="py-24 bg-black border-t border-white/5">
       <div className="container-fluid">
@@ -67,11 +78,11 @@ const WorkSection: React.FC = () => {
           <div className="text-center md:text-left">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Live & Open Source</span>
+              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">{t('workHeadingLive')}</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">Proyek Publik</h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('workTitlePublic')}</h2>
             <p className="text-lg text-gray-400 max-w-xl font-light">
-              Proyek yang sudah live dan dapat diakses oleh publik. Kunjungi langsung atau lihat source code-nya.
+              {t('workDescPublic')}
             </p>
           </div>
           
@@ -124,9 +135,9 @@ const WorkSection: React.FC = () => {
         {/* ===== PROYEK LAINNYA ===== */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 animate-hidden fade-up gap-6">
           <div className="text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">Proyek Lainnya</h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('workTitleOther')}</h2>
             <p className="text-lg text-gray-400 max-w-xl font-light">
-              Kumpulan proyek klien dan studi kasus lainnya yang telah kami kerjakan.
+              {t('workDescOther')}
             </p>
           </div>
           
