@@ -249,3 +249,258 @@ body {
   }
 }
 
+/* ========================================
+   About Section — 2×2 Grid with Grid Lines
+   ======================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background:
+    /* Subtle dot-grid background pattern */
+    radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.about-grid__cell {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Remove border from last cell on mobile (single column) */
+.about-grid__cell:last-child {
+  border-bottom: none;
+}
+
+.about-grid__cell-inner {
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+/* Subtle hover glow on each cell */
+.about-grid__cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.about-grid__cell:hover::before {
+  opacity: 1;
+}
+
+/* — Tablet and up: 2 columns — */
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid__cell-inner {
+    padding: 2.5rem 2rem;
+  }
+
+  /* Odd cells (left column) get a right border */
+  .about-grid__cell:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Only the first two cells (row 1) have bottom border */
+  .about-grid__cell:nth-child(1),
+  .about-grid__cell:nth-child(2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Remove bottom border from row 2 */
+  .about-grid__cell:nth-child(3),
+  .about-grid__cell:nth-child(4) {
+    border-bottom: none;
+  }
+}
+
+/* — Desktop: wider padding — */
+@media (min-width: 1024px) {
+  .about-grid__cell-inner {
+    padding: 3rem 2.5rem;
+  }
+}
+
+/* ========================================
+   Experience Section — Timeline Design
+   ======================================== */
+.exp-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* The vertical line */
+.exp-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+/* Each timeline item */
+.exp-timeline__item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.exp-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Timeline dot */
+.exp-timeline__dot {
+  position: absolute;
+  left: -2rem;
+  top: 8px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.exp-timeline__dot-inner {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.4s ease;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+}
+
+/* Pulse animation for the first (most recent) dot */
+.exp-timeline__item:first-child .exp-timeline__dot-inner {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+  animation: dot-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.03), 0 0 12px rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Dot glow on card hover */
+.exp-timeline__item:hover .exp-timeline__dot-inner {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06), 0 0 16px rgba(255, 255, 255, 0.1);
+  transform: scale(1.2);
+}
+
+/* Card */
+.exp-timeline__card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle shimmer on hover */
+.exp-timeline__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.exp-timeline__card:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.exp-timeline__card:hover::before {
+  opacity: 1;
+}
+
+/* Period badge */
+.exp-timeline__period {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+}
+
+/* Description bullet */
+.exp-timeline__bullet {
+  display: block;
+  width: 5px;
+  height: 5px;
+  min-width: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* — Tablet and up — */
+@media (min-width: 768px) {
+  .exp-timeline {
+    padding-left: 3rem;
+  }
+
+  .exp-timeline::before {
+    left: 7px;
+  }
+
+  .exp-timeline__dot {
+    left: -3rem;
+  }
+
+  .exp-timeline__card {
+    padding: 2rem 2.5rem;
+  }
+
+  .exp-timeline__item {
+    padding-bottom: 3rem;
+  }
+}
+
+/* — Large desktop — */
+@media (min-width: 1024px) {
+  .exp-timeline {
+    padding-left: 4rem;
+  }
+
+  .exp-timeline__dot {
+    left: -4rem;
+  }
+}
+

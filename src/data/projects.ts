@@ -119,6 +119,52 @@ export const projects: Project[] = [
     isPublic: false
   },
   {
+    id: "absensi-karyawan",
+    title: "Sistem Absensi Karyawan Digital",
+    subtitle: "Aplikasi absensi karyawan modern berbasis Web dengan React, TypeScript & Laravel 12",
+    description: "Aplikasi Full-stack web yang dirancang untuk mengelola absensi karyawan secara efisien. Sistem ini memisahkan frontend menggunakan React dan TypeScript untuk interaksi pengguna yang cepat dan responsif, serta backend Laravel 12 sebagai RESTful API yang aman dengan database MySQL dan styling TailwindCSS v4.",
+    image: "/image/project/absensi_karyawan.png",
+    category: "Sistem Absensi",
+    client: "Personal Project",
+    service: "Full-Stack Web Development",
+    year: "2025",
+    price: "—",
+    technologies: ["React", "TypeScript", "PHP", "Laravel", "TailwindCSS", "SweetAlert", "MySQL"],
+    features: [
+      "Autentikasi & Otorisasi Pengguna (Multi-role Admin/Karyawan)",
+      "Sistem Catat Absensi Harian (Check-in & Check-out)",
+      "Dashboard Statistik Absensi & Jam Kerja Karyawan",
+      "Manajemen Data Karyawan, Departemen & Jadwal Kerja",
+      "RESTful API Backend Terpisah dengan Laravel 12",
+      "Notifikasi Interaktif & Konfirmasi dengan SweetAlert"
+    ],
+    githubUrl: "https://github.com/Ipul1122/absensi-karyawan",
+    isPublic: false
+  },
+  {
+    id: "lpdp-app",
+    title: "Aplikasi Pendaftaran Beasiswa LPDP",
+    subtitle: "Sistem Pendaftaran Beasiswa (TUBEL / LPDP App) Berbasis Web Monolithic dengan Laravel & Alpine.js",
+    description: "Aplikasi berbasis web untuk mengelola proses pendaftaran beasiswa secara terpusat. Dilengkapi dengan sistem registrasi berbasis OTP, formulir pendaftaran 7 tahap (multi-step wizard), serta panel kontrol Admin untuk verifikasi, filter, dan pengelolaan status pendaftar (Diterima, Ditolak, Revisi).",
+    image: "/image/project/tubel-lpdp.jpeg",
+    category: "Web App",
+    client: "Personal Project",
+    service: "Aplikasi Web Custom",
+    year: "2025",
+    price: "—",
+    technologies: ["PHP", "Laravel", "Blade", "TailwindCSS", "AlpineJs", "MySQL", "Vite"],
+    features: [
+      "Autentikasi Aman: Registrasi & Login dengan verifikasi OTP via Email",
+      "Formulir Pendaftaran 7 Tahap (Multi-step Wizard)",
+      "Fitur Draft: Otomatis simpan data formulir ke database/localStorage",
+      "Dashboard Statistik Admin: Ringkasan data pendaftar secara real-time",
+      "Manajemen Berkas & Sistem Verifikasi (Diterima, Ditolak, Revisi)",
+      "Integrasi Notifikasi WhatsApp untuk Status Berkas"
+    ],
+    githubUrl: "https://github.com/Ipul1122/lpdp-app",
+    isPublic: false
+  },
+  {
     id: "travel",
     title: "Pellor Trans Travel",
     subtitle: "Website Company Profile untuk Jasa Transportasi & Travel",
