@@ -20,7 +20,7 @@ const ProjectKami: React.FC = () => {
           <div id="project-default">
             <h1 className="text-4xl font-bold font-heading mb-4 text-white">{t('detailNotFoundTitle')}</h1>
             <p className="text-xl text-gray-400 mb-8 font-light">{t('detailNotFoundSub')}</p>
-            <Link to="/#work" className="px-8 py-3.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-bold tracking-wide">
+            <Link to={`/${language}#work`} className="px-8 py-3.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-bold tracking-wide">
               {t('detailBackBtn')}
             </Link>
           </div>
@@ -40,7 +40,7 @@ const ProjectKami: React.FC = () => {
     <section id="project-detail" className="pt-32 pb-24 bg-black text-white min-h-screen">
       <div className="container-fluid">
         <article className="max-w-4xl mx-auto">
-          <Link to="/#work" className="inline-flex items-center text-gray-400 hover:text-white transition mb-8 text-sm">
+          <Link to={`/${language}#work`} className="inline-flex items-center text-gray-400 hover:text-white transition mb-8 text-sm">
             <i className="fas fa-arrow-left mr-2"></i> {t('detailBackBtn')}
           </Link>
 

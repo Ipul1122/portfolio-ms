@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
-import { Navigation, Scrollbar } from 'swiper/modules';
-import { publicProjects, otherProjects } from '../data/projects';
+import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
 import { useLanguage } from '../context/LanguageContext';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
+type FilterKey = 'all' | 'public' | 'attendance' | 'company-profile' | 'web-app' | 'others';
+
+const FILTERS: { key: FilterKey; labelId: string; labelEn: string }[] = [
+  { key: 'all', labelId: 'Semua', labelEn: 'All' },
+  { key: 'public', labelId: 'Publik', labelEn: 'Public' },
+  { key: 'attendance', labelId: 'Sistem Absensi', labelEn: 'Attendance System' },
+  { key: 'company-profile', labelId: 'Company Profile', labelEn: 'Company Profile' },
+  { key: 'web-app', labelId: 'Web App', labelEn: 'Web App' },
+  { key: 'others', labelId: 'Lainnya', labelEn: 'Others' },
+];
+
+const ITEMS_PER_PAGE = 6;
+
+const matchesFilter = (project: Project, filter: FilterKey): boolean => {
+  switch (filter) {
+    case 'all':
+      return true;
+    case 'public':
+      return project.isPublic;
+    case 'attendance':
+      return project.category === 'Sistem Absensi';
+    case 'company-profile':
+      return project.category === 'Company Profile';
+    case 'web-app':
+      return project.category === 'Web App';
+    case 'others': {
+      const knownCategories = ['Sistem Absensi', 'Company Profile', 'Web App'];
+      return !project.isPublic && !knownCategories.includes(project.category);
+    }
+    default:
+      return true;
+  }
+};
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   const { language, t } = useLanguage();
@@ -19,48 +46,67 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   const category = language === 'en' && project.categoryEn ? project.categoryEn : project.category;
 
   return (
-    <Link 
-      to={`/project-kami?project=${project.id}`} 
-      className="group bg-white/5 rounded border border-white/5 hover:border-white/30 hover:bg-white/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
+    <Link
+      to={`/${language}/project-kami?project=${project.id}`}
+      className="project-card group flex flex-col h-full"
     >
-      <div className="relative overflow-hidden aspect-[4/3] bg-neutral-900 border-b border-white/5">
-        <img 
-          src={project.image} 
-          alt={title} 
+      <div className="relative overflow-hidden aspect-[4/3]" style={{ background: '#19191f' }}>
+        <img
+          src={project.image}
+          alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100"
         />
-        <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white border border-white/10 uppercase tracking-wide">
+        <div
+          className="absolute top-4 right-4 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide"
+          style={{
+            background: 'rgba(14, 14, 19, 0.8)',
+            color: '#f9f5fd',
+            border: '1px solid rgba(163, 166, 255, 0.1)',
+          }}
+        >
           {category}
         </div>
         {project.isPublic && (
-          <div className="absolute top-4 left-4 bg-emerald-500/90 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-wide flex items-center gap-1">
-            <i className="fas fa-globe text-[8px]"></i> Live
+          <div
+            className="absolute top-4 left-4 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide flex items-center gap-1"
+            style={{
+              background: 'rgba(163, 166, 255, 0.85)',
+              color: '#0e0e13',
+            }}
+          >
+            <i className="fas fa-globe text-[8px]" /> Live
           </div>
         )}
       </div>
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold font-heading mb-2 group-hover:text-white transition text-white">
+        <h3 className="text-lg font-bold font-heading mb-2 transition" style={{ color: '#f9f5fd' }}>
           {title}
         </h3>
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2 font-light">
+        <p className="text-sm mb-4 line-clamp-2 font-light" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>
           {subtitle}
         </p>
         {project.isPublic && (project.demoUrl || project.githubUrl) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {project.demoUrl && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded px-2 py-0.5">
-                <i className="fas fa-external-link-alt text-[8px]"></i> Demo
+              <span
+                className="inline-flex items-center gap-1 text-[10px] font-semibold rounded-md px-2 py-0.5"
+                style={{ color: '#a3a6ff', background: 'rgba(163, 166, 255, 0.08)', border: '1px solid rgba(163, 166, 255, 0.15)' }}
+              >
+                <i className="fas fa-external-link-alt text-[8px]" /> Demo
               </span>
             )}
             {project.githubUrl && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-300 bg-white/5 border border-white/10 rounded px-2 py-0.5">
-                <i className="fab fa-github text-[8px]"></i> Source
+              <span
+                className="inline-flex items-center gap-1 text-[10px] font-semibold rounded-md px-2 py-0.5"
+                style={{ color: 'rgba(249, 245, 253, 0.5)', background: 'rgba(25, 25, 31, 0.5)', border: '1px solid rgba(163, 166, 255, 0.08)' }}
+              >
+                <i className="fab fa-github text-[8px]" /> Source
               </span>
             )}
           </div>
         )}
-        <div className="mt-auto flex items-center text-white font-semibold text-sm group-hover:underline">
-          {t('workViewCaseStudy')} <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+        <div className="mt-auto flex items-center text-sm font-semibold group-hover:underline" style={{ color: '#a3a6ff' }}>
+          {t('workViewCaseStudy')} <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
     </Link>
@@ -68,121 +114,88 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 };
 
 const WorkSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
+  const [showAll, setShowAll] = useState(false);
+
+  const filteredProjects = useMemo(() => {
+    return projects.filter(p => matchesFilter(p, activeFilter));
+  }, [activeFilter]);
+
+  const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, ITEMS_PER_PAGE);
+  const hasMore = filteredProjects.length > ITEMS_PER_PAGE;
+
+  const handleFilterChange = (key: FilterKey) => {
+    setActiveFilter(key);
+    setShowAll(false);
+  };
 
   return (
-    <section id="work" className="py-24 bg-black border-t border-white/5">
+    <section id="work" className="py-24 border-t" style={{ background: '#0a0a0f', borderColor: 'rgba(163, 166, 255, 0.04)' }}>
       <div className="container-fluid">
-        {/* ===== PROYEK PUBLIK ===== */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 animate-hidden fade-up gap-6">
-          <div className="text-center md:text-left">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">{t('workHeadingLive')}</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('workTitlePublic')}</h2>
-            <p className="text-lg text-gray-400 max-w-xl font-light">
-              {t('workDescPublic')}
+        {/* Header */}
+        <div className="text-center mb-12 animate-hidden fade-up">
+          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">{t('workTitlePublic')}</h2>
+          <p className="text-lg max-w-xl mx-auto font-light" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>
+            {t('workDescPublic')}
+          </p>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-hidden fade-up" style={{ transitionDelay: '100ms' }}>
+          {FILTERS.map(f => (
+            <button
+              key={f.key}
+              className={`filter-btn ${activeFilter === f.key ? 'active' : ''}`}
+              onClick={() => handleFilterChange(f.key)}
+            >
+              {language === 'en' ? f.labelEn : f.labelId}
+            </button>
+          ))}
+        </div>
+
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-hidden fade-up" style={{ transitionDelay: '200ms' }}>
+          {displayedProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+
+        {/* Empty state */}
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-16 animate-hidden fade-up">
+            <i className="fas fa-folder-open text-4xl mb-4" style={{ color: 'rgba(163, 166, 255, 0.2)' }} />
+            <p className="font-light" style={{ color: 'rgba(249, 245, 253, 0.35)' }}>
+              {language === 'en' ? 'No projects found in this category.' : 'Tidak ada proyek dalam kategori ini.'}
             </p>
           </div>
-          
-          <div className="hidden md:flex gap-4">
-            <button className="swiper-button-public-prev w-12 h-12 rounded border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition duration-300 cursor-pointer">
-              <i className="fas fa-arrow-left"></i>
-            </button>
-            <button className="swiper-button-public-next w-12 h-12 rounded border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition duration-300 cursor-pointer">
-              <i className="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
+        )}
 
-        <div className="relative animate-hidden fade-up" style={{ transitionDelay: '200ms' }}>
-          <SwiperComponent
-            modules={[Navigation, Scrollbar]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.swiper-button-public-next',
-              prevEl: '.swiper-button-public-prev',
-            }}
-            scrollbar={{
-              draggable: true,
-              hide: false,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
-            }}
-            className="!pb-12"
-          >
-            {publicProjects.map((project) => (
-              <SwiperSlide key={project.id} className="h-auto">
-                <ProjectCard project={project} />
-              </SwiperSlide>
-            ))}
-          </SwiperComponent>
-        </div>
-
-        {/* ===== DIVIDER ===== */}
-        <div className="my-20 border-t border-white/5"></div>
-
-        {/* ===== PROYEK LAINNYA ===== */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 animate-hidden fade-up gap-6">
-          <div className="text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('workTitleOther')}</h2>
-            <p className="text-lg text-gray-400 max-w-xl font-light">
-              {t('workDescOther')}
-            </p>
-          </div>
-          
-          <div className="hidden md:flex gap-4">
-            <button className="swiper-button-other-prev w-12 h-12 rounded border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition duration-300 cursor-pointer">
-              <i className="fas fa-arrow-left"></i>
-            </button>
-            <button className="swiper-button-other-next w-12 h-12 rounded border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition duration-300 cursor-pointer">
-              <i className="fas fa-arrow-right"></i>
+        {/* See More Button */}
+        {hasMore && !showAll && (
+          <div className="text-center animate-hidden fade-up" style={{ transitionDelay: '300ms' }}>
+            <button
+              className="see-more-btn"
+              onClick={() => setShowAll(true)}
+            >
+              {language === 'en' ? 'See More' : 'Lihat Lebih'}
+              <i className="fas fa-chevron-down text-sm" />
             </button>
           </div>
-        </div>
+        )}
 
-        <div className="relative animate-hidden fade-up" style={{ transitionDelay: '200ms' }}>
-          <SwiperComponent
-            modules={[Navigation, Scrollbar]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.swiper-button-other-next',
-              prevEl: '.swiper-button-other-prev',
-            }}
-            scrollbar={{
-              draggable: true,
-              hide: false,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
-            }}
-            className="!pb-12"
-          >
-            {otherProjects.map((project) => (
-              <SwiperSlide key={project.id} className="h-auto">
-                <ProjectCard project={project} />
-              </SwiperSlide>
-            ))}
-          </SwiperComponent>
-        </div>
+        {/* Show Less Button */}
+        {showAll && hasMore && (
+          <div className="text-center mt-8">
+            <button
+              className="see-more-btn"
+              onClick={() => setShowAll(false)}
+            >
+              {language === 'en' ? 'Show Less' : 'Tampilkan Sedikit'}
+              <i className="fas fa-chevron-up text-sm" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

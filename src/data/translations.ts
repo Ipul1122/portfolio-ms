@@ -81,10 +81,10 @@ export const translations: Record<'id' | 'en', TranslationDict> = {
     navWork: "Portofolio",
     navContact: "Kontak",
 
-    heroBadge: "Web Developer & UI/UX Designer",
+    heroBadge: "Fullstack Developer",
     heroGreeting: "Hai, Saya",
     heroGreetingSub: "Muhammad Syaifulloh",
-    heroDesc: "Pengembang web profesional dengan pengalaman 1+ tahun dalam menciptakan solusi digital yang inovatif. Spesialisasi dalam HTML, CSS, JavaScript, dan framework modern.",
+    heroDesc: "Full-Stack Web Developer spesialisasi Laravel & PHP yang adaptif dalam memanfaatkan AI tools untuk mempercepat siklus pengembangan, optimasi kode, dan automasi pengujian. Berpengalaman mendigitalisasi proses bisnis menjadi aplikasi web dinamis dengan manajemen database MySQL/PostgreSQL yang efisien.",
     heroBtnView: "Lihat Portofolio",
     heroBtnDownload: "Unduh CV Saya",
 
@@ -155,10 +155,10 @@ export const translations: Record<'id' | 'en', TranslationDict> = {
     navWork: "Portfolio",
     navContact: "Contact",
 
-    heroBadge: "Web Developer & UI/UX Designer",
+    heroBadge: "Fullstack Developer",
     heroGreeting: "Hi, I am",
     heroGreetingSub: "Muhammad Syaifulloh",
-    heroDesc: "Professional web developer with 1+ years of experience in creating innovative digital solutions. Specializing in HTML, CSS, JavaScript, and modern frameworks.",
+    heroDesc: "Full-Stack Web Developer specializing in Laravel & PHP, adept at leveraging AI tools to accelerate development cycles, optimize code, and automate testing. Experienced in transforming manual processes into efficient web solutions backed by robust MySQL/PostgreSQL database management.",
     heroBtnView: "View My Work",
     heroBtnDownload: "Download My CV",
 

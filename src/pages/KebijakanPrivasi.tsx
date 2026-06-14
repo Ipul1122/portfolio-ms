@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const KebijakanPrivasi: React.FC = () => {
+  const { language } = useLanguage();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -43,7 +46,7 @@ const KebijakanPrivasi: React.FC = () => {
               <p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan akan diposting di halaman ini dengan tanggal pembaruan yang baru. Kami menganjurkan Anda untuk meninjau halaman ini secara berkala.</p>
 
               <h2 className="text-2xl font-bold font-heading pt-4 text-white">5. Hubungi Kami</h2>
-              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai kebijakan privasi ini, silakan hubungi kami melalui informasi yang tersedia di <Link to="/#contact" className="text-white underline hover:text-gray-300">halaman kontak</Link>.</p>
+              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai kebijakan privasi ini, silakan hubungi kami melalui informasi yang tersedia di <Link to={`/${language}#contact`} className="text-white underline hover:text-gray-300">halaman kontak</Link>.</p>
             </div>
           </article>
         </div>

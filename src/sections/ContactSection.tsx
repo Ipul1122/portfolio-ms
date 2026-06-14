@@ -31,77 +31,94 @@ const ContactSection: React.FC = () => {
     }));
   };
 
+  const inputStyle: React.CSSProperties = {
+    background: 'rgba(25, 25, 31, 0.5)',
+    border: '1px solid rgba(163, 166, 255, 0.08)',
+    color: '#f9f5fd',
+    borderRadius: '12px',
+  };
+
+  const inputFocusClass = 'focus:border-[rgba(163,166,255,0.3)] focus:ring-1 focus:ring-[rgba(163,166,255,0.15)]';
+
   return (
-    <section id="contact" className="py-24 bg-zinc-950 border-t border-white/5">
+    <section id="contact" className="py-24 border-t" style={{ background: '#0e0e13', borderColor: 'rgba(163, 166, 255, 0.04)' }}>
       <div className="container-fluid">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 animate-hidden fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-white">{t('contactHeading')}</h2>
-            <p className="text-xl text-gray-400 font-light">{t('contactSubheading')}</p>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4 gradient-text">{t('contactHeading')}</h2>
+            <p className="text-xl font-light" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>{t('contactSubheading')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-hidden fade-up">
             <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-envelope text-white"></i>
+              {[
+                { icon: 'fas fa-envelope', title: t('contactEmail'), value: 'msyaifulloh2024@gmail.com' },
+                { icon: 'fas fa-phone', title: t('contactPhone'), value: '+62 856 9367 2730' },
+                { icon: 'fas fa-map-marker-alt', title: t('contactLocation'), value: 'DKI Jakarta, Indonesia' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start space-x-4">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'rgba(163, 166, 255, 0.08)', border: '1px solid rgba(163, 166, 255, 0.1)' }}
+                  >
+                    <i className={item.icon} style={{ color: '#a3a6ff' }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-1 font-heading" style={{ color: '#f9f5fd' }}>{item.title}</h3>
+                    <p className="font-light" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>{item.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold mb-1 text-white font-heading">{t('contactEmail')}</h3>
-                  <p className="text-gray-400 font-light">msyaifulloh2024@gmail.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-phone text-white"></i>
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1 text-white font-heading">{t('contactPhone')}</h3>
-                  <p className="text-gray-400 font-light">+62 856 9367 2730</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-map-marker-alt text-white"></i>
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1 text-white font-heading">{t('contactLocation')}</h3>
-                  <p className="text-gray-400 font-light">DKI Jakarta, Indonesia</p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <form onSubmit={handleContactSubmit} className="space-y-4">
-              <input 
-                id="contact-name" 
-                type="text" 
+              <input
+                id="contact-name"
+                type="text"
                 placeholder={t('contactPlaceholderName')}
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white focus:border-white/40 focus:ring-1 focus:ring-white/20 outline-none transition duration-300" 
-                required 
+                className={`w-full px-5 py-3.5 outline-none transition duration-300 ${inputFocusClass}`}
+                style={inputStyle}
+                required
               />
-              <input 
-                id="contact-email" 
-                type="email" 
+              <input
+                id="contact-email"
+                type="email"
                 placeholder={t('contactPlaceholderEmail')}
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white focus:border-white/40 focus:ring-1 focus:ring-white/20 outline-none transition duration-300" 
-                required 
+                className={`w-full px-5 py-3.5 outline-none transition duration-300 ${inputFocusClass}`}
+                style={inputStyle}
+                required
               />
-              <textarea 
-                id="contact-message" 
+              <textarea
+                id="contact-message"
                 placeholder={t('contactPlaceholderMessage')}
-                rows={4} 
+                rows={4}
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white focus:border-white/40 focus:ring-1 focus:ring-white/20 outline-none transition resize-none duration-300" 
+                className={`w-full px-5 py-3.5 outline-none transition resize-none duration-300 ${inputFocusClass}`}
+                style={inputStyle}
                 required
-              ></textarea>
-              <button type="submit" className="w-full px-8 py-3.5 bg-white text-black border border-transparent rounded hover:bg-black hover:text-white hover:border-white transition-all duration-300 font-bold tracking-wide">
+              />
+              <button
+                type="submit"
+                className="w-full px-8 py-3.5 rounded-full font-bold tracking-wide transition-all duration-300"
+                style={{
+                  background: '#6366f1',
+                  color: '#f9f5fd',
+                  boxShadow: '0 0 16px rgba(99, 102, 241, 0.25)',
+                }}
+                onMouseEnter={e => {
+                  (e.target as HTMLElement).style.boxShadow = '0 0 28px rgba(99, 102, 241, 0.45)';
+                  (e.target as HTMLElement).style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  (e.target as HTMLElement).style.boxShadow = '0 0 16px rgba(99, 102, 241, 0.25)';
+                  (e.target as HTMLElement).style.transform = 'translateY(0)';
+                }}
+              >
                 {t('contactBtnSend')}
               </button>
             </form>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate, useParams, Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -36,26 +36,63 @@ const ScrollToHashElement: React.FC = () => {
   return null;
 };
 
+// Layout component to validate the language code
+const LanguageLayout: React.FC = () => {
+  const { lang } = useParams<{ lang: string }>();
+  if (lang !== 'id' && lang !== 'en') {
+    const saved = localStorage.getItem('portfolio_lang');
+    const defaultLang = (saved === 'id' || saved === 'en') ? saved : 'id';
+    return <Navigate to={`/${defaultLang}`} replace />;
+  }
+  return <Outlet />;
+};
+
+// Redirect component for root path
+const RootRedirect: React.FC = () => {
+  const saved = localStorage.getItem('portfolio_lang');
+  const lang = (saved === 'id' || saved === 'en') ? saved : 'id';
+  return <Navigate to={`/${lang}`} replace />;
+};
+
+// Redirect component for specific sub-paths
+const PathRedirect: React.FC<{ target: string }> = ({ target }) => {
+  const saved = localStorage.getItem('portfolio_lang');
+  const lang = (saved === 'id' || saved === 'en') ? saved : 'id';
+  const location = useLocation();
+  return <Navigate to={`/${lang}/${target}${location.search}${location.hash}`} replace />;
+};
+
 const App: React.FC = () => {
   return (
-    <LanguageProvider>
-      <Router>
+    <Router>
+      <LanguageProvider>
         <ScrollToHashElement />
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <div className="flex-grow">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/bisnis" element={<Bisnis />} />
-              <Route path="/project-kami" element={<ProjectKami />} />
-              <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
-              <Route path="/syarat-dan-ketentuan" element={<SyaratKetentuan />} />
+              <Route path="/:lang" element={<LanguageLayout />}>
+                <Route index element={<Home />} />
+                <Route path="bisnis" element={<Bisnis />} />
+                <Route path="project-kami" element={<ProjectKami />} />
+                <Route path="kebijakan-privasi" element={<KebijakanPrivasi />} />
+                <Route path="syarat-dan-ketentuan" element={<SyaratKetentuan />} />
+              </Route>
+              
+              {/* Redirect root and other root-level paths */}
+              <Route path="/" element={<RootRedirect />} />
+              <Route path="/bisnis" element={<PathRedirect target="bisnis" />} />
+              <Route path="/project-kami" element={<PathRedirect target="project-kami" />} />
+              <Route path="/kebijakan-privasi" element={<PathRedirect target="kebijakan-privasi" />} />
+              <Route path="/syarat-dan-ketentuan" element={<PathRedirect target="syarat-dan-ketentuan" />} />
+              {/* Fallback for any other route */}
+              <Route path="*" element={<RootRedirect />} />
             </Routes>
           </div>
           <Footer />
         </div>
-      </Router>
-    </LanguageProvider>
+      </LanguageProvider>
+    </Router>
   );
 };
 
