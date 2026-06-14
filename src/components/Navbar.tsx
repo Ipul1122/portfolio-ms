@@ -7,8 +7,8 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection,    setActiveSection]    = useState<string>('');
   const location = useLocation();
-  const isHome = location.pathname === '/';
   const { language, setLanguage, t } = useLanguage();
+  const isHome = location.pathname === `/${language}` || location.pathname === `/${language}/`;
 
   const navSections = [
     { id: 'about',      label: t('navAbout')       },
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
           if (entry.isIntersecting) setActiveSection(id);
         },
         {
-          rootMargin: '-10% 0px -70% 0px', // active when section enters top 30% of viewport
+          rootMargin: '-10% 0px -70% 0px',
           threshold: 0,
         }
       );
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
     });
 
     return () => observers.forEach(o => o.disconnect());
-  }, [isHome, language]); // added language to trigger observer re-bind when language switches (since elements labels re-render)
+  }, [isHome, language]);
 
   /* ── Close mobile menu on route change ───────────────────────── */
   useEffect(() => setIsMobileMenuOpen(false), [location]);
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
       );
     }
     return (
-      <Link key={id} to={`/#${id}`} className={linkClass(id)}>
+      <Link key={id} to={`/${language}#${id}`} className={linkClass(id)}>
         {label}
         <span className="nav-underline" />
       </Link>
@@ -118,17 +118,14 @@ const Navbar: React.FC = () => {
       );
     }
     return (
-      <Link key={id} to={`/#${id}`} className={mobileLinkClass(id)}>
+      <Link key={id} to={`/${language}#${id}`} className={mobileLinkClass(id)}>
         {label}
       </Link>
     );
   };
 
-  /* ── Contact button class ─────────────────────────────────────── */
-  const contactBtnClass =
-    activeSection === 'contact'
-      ? 'px-6 py-2.5 rounded font-medium transition duration-300 bg-white text-black border border-white nav-contact-active'
-      : 'px-6 py-2.5 border border-white text-white rounded hover:bg-white hover:text-black transition duration-300 font-medium';
+  /* ── Contact button ──────────────────────────────────────────── */
+  const isContactActive = activeSection === 'contact';
 
   return (
     <header
@@ -140,8 +137,8 @@ const Navbar: React.FC = () => {
       <nav className="container-fluid py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition duration-300">
-            <div className="bg-white text-black font-black text-lg px-3 py-1.5 rounded">MS</div>
+          <Link to={`/${language}`} className="flex items-center space-x-2 hover:opacity-80 transition duration-300">
+            <img src="/image/logo-ms.png" alt="Logo MS" className="h-10 w-auto object-contain transition-all duration-300 hover:scale-105" style={{ filter: 'drop-shadow(0 0 6px rgba(163, 166, 255, 0.3))' }} />
           </Link>
 
           {/* Desktop & Mobile Actions */}
@@ -151,17 +148,28 @@ const Navbar: React.FC = () => {
               {navSections.map(({ id, label }) => desktopNavLink(id, label))}
             </div>
 
-            {/* Language Selector (Visible on both desktop & mobile) */}
-            <div className="inline-flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 text-[10px] select-none">
+            {/* Language Selector */}
+            <div
+              className="inline-flex items-center rounded-full p-0.5 text-[10px] select-none"
+              style={{ background: 'rgba(25, 25, 31, 0.6)', border: '1px solid rgba(163, 166, 255, 0.08)' }}
+            >
               <button
                 onClick={() => setLanguage('id')}
-                className={`px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer ${language === 'id' ? 'bg-white text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+                className="px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer"
+                style={language === 'id'
+                  ? { background: '#a3a6ff', color: '#0e0e13', boxShadow: '0 0 8px rgba(163, 166, 255, 0.3)' }
+                  : { color: 'rgba(249, 245, 253, 0.4)' }
+                }
               >
                 ID
               </button>
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer ${language === 'en' ? 'bg-white text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+                className="px-2.5 py-1 rounded-full transition-all duration-300 font-bold cursor-pointer"
+                style={language === 'en'
+                  ? { background: '#a3a6ff', color: '#0e0e13', boxShadow: '0 0 8px rgba(163, 166, 255, 0.3)' }
+                  : { color: 'rgba(249, 245, 253, 0.4)' }
+                }
               >
                 EN
               </button>
@@ -172,13 +180,33 @@ const Navbar: React.FC = () => {
               {isHome ? (
                 <a
                   href="#contact"
-                  className={contactBtnClass}
+                  className="px-6 py-2.5 rounded-full font-medium transition duration-300"
+                  style={isContactActive
+                    ? { background: '#6366f1', color: '#f9f5fd', border: '1px solid #6366f1', boxShadow: '0 0 16px rgba(99, 102, 241, 0.3)' }
+                    : { border: '1px solid rgba(163, 166, 255, 0.2)', color: '#a3a6ff' }
+                  }
+                  onMouseEnter={e => {
+                    if (!isContactActive) {
+                      (e.target as HTMLElement).style.background = 'rgba(163, 166, 255, 0.08)';
+                      (e.target as HTMLElement).style.borderColor = 'rgba(163, 166, 255, 0.4)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isContactActive) {
+                      (e.target as HTMLElement).style.background = 'transparent';
+                      (e.target as HTMLElement).style.borderColor = 'rgba(163, 166, 255, 0.2)';
+                    }
+                  }}
                   onClick={e => { e.preventDefault(); scrollTo('contact'); }}
                 >
                   {t('navContact')}
                 </a>
               ) : (
-                <Link to="/#contact" className={contactBtnClass}>
+                <Link
+                  to={`/${language}#contact`}
+                  className="px-6 py-2.5 rounded-full font-medium transition duration-300"
+                  style={{ border: '1px solid rgba(163, 166, 255, 0.2)', color: '#a3a6ff' }}
+                >
                   {t('navContact')}
                 </Link>
               )}
@@ -187,7 +215,8 @@ const Navbar: React.FC = () => {
             {/* Hamburger */}
             <button
               id="menu-btn"
-              className="md:hidden focus:outline-none text-white cursor-pointer"
+              className="md:hidden focus:outline-none cursor-pointer"
+              style={{ color: '#f9f5fd' }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`} />
@@ -206,7 +235,7 @@ const Navbar: React.FC = () => {
             {navSections.map(({ id, label }) => mobileNavLink(id, label))}
           </div>
 
-          <div className="pt-2 border-t border-white/5">
+          <div className="pt-2" style={{ borderTop: '1px solid rgba(163, 166, 255, 0.06)' }}>
             {isHome ? (
               <a
                 href="#contact"
@@ -216,7 +245,7 @@ const Navbar: React.FC = () => {
                 {t('navContact')}
               </a>
             ) : (
-              <Link to="/#contact" className={mobileLinkClass('contact')}>
+              <Link to={`/${language}#contact`} className={mobileLinkClass('contact')}>
                 {t('navContact')}
               </Link>
             )}

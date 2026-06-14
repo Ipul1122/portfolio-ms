@@ -53,7 +53,12 @@ const Footer: React.FC = () => {
 
           {/* Left — logo + tagline */}
           <div className="footer-brand">
-            <div className="footer-logo">MS</div>
+            <img
+              src="/image/logo-ms.png"
+              alt="Logo MS"
+              className="h-14 w-auto object-contain self-start transition-all duration-300 hover:scale-105"
+              style={{ filter: 'drop-shadow(0 0 6px rgba(163, 166, 255, 0.3))' }}
+            />
             <p className="footer-tagline">
               {t('footerTagline')}
             </p>

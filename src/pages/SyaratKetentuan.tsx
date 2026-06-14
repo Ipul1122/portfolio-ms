@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const SyaratKetentuan: React.FC = () => {
+  const { language } = useLanguage();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,7 +38,7 @@ const SyaratKetentuan: React.FC = () => {
               <p>Kami berhak untuk mengubah atau mengganti Ketentuan ini kapan saja atas kebijakan kami sendiri. Tanggung jawab Anda untuk meninjau Ketentuan ini secara berkala. Penggunaan Situs yang berkelanjutan setelah perubahan apa pun merupakan penerimaan Anda atas Ketentuan yang baru.</p>
 
               <h2 className="text-2xl font-bold font-heading pt-4 text-white">6. Hubungi Kami</h2>
-              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai syarat dan ketentuan ini, silakan hubungi kami melalui informasi yang tersedia di <Link to="/#contact" className="text-white underline hover:text-gray-300">halaman kontak</Link>.</p>
+              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai syarat dan ketentuan ini, silakan hubungi kami melalui informasi yang tersedia di <Link to={`/${language}#contact`} className="text-white underline hover:text-gray-300">halaman kontak</Link>.</p>
             </div>
           </article>
         </div>
