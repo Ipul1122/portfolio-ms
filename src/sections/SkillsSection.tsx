@@ -75,6 +75,7 @@ const SkillsSection: React.FC = () => {
                           src={lang.image}
                           alt={lang.name}
                           className="w-10 h-10 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                          loading="lazy"
                         />
                         <span className="text-sm font-semibold transition duration-300" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>
                           {lang.name}
@@ -122,6 +123,7 @@ const SkillsSection: React.FC = () => {
                           src={tool.image}
                           alt={tool.name}
                           className="w-10 h-10 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                          loading="lazy"
                         />
                         <span className="text-sm font-semibold transition duration-300" style={{ color: 'rgba(249, 245, 253, 0.45)' }}>
                           {tool.name}
