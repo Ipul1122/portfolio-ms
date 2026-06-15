@@ -247,9 +247,10 @@ const Bisnis: React.FC = () => {
                       <div className="absolute -inset-4 bg-white/5 rounded-3xl transform rotate-2 group-hover:rotate-1 transition duration-500 opacity-70"></div>
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-white/30 transition duration-300 bg-neutral-950">
                         <img 
-                          src="/image/project/masjid_nurul_haq.png" 
+                          src="/image/project/masjid_nurul_haq.webp" 
                           alt="Kopi Senja MVP" 
                           className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700 opacity-80"
+                          loading="lazy"
                         />
                         <div className="absolute bottom-6 left-6 right-6 bg-black/90 backdrop-blur-md p-4 rounded border border-white/10 shadow-lg flex items-center justify-between">
                           <div>
@@ -307,9 +308,10 @@ const Bisnis: React.FC = () => {
                       <div className="absolute -inset-4 bg-white/5 rounded-3xl transform -rotate-2 group-hover:rotate-1 transition duration-500 opacity-70"></div>
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-white/30 transition duration-300 bg-neutral-950">
                         <img 
-                          src="/image/project/printing.jpg" 
+                          src="/image/project/printing.webp" 
                           alt="Sistem Percetakan Online" 
                           className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700 opacity-80"
+                          loading="lazy"
                         />
                         <div className="absolute bottom-6 left-6 right-6 bg-black/90 backdrop-blur-md p-4 rounded border border-white/10 shadow-lg flex items-center justify-between">
                           <div>

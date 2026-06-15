@@ -55,6 +55,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
           src={project.image}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100"
+          loading="lazy"
         />
         <div
           className="absolute top-4 right-4 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide"
