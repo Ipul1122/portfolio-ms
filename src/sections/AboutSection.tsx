@@ -5,7 +5,7 @@ const AboutSection: React.FC = () => {
   const { language, t } = useLanguage();
 
   return (
-    <section id="about" className="py-20 border-t" style={{ background: '#0e0e13', borderColor: 'rgba(163, 166, 255, 0.04)' }}>
+    <section id={language === 'id' ? 'tentang-saya' : 'about-me'} className="py-20 border-t" style={{ background: '#0e0e13', borderColor: 'rgba(163, 166, 255, 0.04)' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-hidden fade-up">
@@ -55,7 +55,12 @@ const AboutSection: React.FC = () => {
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    const el = document.getElementById('contact');
+                    if (el) {
+                      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+                      window.scrollTo({ top, behavior: 'smooth' });
+                      window.history.pushState(null, '', '#contact');
+                    }
                   }}
                 >
                   {t('aboutBtnContact')}

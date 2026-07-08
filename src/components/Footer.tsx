@@ -32,15 +32,35 @@ const SOCIAL_LINKS = [
 ];
 
 const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const year = new Date().getFullYear();
 
   const navItems = [
-    { id: 'about', label: t('navAbout') },
-    { id: 'experience', label: t('navExperience') },
-    { id: 'skills', label: t('navSkills') },
-    { id: 'work', label: t('navWork') },
-    { id: 'contact', label: t('navContact') },
+    { 
+      id: language === 'id' ? 'tentang-saya' : 'about-me', 
+      path: language === 'id' ? 'tentang-saya' : 'about-me', 
+      label: t('navAbout') 
+    },
+    { 
+      id: 'experience', 
+      path: language === 'id' ? 'pengalaman' : 'experience', 
+      label: t('navExperience') 
+    },
+    { 
+      id: 'skills', 
+      path: 'skills', 
+      label: t('navSkills') 
+    },
+    { 
+      id: 'work', 
+      path: language === 'id' ? 'portofolio' : 'work', 
+      label: t('navWork') 
+    },
+    { 
+      id: 'contact', 
+      path: language === 'id' ? 'kontak' : 'contact', 
+      label: t('navContact') 
+    },
   ];
 
   return (
@@ -66,10 +86,10 @@ const Footer: React.FC = () => {
 
           {/* Center — nav anchors */}
           <nav className="footer-nav" aria-label="Footer navigation">
-            {navItems.map(({ id, label }) => (
+            {navItems.map(({ id, path, label }) => (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`/${language}/${path}`}
                 className="footer-nav-link"
                 onClick={(e) => {
                   e.preventDefault();
@@ -77,6 +97,7 @@ const Footer: React.FC = () => {
                   if (el) {
                     const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
                     window.scrollTo({ top, behavior: 'smooth' });
+                    window.history.pushState(null, '', `/${language}/${path}`);
                   }
                 }}
               >

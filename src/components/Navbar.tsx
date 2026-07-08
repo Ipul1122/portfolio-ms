@@ -11,10 +11,26 @@ const Navbar: React.FC = () => {
   const isHome = location.pathname === `/${language}` || location.pathname === `/${language}/`;
 
   const navSections = [
-    { id: 'about',      label: t('navAbout')       },
-    { id: 'experience', label: t('navExperience')  },
-    { id: 'skills',     label: t('navSkills')      },
-    { id: 'work',       label: t('navWork')        },
+    { 
+      id: language === 'id' ? 'tentang-saya' : 'about-me', 
+      path: language === 'id' ? 'tentang-saya' : 'about-me', 
+      label: t('navAbout') 
+    },
+    { 
+      id: 'experience', 
+      path: language === 'id' ? 'pengalaman' : 'experience', 
+      label: t('navExperience')  
+    },
+    { 
+      id: 'skills',     
+      path: 'skills',     
+      label: t('navSkills')      
+    },
+    { 
+      id: 'work',       
+      path: language === 'id' ? 'portofolio' : 'work',       
+      label: t('navWork')        
+    },
   ];
 
   /* ── Scroll → blur navbar ─────────────────────────────────────── */
@@ -56,11 +72,12 @@ const Navbar: React.FC = () => {
   useEffect(() => setIsMobileMenuOpen(false), [location]);
 
   /* ── Smooth-scroll helper ─────────────────────────────────────── */
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, path: string) => {
     const el = document.getElementById(id);
     if (el) {
       const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
       window.scrollTo({ top, behavior: 'smooth' });
+      window.history.pushState(null, '', `/${language}/${path}`);
     }
     setIsMobileMenuOpen(false);
   };
@@ -81,14 +98,15 @@ const Navbar: React.FC = () => {
     }`;
 
   /* ── Render desktop nav link ──────────────────────────────────── */
-  const desktopNavLink = (id: string, label: string) => {
+  const desktopNavLink = (id: string, path: string, label: string) => {
+    const sectionId = id;
     if (isHome) {
       return (
         <a
-          key={id}
-          href={`#${id}`}
-          className={linkClass(id)}
-          onClick={e => { e.preventDefault(); scrollTo(id); }}
+          key={sectionId}
+          href={`/${language}/${path}`}
+          className={linkClass(sectionId)}
+          onClick={e => { e.preventDefault(); scrollTo(sectionId, path); }}
         >
           {label}
           <span className="nav-underline" />
@@ -96,7 +114,7 @@ const Navbar: React.FC = () => {
       );
     }
     return (
-      <Link key={id} to={`/${language}#${id}`} className={linkClass(id)}>
+      <Link key={sectionId} to={`/${language}/${path}`} className={linkClass(sectionId)}>
         {label}
         <span className="nav-underline" />
       </Link>
@@ -104,21 +122,22 @@ const Navbar: React.FC = () => {
   };
 
   /* ── Render mobile nav link ───────────────────────────────────── */
-  const mobileNavLink = (id: string, label: string) => {
+  const mobileNavLink = (id: string, path: string, label: string) => {
+    const sectionId = id;
     if (isHome) {
       return (
         <a
-          key={id}
-          href={`#${id}`}
-          className={mobileLinkClass(id)}
-          onClick={e => { e.preventDefault(); scrollTo(id); }}
+          key={sectionId}
+          href={`/${language}/${path}`}
+          className={mobileLinkClass(sectionId)}
+          onClick={e => { e.preventDefault(); scrollTo(sectionId, path); }}
         >
           {label}
         </a>
       );
     }
     return (
-      <Link key={id} to={`/${language}#${id}`} className={mobileLinkClass(id)}>
+      <Link key={sectionId} to={`/${language}/${path}`} className={mobileLinkClass(sectionId)}>
         {label}
       </Link>
     );
@@ -145,7 +164,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4 md:space-x-8">
             {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-8">
-              {navSections.map(({ id, label }) => desktopNavLink(id, label))}
+              {navSections.map(({ id, path, label }) => desktopNavLink(id, path, label))}
             </div>
 
             {/* Language Selector */}
@@ -179,7 +198,7 @@ const Navbar: React.FC = () => {
             <div className="hidden md:block">
               {isHome ? (
                 <a
-                  href="#contact"
+                  href={`/${language}/${language === 'id' ? 'kontak' : 'contact'}`}
                   className="px-6 py-2.5 rounded-full font-medium transition duration-300"
                   style={isContactActive
                     ? { background: '#6366f1', color: '#f9f5fd', border: '1px solid #6366f1', boxShadow: '0 0 16px rgba(99, 102, 241, 0.3)' }
@@ -197,13 +216,16 @@ const Navbar: React.FC = () => {
                       (e.target as HTMLElement).style.borderColor = 'rgba(163, 166, 255, 0.2)';
                     }
                   }}
-                  onClick={e => { e.preventDefault(); scrollTo('contact'); }}
+                  onClick={e => { 
+                    e.preventDefault(); 
+                    scrollTo('contact', language === 'id' ? 'kontak' : 'contact'); 
+                  }}
                 >
                   {t('navContact')}
                 </a>
               ) : (
                 <Link
-                  to={`/${language}#contact`}
+                  to={`/${language}/${language === 'id' ? 'kontak' : 'contact'}`}
                   className="px-6 py-2.5 rounded-full font-medium transition duration-300"
                   style={{ border: '1px solid rgba(163, 166, 255, 0.2)', color: '#a3a6ff' }}
                 >
@@ -232,20 +254,26 @@ const Navbar: React.FC = () => {
       >
         <div className="container-fluid py-4 space-y-4">
           <div className="space-y-2">
-            {navSections.map(({ id, label }) => mobileNavLink(id, label))}
+            {navSections.map(({ id, path, label }) => mobileNavLink(id, path, label))}
           </div>
 
           <div className="pt-2" style={{ borderTop: '1px solid rgba(163, 166, 255, 0.06)' }}>
             {isHome ? (
               <a
-                href="#contact"
+                href={`/${language}/${language === 'id' ? 'kontak' : 'contact'}`}
                 className={mobileLinkClass('contact')}
-                onClick={e => { e.preventDefault(); scrollTo('contact'); }}
+                onClick={e => { 
+                  e.preventDefault(); 
+                  scrollTo('contact', language === 'id' ? 'kontak' : 'contact'); 
+                }}
               >
                 {t('navContact')}
               </a>
             ) : (
-              <Link to={`/${language}#contact`} className={mobileLinkClass('contact')}>
+              <Link 
+                to={`/${language}/${language === 'id' ? 'kontak' : 'contact'}`} 
+                className={mobileLinkClass('contact')}
+              >
                 {t('navContact')}
               </Link>
             )}

@@ -7,16 +7,48 @@ import Bisnis from './pages/Bisnis';
 import ProjectKami from './pages/ProjectKami';
 import KebijakanPrivasi from './pages/KebijakanPrivasi';
 import SyaratKetentuan from './pages/SyaratKetentuan';
-import { LanguageProvider } from './context/LanguageContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import WhatsappFloat from './components/WhatsappFloat';
 
-// Helper component to handle scrolling to hash element on route change
+// Helper component to handle scrolling to section on route change (both pathname and hash)
 const ScrollToHashElement: React.FC = () => {
   const { hash, pathname } = useLocation();
+  const { language } = useLanguage();
 
   useEffect(() => {
-    if (hash) {
-      // Find element by id
-      const element = document.getElementById(hash.replace('#', ''));
+    // Parse the subpath from the URL pathname (e.g. "/id/tentang-saya" => "tentang-saya")
+    const segments = pathname.split('/').filter(Boolean);
+    const subPath = segments[1];
+
+    let targetId = '';
+
+    if (subPath) {
+      // Check if subpath is a registered section and resolve to target element ID
+      if (subPath === 'tentang-saya' || subPath === 'about-me' || subPath === 'about') {
+        targetId = language === 'id' ? 'tentang-saya' : 'about-me';
+      } else if (subPath === 'pengalaman' || subPath === 'experience') {
+        targetId = 'experience';
+      } else if (subPath === 'skills') {
+        targetId = 'skills';
+      } else if (subPath === 'portofolio' || subPath === 'work') {
+        targetId = 'work';
+      } else if (subPath === 'kontak' || subPath === 'contact') {
+        targetId = 'contact';
+      }
+    } else if (hash) {
+      // Fallback to hash support if present
+      let hashId = hash.replace('#', '');
+      if (hashId === 'about' || hashId === 'about-me') {
+        targetId = language === 'id' ? 'tentang-saya' : 'about-me';
+      } else if (hashId === 'tentang-saya') {
+        targetId = language === 'en' ? 'about-me' : 'tentang-saya';
+      } else {
+        targetId = hashId;
+      }
+    }
+
+    if (targetId) {
+      const element = document.getElementById(targetId);
       if (element) {
         setTimeout(() => {
           const headerOffset = 80;
@@ -29,9 +61,13 @@ const ScrollToHashElement: React.FC = () => {
         }, 100);
       }
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Only scroll to top if we're not on a different subpage (like /bisnis, /project-kami, etc.)
+      const isSubPage = ['bisnis', 'project-kami', 'kebijakan-privasi', 'syarat-dan-ketentuan'].includes(subPath || '');
+      if (!isSubPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
-  }, [hash, pathname]);
+  }, [hash, pathname, language]);
 
   return null;
 };
@@ -51,7 +87,38 @@ const LanguageLayout: React.FC = () => {
 const RootRedirect: React.FC = () => {
   const saved = localStorage.getItem('portfolio_lang');
   const lang = (saved === 'id' || saved === 'en') ? saved : 'id';
-  return <Navigate to={`/${lang}`} replace />;
+  const location = useLocation();
+
+  // If path is a section path, redirect to lang subpath
+  const segments = location.pathname.split('/').filter(Boolean);
+  const requestedPath = segments[0]; // e.g. "tentang-saya" or "about-me"
+  
+  let targetPath = '';
+  if (requestedPath) {
+    if (requestedPath === 'tentang-saya' || requestedPath === 'about-me' || requestedPath === 'about') {
+      targetPath = lang === 'id' ? 'tentang-saya' : 'about-me';
+    } else if (requestedPath === 'pengalaman' || requestedPath === 'experience') {
+      targetPath = lang === 'id' ? 'pengalaman' : 'experience';
+    } else if (requestedPath === 'skills') {
+      targetPath = 'skills';
+    } else if (requestedPath === 'portofolio' || requestedPath === 'work') {
+      targetPath = lang === 'id' ? 'portofolio' : 'work';
+    } else if (requestedPath === 'kontak' || requestedPath === 'contact') {
+      targetPath = lang === 'id' ? 'kontak' : 'contact';
+    } else if (['bisnis', 'project-kami', 'kebijakan-privasi', 'syarat-dan-ketentuan'].includes(requestedPath)) {
+      targetPath = requestedPath;
+    }
+  }
+
+  let currentHash = location.hash;
+  if (lang === 'en' && currentHash === '#tentang-saya') {
+    currentHash = '#about-me';
+  } else if (lang === 'id' && (currentHash === '#about-me' || currentHash === '#about')) {
+    currentHash = '#tentang-saya';
+  }
+
+  const destination = targetPath ? `/${lang}/${targetPath}` : `/${lang}`;
+  return <Navigate to={`${destination}${location.search}${currentHash}`} replace />;
 };
 
 // Redirect component for specific sub-paths
@@ -59,7 +126,15 @@ const PathRedirect: React.FC<{ target: string }> = ({ target }) => {
   const saved = localStorage.getItem('portfolio_lang');
   const lang = (saved === 'id' || saved === 'en') ? saved : 'id';
   const location = useLocation();
-  return <Navigate to={`/${lang}/${target}${location.search}${location.hash}`} replace />;
+
+  let currentHash = location.hash;
+  if (lang === 'en' && currentHash === '#tentang-saya') {
+    currentHash = '#about-me';
+  } else if (lang === 'id' && (currentHash === '#about-me' || currentHash === '#about')) {
+    currentHash = '#tentang-saya';
+  }
+
+  return <Navigate to={`/${lang}/${target}${location.search}${currentHash}`} replace />;
 };
 
 const App: React.FC = () => {
@@ -73,6 +148,17 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/:lang" element={<LanguageLayout />}>
                 <Route index element={<Home />} />
+                {/* Section subpaths that render the main Home page */}
+                <Route path="tentang-saya" element={<Home />} />
+                <Route path="about-me" element={<Home />} />
+                <Route path="pengalaman" element={<Home />} />
+                <Route path="experience" element={<Home />} />
+                <Route path="skills" element={<Home />} />
+                <Route path="portofolio" element={<Home />} />
+                <Route path="work" element={<Home />} />
+                <Route path="kontak" element={<Home />} />
+                <Route path="contact" element={<Home />} />
+
                 <Route path="bisnis" element={<Bisnis />} />
                 <Route path="project-kami" element={<ProjectKami />} />
                 <Route path="kebijakan-privasi" element={<KebijakanPrivasi />} />
@@ -90,6 +176,7 @@ const App: React.FC = () => {
             </Routes>
           </div>
           <Footer />
+          <WhatsappFloat />
         </div>
       </LanguageProvider>
     </Router>

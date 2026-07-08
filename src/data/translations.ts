@@ -1,9 +1,12 @@
 export interface TranslationDict {
+  navHome: string;
   navAbout: string;
   navExperience: string;
   navSkills: string;
   navWork: string;
   navContact: string;
+  whatsappTooltip: string;
+  whatsappMessage: string;
 
   heroBadge: string;
   heroGreeting: string;
@@ -75,16 +78,19 @@ export interface TranslationDict {
 
 export const translations: Record<'id' | 'en', TranslationDict> = {
   id: {
+    navHome: "Beranda",
     navAbout: "Tentang Saya",
     navExperience: "Pengalaman",
     navSkills: "Skills",
     navWork: "Portofolio",
     navContact: "Kontak",
+    whatsappTooltip: "Hubungi via WhatsApp",
+    whatsappMessage: "Halo Muhammad Syaifulloh, saya tertarik dengan portofolio Anda dan ingin berdiskusi mengenai peluang kerja sama.",
 
     heroBadge: "Fullstack Developer",
     heroGreeting: "Hai, Saya",
     heroGreetingSub: "Muhammad Syaifulloh",
-    heroDesc: "Full-Stack Web Developer spesialisasi Laravel & PHP yang adaptif dalam memanfaatkan AI tools untuk mempercepat siklus pengembangan, optimasi kode, dan automasi pengujian. Berpengalaman mendigitalisasi proses bisnis menjadi aplikasi web dinamis dengan manajemen database MySQL/PostgreSQL yang efisien.",
+    heroDesc: "Full-Stack Developer spesialis Laravel & React yang berdedikasi membangun dan mengembangkan aplikasi web dinamis yang berkinerja tinggi, aman, dan efisien.",
     heroBtnView: "Lihat Portofolio",
     heroBtnDownload: "Unduh CV Saya",
 
@@ -149,16 +155,19 @@ export const translations: Record<'id' | 'en', TranslationDict> = {
     detailTech: "Teknologi:"
   },
   en: {
+    navHome: "Home",
     navAbout: "About Me",
     navExperience: "Work Experience",
     navSkills: "Skills",
     navWork: "Portfolio",
     navContact: "Contact",
+    whatsappTooltip: "Contact via WhatsApp",
+    whatsappMessage: "Hello Muhammad Syaifulloh, I am interested in your portfolio and would like to discuss potential collaboration opportunities.",
 
     heroBadge: "Fullstack Developer",
     heroGreeting: "Hi, I am",
     heroGreetingSub: "Muhammad Syaifulloh",
-    heroDesc: "Full-Stack Web Developer specializing in Laravel & PHP, adept at leveraging AI tools to accelerate development cycles, optimize code, and automate testing. Experienced in transforming manual processes into efficient web solutions backed by robust MySQL/PostgreSQL database management.",
+    heroDesc: "Full-Stack Developer specializing in Laravel & React, dedicated to building and developing high-performance, secure, and efficient dynamic web applications.",
     heroBtnView: "View My Work",
     heroBtnDownload: "Download My CV",
 
