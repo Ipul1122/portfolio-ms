@@ -840,3 +840,112 @@ a:hover .nav-underline,
   box-shadow: 0 0 20px rgba(163, 166, 255, 0.1);
   transform: translateY(-2px);
 }
+
+/* ========================================
+   Laptop Mockup Styling
+   ======================================== */
+
+.laptop-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 0 6% 12px 6%; /* Horizontal padding to perfectly house the 112% laptop base */
+  box-sizing: border-box;
+}
+
+.laptop-mockup {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.laptop-screen {
+  position: relative;
+  background: #08080c;
+  border-radius: 12px 12px 0 0;
+  border: 10px solid #1a1a24; /* Sleek metallic bezel */
+  border-bottom-width: 14px;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  z-index: 1;
+}
+
+/* Webcam dot on top bezel */
+.laptop-screen::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #2b2b36;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+
+/* Screen content glare/glossy screen finish */
+.laptop-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 60%);
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* Screen content image */
+.laptop-screen-content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.9;
+}
+
+/* Keyboard Base part */
+.laptop-base {
+  position: relative;
+  width: 112%;
+  height: 10px;
+  left: -6%;
+  background: linear-gradient(to bottom, #303040 0%, #1e1e28 100%);
+  border-top: 1px solid #4a4a5e;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.4),
+    0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+/* Base opening notch / trackpad detail */
+.laptop-base::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16%;
+  height: 3px;
+  background: #0f0f15;
+  border-radius: 0 0 3px 3px;
+}
+
+/* Hover effects */
+.group:hover .laptop-screen-content {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.group:hover .laptop-screen::before {
+  opacity: 0.05;
+}
+

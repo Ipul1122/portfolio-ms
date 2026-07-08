@@ -48,38 +48,43 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   return (
     <Link
       to={`/${language}/project-kami?project=${project.id}`}
-      className="project-card group flex flex-col h-full"
+      className="project-card group flex flex-col h-full p-4"
     >
-      <div className="relative overflow-hidden aspect-[4/3]" style={{ background: '#19191f' }}>
-        <img
-          src={project.image}
-          alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100"
-          loading="lazy"
-        />
-        <div
-          className="absolute top-4 right-4 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide"
-          style={{
-            background: 'rgba(14, 14, 19, 0.8)',
-            color: '#f9f5fd',
-            border: '1px solid rgba(163, 166, 255, 0.1)',
-          }}
-        >
-          {category}
-        </div>
-        {project.isPublic && (
-          <div
-            className="absolute top-4 left-4 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide flex items-center gap-1"
-            style={{
-              background: 'rgba(163, 166, 255, 0.85)',
-              color: '#0e0e13',
-            }}
-          >
-            <i className="fas fa-globe text-[8px]" /> Live
+      <div className="laptop-wrapper mb-4">
+        <div className="laptop-mockup">
+          <div className="laptop-screen">
+            <img
+              src={project.image}
+              alt={title}
+              className="laptop-screen-content"
+              loading="lazy"
+            />
+            <div
+              className="absolute top-2 right-2 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wide z-10"
+              style={{
+                background: 'rgba(14, 14, 19, 0.8)',
+                color: '#f9f5fd',
+                border: '1px solid rgba(163, 166, 255, 0.08)',
+              }}
+            >
+              {category}
+            </div>
+            {project.isPublic && (
+              <div
+                className="absolute top-2 left-2 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wide flex items-center gap-1 z-10"
+                style={{
+                  background: 'rgba(163, 166, 255, 0.85)',
+                  color: '#0e0e13',
+                }}
+              >
+                <i className="fas fa-globe text-[7px]" /> Live
+              </div>
+            )}
           </div>
-        )}
+          <div className="laptop-base" />
+        </div>
       </div>
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-2 flex flex-col flex-grow">
         <h3 className="text-lg font-bold font-heading mb-2 transition" style={{ color: '#f9f5fd' }}>
           {title}
         </h3>
@@ -120,7 +125,13 @@ const WorkSection: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter(p => matchesFilter(p, activeFilter));
+    const list = projects.filter(p => matchesFilter(p, activeFilter));
+    // Prioritize public projects first so they appear before "See More" (Lihat Lebih)
+    return [...list].sort((a, b) => {
+      if (a.isPublic && !b.isPublic) return -1;
+      if (!a.isPublic && b.isPublic) return 1;
+      return 0;
+    });
   }, [activeFilter]);
 
   const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, ITEMS_PER_PAGE);

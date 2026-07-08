@@ -51,11 +51,19 @@ const ProjectKami: React.FC = () => {
             {subtitle}
           </p>
 
-          <img 
-            src={project.image} 
-            alt={title} 
-            className="w-full rounded border border-white/10 shadow-2xl mb-12 object-cover"
-          />
+          {/* Laptop Mockup */}
+          <div className="laptop-wrapper mb-12 max-w-3xl mx-auto group">
+            <div className="laptop-mockup">
+              <div className="laptop-screen">
+                <img 
+                  src={project.image} 
+                  alt={title} 
+                  className="laptop-screen-content"
+                />
+              </div>
+              <div className="laptop-base"></div>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 text-left">

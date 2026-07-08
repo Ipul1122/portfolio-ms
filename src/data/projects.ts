@@ -35,7 +35,7 @@ export const projects: Project[] = [
     subtitleEn: "Web-Based TPA Student Registration and Attendance System using Laravel & Blade",
     description: "Aplikasi web ini dirancang untuk menggantikan sistem absensi manual di TPA Nurul Haq. Dibangun dengan framework Laravel dan template engine Blade, aplikasi ini memungkinkan orang tua mendaftarkan anak mereka secara online, sementara guru dapat dengan mudah mencatat absensi harian serta memantau perkembangan santri melalui dashboard yang interaktif.",
     descriptionEn: "This web application is designed to replace the manual attendance system at TPA Nurul Haq. Built with the Laravel framework and Blade template engine, it allows parents to register their children online, while teachers can easily record daily attendance and monitor student progress via an interactive dashboard.",
-    image: "/image/project/tpa_masjid.webp",
+    image: "/image/project/absensi-tpa.webp",
     category: "Sistem Absensi",
     categoryEn: "Attendance System",
     client: "Pengurus TPA Nurul Haq",
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     subtitleEn: "Modern Company Profile Website built with Vue.js, Laravel & MySQL",
     description: "Website company profile profesional untuk PT Cakrawala Internasional. Dibangun menggunakan arsitektur SPA dengan Vue.js di frontend dan Laravel sebagai RESTful API backend. Website ini menampilkan profil perusahaan, layanan, dan informasi bisnis dengan desain modern dan performa tinggi.",
     descriptionEn: "A professional company profile website for PT Cakrawala Internasional. Built using a SPA architecture with Vue.js on the frontend and Laravel as the RESTful API backend. The website displays company profile, services, and business information with a modern design and high performance.",
-    image: "/image/project/pt-cakrawala-internasional.webp",
+    image: "/image/project/company-profile.webp",
     category: "Company Profile",
     categoryEn: "Company Profile",
     client: "PT Cakrawala Internasional",
@@ -151,7 +151,7 @@ export const projects: Project[] = [
     subtitleEn: "A monolithic web application built using Laravel to manage all aspects of mosque information, activities, and finance.",
     description: "Aplikasi Web ini memiliki tiga peran pengguna utama: Pengguna Umum (Jamaah) dapat melihat informasi publik, Admin DKM (Dewan Kemakmuran Masjid) sebagai pengelola utama website, dan Admin RISNHA (Remaja Islam Masjid Nurul Haq) sebagai pengelola untuk bagian organisasi remaja masjid.",
     descriptionEn: "This Web Application has three main user roles: General Users (Congregants) can view public information, DKM Admin (Mosque Prosperity Council) acts as the main website manager, and RISNHA Admin (Remaja Islam Mosque Nurul Haq) manages the mosque youth organization section.",
-    image: "/image/project/masjid_nurul_haq.webp",
+    image: "/image/project/sistem-masjid.webp",
     category: "Web App",
     categoryEn: "Web App",
     client: "DKM Masjid Nurul Haq",
@@ -189,7 +189,7 @@ export const projects: Project[] = [
     subtitleEn: "Modern web-based employee attendance application with React, TypeScript & Laravel 12",
     description: "Aplikasi Full-stack web yang dirancang untuk mengelola absensi karyawan secara efisien. Sistem ini memisahkan frontend menggunakan React dan TypeScript untuk interaksi pengguna yang cepat dan responsif, serta backend Laravel 12 sebagai RESTful API yang aman dengan database MySQL dan styling TailwindCSS v4.",
     descriptionEn: "Full-stack web application designed to manage employee attendance efficiently. The system separates the frontend using React and TypeScript for fast and responsive user interaction, and the backend using Laravel 12 as a secure RESTful API with a MySQL database and TailwindCSS v4 styling.",
-    image: "/image/project/absensi_karyawan.webp",
+    image: "/image/project/hris.webp",
     category: "Sistem Absensi",
     categoryEn: "Attendance System",
     client: "Personal Project",
@@ -215,8 +215,9 @@ export const projects: Project[] = [
       "Separate RESTful API Backend with Laravel 12",
       "Interactive Notifications & Confirmation with SweetAlert"
     ],
+    demoUrl: "https://goodpeople-hcms.com/",
     githubUrl: "https://github.com/Ipul1122/absensi-karyawan",
-    isPublic: false
+    isPublic: true
   },
   {
     id: "lpdp-app",
@@ -226,7 +227,7 @@ export const projects: Project[] = [
     subtitleEn: "Monolithic Web-Based Scholarship Registration System (TUBEL / LPDP App) with Laravel & Alpine.js",
     description: "Aplikasi berbasis web untuk mengelola proses pendaftaran beasiswa secara terpusat. Dilengkapi dengan sistem registrasi berbasis OTP, formulir pendaftaran 7 tahap (multi-step wizard), serta panel kontrol Admin untuk verifikasi, filter, dan pengelolaan status pendaftar (Diterima, Ditolak, Revisi).",
     descriptionEn: "Web-based application to manage scholarship registration process centrally. Equipped with OTP registration system, 7-stage registration form (multi-step wizard), and Admin control panel for verification, filtering, and status management (Accepted, Rejected, Revision).",
-    image: "/image/project/tubel-lpdp.webp",
+    image: "/image/project/tubel-app.webp",
     category: "Web App",
     categoryEn: "Web App",
     client: "Personal Project",
@@ -256,73 +257,69 @@ export const projects: Project[] = [
     isPublic: false
   },
   {
-    id: "travel",
-    title: "Pellor Trans Travel",
-    titleEn: "Pellor Trans Travel",
-    subtitle: "Website Company Profile untuk Jasa Transportasi & Travel",
-    subtitleEn: "Company Profile Website for Transportation & Travel Services",
-    description: "Ini adalah proyek studi kasus untuk membuat website company profile modern bagi perusahaan travel. Fokus utamanya adalah pada desain yang menarik, informasi layanan yang jelas, dan kemudahan untuk menghubungi (Call to Action).",
-    descriptionEn: "This is a case study project to create a modern company profile website for a travel company. The main focus is on attractive design, clear service information, and ease of contact (Call to Action).",
-    image: "/image/project/pellor_trans_travel.webp",
+    id: "percetakan",
+    title: "Percetakan & Stempel Online",
+    titleEn: "Online Printing & Stamp",
+    subtitle: "Website Company Profile & Layanan Percetakan Modern",
+    subtitleEn: "Modern Company Profile & Printing Services Website",
+    description: "Website profile bisnis percetakan yang menampilkan berbagai produk, kalkulator harga, dan memudahkan pelanggan melakukan pemesanan via WhatsApp.",
+    descriptionEn: "A business profile website for printing and stamp services, displaying various print products and facilitating direct orders via WhatsApp.",
+    image: "/image/project/percetakan.webp",
     category: "Company Profile",
     categoryEn: "Company Profile",
-    client: "Pellor Trans Travel",
-    clientEn: "Pellor Trans Travel",
-    service: "Website Company Profile",
-    serviceEn: "Company Profile Website",
-    year: "2023",
-    price: "Rp 500.000",
-    technologies: ["HTML", "CSS", "Bootstrap", "JavaScript", "PHP", "MySQL"],
-    features: [
-      "Desain Landing Page yang Menarik",
-      "Daftar Layanan (Pemesanan Tiket, Antar Jemput)",
-      "Galeri Armada Kendaraan",
-      "Halaman 'Tentang Kami' dan 'Kontak'",
-      "Tombol WhatsApp terintegrasi"
-    ],
-    featuresEn: [
-      "Attractive Landing Page Design",
-      "Service List (Ticket Booking, Shuttle Service)",
-      "Vehicle Fleet Gallery",
-      "About Us & Contact Page",
-      "Integrated WhatsApp Button"
-    ],
-    demoUrl: "https://ipul1122.github.io/pellortranstravel.io/index.html",
-    isPublic: false
-  },
-  {
-    id: "launtec",
-    title: "Launtec - Website Laundry",
-    titleEn: "Launtec - Laundry Website",
-    subtitle: "Company profile modern untuk jasa laundry, menampilkan layanan dan paket harga.",
-    subtitleEn: "Modern company profile for laundry services, displaying services and pricing packages.",
-    description: "Launtec adalah sebuah website company profile yang dirancang untuk bisnis laundry modern. Website ini menonjolkan kemudahan pemesanan, transparansi harga, dan layanan profesional.",
-    descriptionEn: "Launtec is a company profile website designed for modern laundry businesses. The website highlights ease of ordering, price transparency, and professional services.",
-    image: "/image/project/launtec.webp",
-    category: "Bisnis UMKM",
-    categoryEn: "MSME Business",
-    client: "Pak Asep Surahmat",
-    clientEn: "Mr. Asep Surahmat",
+    client: "UMKM Percetakan",
+    clientEn: "Printing Business",
     service: "Website Company Profile",
     serviceEn: "Company Profile Website",
     year: "2024",
-    price: "Rp 750.000",
+    price: "Rp 500.000",
     technologies: ["HTML", "CSS", "Bootstrap 5", "JavaScript"],
     features: [
-      "Desain Bersih dan Modern",
-      "Daftar Layanan (Cuci Kering, Setrika, dll)",
-      "Tabel Paket Harga",
-      "Galeri Hasil Cucian",
-      "Formulir Kontak dan Peta Lokasi"
+      "Katalog Produk & Layanan Cetak",
+      "Tombol Direct Chat WhatsApp",
+      "Peta Lokasi & Informasi Toko",
+      "Desain Responsif & Cepat"
     ],
     featuresEn: [
-      "Clean and Modern Design",
-      "Service List (Dry Cleaning, Ironing, etc.)",
-      "Pricing Package Table",
-      "Laundry Results Gallery",
-      "Contact Form and Location Map"
+      "Product & Print Service Catalog",
+      "WhatsApp Direct Chat Button",
+      "Location Map & Store Information",
+      "Responsive & Fast Design"
     ],
-    demoUrl: "https://ipul1122.github.io/launtec/",
+    demoUrl: "https://percetakandanstempel.netlify.app/",
+    isPublic: true
+  },
+  {
+    id: "edu-siswa",
+    title: "Edu Siswa Empat Pilar",
+    titleEn: "Edu Siswa Empat Pilar",
+    subtitle: "Aplikasi Media Pembelajaran Interaktif Empat Pilar Kebangsaan",
+    subtitleEn: "Interactive Learning Media Application for the Four Pillars of Nationality",
+    description: "Aplikasi web interaktif yang dirancang sebagai media pembelajaran bagi siswa untuk memahami Pancasila, UUD 1945, NKRI, dan Bhinneka Tunggal Ika. Dilengkapi materi pembelajaran dan modul kuis interaktif.",
+    descriptionEn: "An interactive web application designed as learning media for students to understand Pancasila, UUD 1945, NKRI, and Bhinneka Tunggal Ika. Features learning materials and interactive quizzes.",
+    image: "/image/project/materi-edukasi.webp",
+    category: "Web App",
+    categoryEn: "Web App",
+    client: "Personal Project",
+    clientEn: "Personal Project",
+    service: "Aplikasi Web Edukasi",
+    serviceEn: "Educational Web Application",
+    year: "2026",
+    price: "—",
+    technologies: ["PHP", "Laravel", "Blade", "TailwindCSS", "MySQL", "JavaScript"],
+    features: [
+      "Materi Pembelajaran (Teks & Video)",
+      "Kuis Interaktif dengan Perhitungan Skor",
+      "Panel Manajemen Soal & Materi (Admin)",
+      "User Interface Responsif & Menarik untuk Siswa"
+    ],
+    featuresEn: [
+      "Learning Materials (Text & Video)",
+      "Interactive Quiz with Score Calculation",
+      "Questions & Materials Management Panel (Admin)",
+      "Responsive & Attractive UI for Students"
+    ],
+    githubUrl: "https://github.com/Ipul1122/edu-siswa-empat-pilar",
     isPublic: false
   },
   {
@@ -333,7 +330,7 @@ export const projects: Project[] = [
     subtitleEn: "Elegant landing page for promotion with focus on visuals and booking.",
     description: "Sebuah landing page yang dirancang untuk Nyi Roro Green. Tujuannya adalah untuk menarik pengunjung dengan visual yang kuat, menampilkan akibat sampah lautan di pantai selatan akibat manusia.",
     descriptionEn: "A landing page designed for Nyi Roro Green. The goal is to attract visitors with strong visuals, showing the impact of marine waste on the southern coast caused by humans.",
-    image: "/image/project/nyirorogreen.webp",
+    image: "/image/project/story-telling-nyi-roro-kidul.webp",
     category: "Landing Page",
     categoryEn: "Landing Page",
     client: "Pak Asep Surahmat",
@@ -358,7 +355,7 @@ export const projects: Project[] = [
       "Waste Volume Distribution in Yogyakarta"
     ],
     demoUrl: "https://ipul1122.github.io/Nyi_Roro_Green/",
-    isPublic: false
+    isPublic: true
   }
 ];
 

@@ -247,7 +247,7 @@ const Bisnis: React.FC = () => {
                       <div className="absolute -inset-4 bg-white/5 rounded-3xl transform rotate-2 group-hover:rotate-1 transition duration-500 opacity-70"></div>
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-white/30 transition duration-300 bg-neutral-950">
                         <img 
-                          src="/image/project/masjid_nurul_haq.webp" 
+                          src="/image/project/sistem-masjid.webp" 
                           alt="Kopi Senja MVP" 
                           className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700 opacity-80"
                           loading="lazy"
@@ -308,7 +308,7 @@ const Bisnis: React.FC = () => {
                       <div className="absolute -inset-4 bg-white/5 rounded-3xl transform -rotate-2 group-hover:rotate-1 transition duration-500 opacity-70"></div>
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-white/30 transition duration-300 bg-neutral-950">
                         <img 
-                          src="/image/project/printing.webp" 
+                          src="/image/project/percetakan.webp" 
                           alt="Sistem Percetakan Online" 
                           className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700 opacity-80"
                           loading="lazy"
