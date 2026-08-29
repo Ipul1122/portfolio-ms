@@ -1,196 +1,234 @@
-import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Sparkles, Layers, Code2, Database, Wrench, Users } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { animate, scrambleText } from 'animejs';
+import { Sparkles, Terminal } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
-interface SkillCategory {
+export interface TechIcon {
   id: string;
   name: string;
-  icon: any;
-  description: string;
-  skills: string[];
+  icon: string;
 }
 
-const skillCategories: SkillCategory[] = [
-  {
-    id: 'frontend',
-    name: 'Frontend Ecosystem',
-    icon: Code2,
-    description: 'Declarative component hierarchies, high-fidelity responsive styling, state machines, and fine-tuned browser rendering.',
-    skills: [
-      'React 18',
-      'Next.js 14 (App Router)',
-      'TypeScript',
-      'Tailwind CSS',
-      'Three.js / WebGL',
-      'Anime.js & GSAP',
-      'HTML5 Canvas',
-      'Vite & Webpack',
-      'Zustand / Redux Toolkit',
-    ],
-  },
-  {
-    id: 'backend',
-    name: 'Backend & Data Engineering',
-    icon: Database,
-    description: 'Resilient REST & GraphQL microservices, caching layers, relational schemas, and asynchronous queue processing.',
-    skills: [
-      'Node.js & Express',
-      'NestJS',
-      'PostgreSQL',
-      'Prisma ORM',
-      'Redis Caching',
-      'GraphQL & Apollo',
-      'RESTful APIs',
-      'JWT / OAuth2 Auth',
-      'WebSockets',
-    ],
-  },
-  {
-    id: 'tools',
-    name: 'Cloud, DevOps & Tooling',
-    icon: Wrench,
-    description: 'Containerization, continuous integration workflows, cloud hosting, and testing harnesses.',
-    skills: [
-      'Docker & Compose',
-      'GitHub Actions CI/CD',
-      'Linux Server Mgmt',
-      'Nginx Reverse Proxy',
-      'Vitest & Jest',
-      'Playwright E2E',
-      'Git Workflow & SemVer',
-      'AWS (S3 / EC2)',
-    ],
-  },
-  {
-    id: 'soft-skills',
-    name: 'Engineering Leadership & Soft Skills',
-    icon: Users,
-    description: 'Technical strategy, product architecture breakdown, code review standards, and effective communication.',
-    skills: [
-      'System Design & RFCs',
-      'Code Review & Mentorship',
-      'Agile / Scrum Cycles',
-      'Product Empathy',
-      'Technical Documentation',
-      'Cross-functional Alignment',
-    ],
-  },
+const rowOneIcons: TechIcon[] = [
+  { id: 'react', name: 'React', icon: '/img/react.svg' },
+  { id: 'typescript', name: 'TypeScript', icon: '/img/typescript.svg' },
+  { id: 'javascript', name: 'JavaScript', icon: '/img/Javascript.svg' },
+  { id: 'tailwindcss', name: 'Tailwind CSS', icon: '/img/tailwindcss.svg' },
+  { id: 'html', name: 'HTML5', icon: '/img/html.svg' },
+  { id: 'figma', name: 'Figma', icon: '/img/figma.svg' },
+  { id: 'antigravity', name: 'Antigravity IDE', icon: '/img/antigravity.svg' },
+];
+
+const rowTwoIcons: TechIcon[] = [
+  { id: 'nodejs', name: 'Node.js', icon: '/img/nodejs.svg' },
+  { id: 'mysql', name: 'MySQL', icon: '/img/mysql.svg' },
+  { id: 'cpanel', name: 'cPanel', icon: '/img/cpanel.svg' },
+  { id: 'git', name: 'Git', icon: '/img/git-branch.svg' },
+  { id: 'github', name: 'GitHub', icon: '/img/github.svg' },
+  { id: 'claude', name: 'Claude AI', icon: '/img/claude.svg' },
+  { id: 'react2', name: 'React Ecosystem', icon: '/img/react.svg' },
 ];
 
 export const Skills: React.FC = () => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('frontend');
+  const { lang, t } = useLanguage();
 
-  const activeCategory =
-    skillCategories.find((c) => c.id === selectedCategoryId) || skillCategories[0];
+  // Anime.js refs
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const badgeRef = useRef<HTMLSpanElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const descRef = useRef<HTMLParagraphElement | null>(null);
+  const hasAnimatedRef = useRef<boolean>(false);
+
+  // Scramble text animation for section header
+  const runHeaderScramble = () => {
+    if (badgeRef.current) {
+      animate(badgeRef.current, {
+        innerHTML: scrambleText({
+          text: t('skills.overline'),
+          chars: 'uppercase',
+          cursor: '_',
+          duration: 1400,
+        }),
+      });
+    }
+
+    if (headingRef.current) {
+      animate(headingRef.current, {
+        innerHTML: scrambleText({
+          text: t('skills.title'),
+          chars: 'a-zA-Z0-9 &',
+          cursor: true,
+          duration: 1800,
+        }),
+      });
+    }
+
+    if (descRef.current) {
+      animate(descRef.current, {
+        innerHTML: scrambleText({
+          text: t('skills.desc'),
+          chars: 'a-zA-Z0-9 ',
+          cursor: false,
+          duration: 1600,
+        }),
+      });
+    }
+  };
+
+  // Anime.js interactive bounce on icon click / hover
+  const handleIconClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    animate(e.currentTarget, {
+      scale: [1, 0.88, 1.15, 1],
+      rotate: [0, -8, 8, 0],
+      duration: 500,
+      easing: 'easeOutElastic(1, .5)',
+    });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimatedRef.current) {
+            runHeaderScramble();
+            hasAnimatedRef.current = true;
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (hasAnimatedRef.current) {
+      runHeaderScramble();
+    }
+  }, [lang]);
+
+  // Helper component for repeating seamless marquee stream
+  const renderMarqueeTrack = (icons: TechIcon[], reverse: boolean = false, durationSec: number = 28) => {
+    // Quadruple items to ensure seamless infinite loop across wide screens
+    const quadrupleList = [...icons, ...icons, ...icons, ...icons];
+
+    return (
+      <div className="relative w-full overflow-hidden py-3 select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div
+          className={`flex gap-4 sm:gap-6 w-max ${
+            reverse ? 'animate-marquee-reverse' : 'animate-marquee'
+          } hover:[animation-play-state:paused]`}
+          style={{
+            animationDuration: `${durationSec}s`,
+          }}
+        >
+          {quadrupleList.map((item, index) => (
+            <div
+              key={`${item.id}-${index}`}
+              onClick={handleIconClick}
+              className="group flex items-center gap-3.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-[#F4F0EA] hover:bg-[#1E1E1E] border border-[#E2DDD5] hover:border-[#C25E3E] shadow-sm hover:shadow-warm-md transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+            >
+              {/* Icon Container */}
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FDFBF7] p-2 border border-[#E2DDD5]/80 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  className="w-full h-full object-contain filter drop-shadow-xs"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (!target.src.includes('/icon/')) {
+                      target.src = target.src.replace('/img/', '/icon/');
+                    }
+                  }}
+                />
+              </div>
+
+              {/* Icon Tech Name Only */}
+              <span className="font-mono text-xs sm:text-sm font-bold text-[#1E1E1E] group-hover:text-[#FDFBF7] tracking-wide whitespace-nowrap transition-colors">
+                {item.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section
-      id="skill"
-      className="relative py-24 sm:py-28 px-5 sm:px-8 bg-[#FDFBF7]"
+      ref={sectionRef}
+      id="skills"
+      className="relative z-10 py-20 sm:py-28 bg-[#FDFBF7] border-t border-[#E2DDD5] overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 mb-10 sm:mb-14">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#E2DDD5]">
-          <div data-aos="fade-right">
-            <div className="flex items-center gap-2 text-[#C25E3E] font-mono text-xs uppercase tracking-widest mb-2">
-              <span className="w-6 h-[1px] bg-[#C25E3E]" />
-              <span>02 / Technical Ecosystem</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-6 border-b border-[#E2DDD5]">
+          <div className="max-w-2xl">
+            {/* Overline Badge */}
+            <div
+              className="flex items-center gap-2 mb-3 cursor-pointer group w-fit"
+              onClick={runHeaderScramble}
+              title="Click to replay anime.js scramble"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C25E3E] group-hover:scale-125 transition-transform" />
+              <span
+                ref={badgeRef}
+                className="font-mono text-xs uppercase tracking-[0.2em] text-[#78716C] font-semibold group-hover:text-[#C25E3E] transition-colors"
+              >
+                {t('skills.overline')}
+              </span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-[#1E1E1E]">
-              Skills, Tooling & Competencies
+
+            {/* Main Heading */}
+            <h2
+              ref={headingRef}
+              onClick={runHeaderScramble}
+              className="font-sans font-bold text-3xl sm:text-4xl lg:text-5xl text-[#1E1E1E] leading-[1.15] tracking-tight cursor-pointer"
+            >
+              {t('skills.title')}
             </h2>
           </div>
-          <p data-aos="fade-left" className="text-[#6E6A67] text-sm max-w-xs mt-4 md:mt-0 font-mono">
-            Hover any badge to experience physics bounce. Click categories to inspect architectural specialization.
-          </p>
-        </div>
 
-        {/* Category Switcher Tabs */}
-        <div data-aos="fade-up" className="flex flex-wrap gap-2.5 mb-12">
-          {skillCategories.map((cat) => {
-            const Icon = cat.icon;
-            const isSelected = selectedCategoryId === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategoryId(cat.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                  isSelected
-                    ? 'bg-[#1E1E1E] text-[#FDFBF7] shadow-sm'
-                    : 'bg-[#F4F0EA] text-[#6E6A67] hover:text-[#1E1E1E] border border-[#E2DDD5]'
-                }`}
-              >
-                <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-[#C25E3E]' : 'text-[#6E6A67]'}`} />
-                <span>{cat.name}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Dynamic Category Card Showcase */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Active Category Deep Dive (5 cols) */}
-          <div className="lg:col-span-5" data-aos="fade-right">
-            <Card className="bg-[#F4F0EA] border-[#E2DDD5] shadow-sm">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge variant="terracotta">CATEGORY SPOTLIGHT</Badge>
-                  <span className="font-mono text-xs text-[#6E6A67]">
-                    {activeCategory.skills.length} TECHNOLOGIES
-                  </span>
-                </div>
-                <CardTitle className="text-2xl">{activeCategory.name}</CardTitle>
-                <CardDescription className="text-sm mt-2 text-[#6E6A67]">
-                  {activeCategory.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-2">
-                <div className="p-4 rounded-2xl bg-[#FDFBF7] border border-[#E2DDD5] space-y-2">
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#1E1E1E] font-semibold flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#C25E3E]" />
-                    <span>Production Standards</span>
-                  </div>
-                  <p className="text-xs text-[#6E6A67] leading-relaxed">
-                    All tools are utilized in adherence to clean architecture principles, strict unit/integration tests, and zero-downtime deployment pipelines.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Description */}
+          <div className="mt-4 md:mt-0 max-w-sm">
+            <p
+              ref={descRef}
+              className="text-xs sm:text-sm text-[#78716C] font-mono leading-relaxed"
+            >
+              {t('skills.desc')}
+            </p>
           </div>
+        </div>
+      </div>
 
-          {/* Interactive Badge Cluster (7 cols) */}
-          <div className="lg:col-span-7" data-aos="fade-left">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#F4F0EA]/50 border border-[#E2DDD5] min-h-[320px] flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-mono text-[#6E6A67] uppercase tracking-wider mb-6 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-[#C25E3E]" />
-                  <span>Interactive Badge Cloud (Hover for Physics)</span>
-                </div>
+      {/* Full Width Running Text / Logo Stream Marquee Tracks */}
+      <div className="w-full space-y-4 sm:space-y-6">
+        {/* Track 1: Running Left to Right */}
+        {renderMarqueeTrack(rowOneIcons, false, 30)}
 
-                <div className="flex flex-wrap gap-3">
-                  {activeCategory.skills.map((skill, idx) => (
-                    <Badge
-                      key={skill}
-                      variant={idx % 2 === 0 ? 'secondary' : 'outline'}
-                      bounceOnHover={true}
-                      className="px-4 py-2 text-sm bg-[#FDFBF7] shadow-sm hover:border-[#C25E3E] hover:text-[#C25E3E]"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-[#C25E3E] mr-2" />
-                      <span>{skill}</span>
-                    </Badge>
-                  ))}
-                </div>
-              </div>
+        {/* Track 2: Running Right to Left */}
+        {renderMarqueeTrack(rowTwoIcons, true, 34)}
+      </div>
 
-              <div className="mt-8 pt-4 border-t border-[#E2DDD5] flex items-center justify-between text-xs font-mono text-[#6E6A67]">
-                <span>Engineered with Anime.js Elastic Motion</span>
-                <span className="text-[#C25E3E] font-semibold">100% Type-Safe</span>
-              </div>
-            </div>
+      {/* Subtle Footer Note */}
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 mt-10">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#78716C] pt-6 border-t border-[#E2DDD5]/60">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#C25E3E]" />
+            <span>Hover to pause • Click icon for Anime.js elastic bounce</span>
+          </div>
+          <div className="flex items-center gap-2 text-[#1E1E1E] font-medium">
+            <Terminal className="w-3.5 h-3.5 text-[#C25E3E]" />
+            <span>Continuous Infinite Tech Stream</span>
           </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default Skills;
