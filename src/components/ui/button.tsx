@@ -13,6 +13,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   href?: string;
   target?: string;
   rel?: string;
+  download?: string | boolean;
   asChild?: boolean;
 }
 
@@ -26,6 +27,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       href,
       target,
       rel,
+      download,
       children,
       onClick,
       ...props
@@ -117,6 +119,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           href={href}
           target={target}
           rel={rel}
+          download={download as any}
           className={combinedClassName}
           onClick={onClick as any}
         >
