@@ -31,13 +31,13 @@ export const Hero: React.FC = () => {
       }
     }
 
-    // 2. Scroll event listener for smooth Hollow -> Fill animation
+    // 2. Scroll listener to calculate fill transition
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
-          const heroHeight = window.innerHeight * 0.75;
+          const heroHeight = window.innerHeight * 0.8;
           const progress = Math.min(Math.max(currentScroll / heroHeight, 0), 1);
           setScrollProgress(progress);
           ticking = false;
@@ -47,7 +47,6 @@ export const Hero: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Trigger once on mount in case page is loaded scrolled
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -65,15 +64,15 @@ export const Hero: React.FC = () => {
     backgroundClip: 'text',
     WebkitTextFillColor: isFilled ? '#1E1E1E' : 'transparent',
     color: isFilled ? '#1E1E1E' : 'transparent',
-    transition: 'background-image 0.1s ease-out, color 0.15s ease-out',
+    transition: 'background-image 0.08s ease-out, color 0.12s ease-out',
   };
 
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen flex flex-col justify-start sm:justify-end items-center overflow-hidden bg-[#FDFBF7] select-none"
+      className="fixed inset-0 w-full h-screen min-h-[100dvh] flex flex-col justify-start sm:justify-end items-center overflow-hidden bg-[#FDFBF7] select-none z-0 pointer-events-auto"
     >
-      {/* 1. LAYER 0 (BACKGROUND): Tulisan "SOFTWARE ENGINEER" (2 Kolom Vertikal di Mobile, Horizontal di Desktop) */}
+      {/* 1. LAYER 0 (BACKGROUND): Tulisan "SOFTWARE ENGINEER" (Tetap diam di tempat / Fixed) */}
       <div
         ref={hollowTextRef}
         className="pointer-events-none absolute inset-0 z-0 flex items-start sm:items-center justify-center overflow-visible select-none"
@@ -125,7 +124,7 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. LAYER 1 (MIDDLE): Foto Portrait Syaiful (Naik ke atas menempel dengan text di mobile) */}
+      {/* 2. LAYER 1 (MIDDLE): Foto Portrait Syaiful (Tetap diam di tempat / Fixed) */}
       <div
         ref={photoRef}
         className="relative z-10 w-full flex justify-center items-end group cursor-pointer h-[100vh] -translate-y-24 sm:translate-y-0"
@@ -144,7 +143,10 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* 3. Bottom Centered Scroll Down Arrow Indicator */}
-      <div className="absolute bottom-2 right-6 sm:right-12 z-30 hidden sm:block">
+      <div
+        className="absolute bottom-2 right-6 sm:right-12 z-30 hidden sm:block transition-opacity duration-300"
+        style={{ opacity: Math.max(1 - scrollProgress * 2, 0) }}
+      >
         <a
           href="#about"
           className="p-2 text-[#78716C] hover:text-[#C25E3E] transition-colors group flex items-center gap-1 text-xs font-mono"
@@ -157,3 +159,5 @@ export const Hero: React.FC = () => {
     </section>
   );
 };
+
+export default Hero;
