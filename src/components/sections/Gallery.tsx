@@ -368,7 +368,7 @@ export const Gallery: React.FC = () => {
     <section
       ref={sectionRef}
       id="gallery"
-      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5] overflow-hidden select-none"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5] overflow-hidden select-none scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12">
         {/* Section Header */}

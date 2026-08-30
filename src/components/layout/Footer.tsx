@@ -12,7 +12,7 @@ import { Button } from '../ui/button';
 import { useLanguage } from '../../context/LanguageContext';
 
 export const Footer: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { lang, t, getUrlForSection, navigateToSection } = useLanguage();
   const [currentTime, setCurrentTime] = useState<string>('');
 
   const emailAddress = 'msyaifulloh2024@gmail.com';
@@ -38,16 +38,16 @@ export const Footer: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateToSection('home', lang, true);
   };
 
   const navLinks = [
-    { href: '#home', label: lang === 'ID' ? 'Beranda' : 'Home' },
-    { href: '#about', label: lang === 'ID' ? 'Tentang' : 'About' },
-    { href: '#skills', label: lang === 'ID' ? 'Keahlian' : 'Skills' },
-    { href: '#experience', label: lang === 'ID' ? 'Pengalaman' : 'Experience' },
-    { href: '#gallery', label: lang === 'ID' ? 'Galeri' : 'Gallery' },
-    { href: '#contact', label: lang === 'ID' ? 'Kontak' : 'Contact' },
+    { id: 'home', label: lang === 'ID' ? 'Beranda' : 'Home' },
+    { id: 'about', label: lang === 'ID' ? 'Tentang' : 'About' },
+    { id: 'skills', label: lang === 'ID' ? 'Keahlian' : 'Skills' },
+    { id: 'experience', label: lang === 'ID' ? 'Pengalaman' : 'Experience' },
+    { id: 'gallery', label: lang === 'ID' ? 'Galeri' : 'Gallery' },
+    { id: 'contact', label: lang === 'ID' ? 'Kontak' : 'Contact' },
   ];
 
   return (
@@ -58,8 +58,12 @@ export const Footer: React.FC = () => {
           {/* Brand Info (5 cols) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#1E1E1E] text-[#FDFBF7] flex items-center justify-center font-serif font-bold text-sm shadow-sm">
-                MS
+              <div className="w-10 h-10 rounded-xl bg-[#1E1E1E] p-1 flex items-center justify-center shadow-sm border border-[#E2DDD5] overflow-hidden">
+                <img
+                  src="/logo/logo-syaiful.png"
+                  alt="M. Syaiful Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-sans font-bold text-xl text-[#1E1E1E] tracking-tight">
                 M. Syaiful
@@ -92,16 +96,23 @@ export const Footer: React.FC = () => {
               {lang === 'ID' ? 'Navigasi Cepat' : 'Navigation'}
             </div>
             <ul className="space-y-2 text-xs sm:text-sm font-mono text-[#6E6A67]">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="hover:text-[#C25E3E] hover:translate-x-1 inline-block transition-all duration-200"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const href = getUrlForSection(link.id);
+                return (
+                  <li key={link.id}>
+                    <a
+                      href={href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigateToSection(link.id, lang, true);
+                      }}
+                      className="hover:text-[#C25E3E] hover:translate-x-1 inline-block transition-all duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

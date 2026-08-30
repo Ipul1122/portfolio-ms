@@ -157,7 +157,7 @@ export const Contact: React.FC = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5]"
+      className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5] scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Header */}

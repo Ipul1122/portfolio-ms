@@ -304,6 +304,10 @@ export const Experience: React.FC = () => {
     },
   ];
 
+  const allCount = milestones.length;
+  const workCount = milestones.filter((m) => m.type === 'work').length;
+  const educationCount = milestones.filter((m) => m.type === 'education').length;
+
   const filteredMilestones =
     filterType === 'all'
       ? milestones
@@ -367,7 +371,7 @@ export const Experience: React.FC = () => {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -387,7 +391,7 @@ export const Experience: React.FC = () => {
     <section
       ref={sectionRef}
       id="experience"
-      className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F4F0EA]/50 border-t border-[#E2DDD5]"
+      className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F4F0EA]/50 border-t border-[#E2DDD5] scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-5xl mx-auto">
         {/* Section Header */}
@@ -429,26 +433,34 @@ export const Experience: React.FC = () => {
           </div>
         </div>
 
-        {/* Filter Switcher Tabs */}
+        {/* Filter Switcher Tabs with Dynamic Counts */}
         <div className="flex flex-wrap items-center gap-2.5 mb-12">
+          {/* All Milestones */}
           <button
             onClick={() => handleFilterChange('all')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+            className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               filterType === 'all'
                 ? 'bg-[#1E1E1E] text-[#FDFBF7] shadow-sm'
                 : 'bg-[#FDFBF7] text-[#6E6A67] hover:text-[#1E1E1E] border border-[#E2DDD5]'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5 text-[#C25E3E]" />
             <span>{lang === 'ID' ? 'Semua Riwayat' : 'All Milestones'}</span>
-            <span className="text-[10px] bg-[#C25E3E] text-white px-1.5 py-0.2 rounded-full">
-              {milestones.length}
+            <span
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors ${
+                filterType === 'all'
+                  ? 'bg-[#C25E3E] text-white'
+                  : 'bg-[#F4F0EA] text-[#6E6A67] border border-[#E2DDD5]'
+              }`}
+            >
+              {allCount}
             </span>
           </button>
 
+          {/* Work Experience */}
           <button
             onClick={() => handleFilterChange('work')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+            className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               filterType === 'work'
                 ? 'bg-[#1E1E1E] text-[#FDFBF7] shadow-sm'
                 : 'bg-[#FDFBF7] text-[#6E6A67] hover:text-[#1E1E1E] border border-[#E2DDD5]'
@@ -456,11 +468,21 @@ export const Experience: React.FC = () => {
           >
             <Briefcase className="w-3.5 h-3.5 text-[#C25E3E]" />
             <span>{lang === 'ID' ? 'Pengalaman Kerja' : 'Work Experience'}</span>
+            <span
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors ${
+                filterType === 'work'
+                  ? 'bg-[#C25E3E] text-white'
+                  : 'bg-[#F4F0EA] text-[#6E6A67] border border-[#E2DDD5]'
+              }`}
+            >
+              {workCount}
+            </span>
           </button>
 
+          {/* Education */}
           <button
             onClick={() => handleFilterChange('education')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+            className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               filterType === 'education'
                 ? 'bg-[#1E1E1E] text-[#FDFBF7] shadow-sm'
                 : 'bg-[#FDFBF7] text-[#6E6A67] hover:text-[#1E1E1E] border border-[#E2DDD5]'
@@ -468,6 +490,15 @@ export const Experience: React.FC = () => {
           >
             <GraduationCap className="w-3.5 h-3.5 text-[#C25E3E]" />
             <span>{lang === 'ID' ? 'Pendidikan' : 'Education'}</span>
+            <span
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors ${
+                filterType === 'education'
+                  ? 'bg-[#C25E3E] text-white'
+                  : 'bg-[#F4F0EA] text-[#6E6A67] border border-[#E2DDD5]'
+              }`}
+            >
+              {educationCount}
+            </span>
           </button>
         </div>
 

@@ -162,7 +162,7 @@ export const Skills: React.FC = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative z-10 py-20 sm:py-28 bg-[#FDFBF7] border-t border-[#E2DDD5] overflow-hidden"
+      className="relative z-10 py-20 sm:py-28 bg-[#FDFBF7] border-t border-[#E2DDD5] overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 mb-10 sm:mb-14">
         {/* Section Header */}
