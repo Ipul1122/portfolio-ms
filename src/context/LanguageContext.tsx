@@ -87,7 +87,6 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Footer
     'footer.rights': 'All rights reserved.',
-    'footer.crafted': 'Crafted with Laravel, React & AI Workflow.',
   },
   ID: {
     // Navbar
@@ -166,7 +165,6 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Footer
     'footer.rights': 'Seluruh hak cipta dilindungi.',
-    'footer.crafted': 'Dibuat dengan Laravel, React & AI Workflow.',
   },
 };
 

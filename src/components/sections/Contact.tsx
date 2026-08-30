@@ -23,8 +23,10 @@ import { useLanguage } from '../../context/LanguageContext';
 
 export const Contact: React.FC = () => {
   const { lang, t } = useLanguage();
-  const emailAddress = 'syaiful.work@gmail.com';
-  const whatsappNumber = '6281283626757';
+  const emailAddress = 'msyaifulloh2024@gmail.com';
+  const whatsappNumber = '6285693672730';
+  const linkedinUrl = 'https://www.linkedin.com/in/muhammad-syaifulloh-99a233305/';
+  const githubUrl = 'https://github.com/Ipul1122';
 
   const [selectedTopic, setSelectedTopic] = useState<string>('Full-Stack Web Project');
   const [formData, setFormData] = useState({
@@ -266,7 +268,7 @@ export const Contact: React.FC = () => {
                 <span>{lang === 'ID' ? 'Jalur Kontak Cepat' : 'Direct Instant Channels'}</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {/* WhatsApp */}
                 <a
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -313,7 +315,7 @@ export const Contact: React.FC = () => {
 
                 {/* GitHub */}
                 <a
-                  href="https://github.com/Ipul1122"
+                  href={githubUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="block"
@@ -327,6 +329,27 @@ export const Contact: React.FC = () => {
                     <div className="flex items-center gap-1.5">
                       <Code className="w-3.5 h-3.5 text-[#1E1E1E]" />
                       <span>GitHub</span>
+                    </div>
+                    <ArrowUpRight className="w-3 h-3 text-[#6E6A67]" />
+                  </Button>
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block"
+                >
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    magnetic={true}
+                    className="w-full justify-between bg-[#FDFBF7] text-[#1E1E1E] border-[#E2DDD5] hover:border-[#0A66C2] hover:text-[#0A66C2] text-xs font-mono cursor-pointer"
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <ExternalLink className="w-3.5 h-3.5 text-[#0A66C2]" />
+                      <span>LinkedIn</span>
                     </div>
                     <ArrowUpRight className="w-3 h-3 text-[#6E6A67]" />
                   </Button>
