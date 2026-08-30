@@ -211,13 +211,27 @@ const translations: Record<Language, Record<string, string>> = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const getBasePath = (): string => {
+    if (typeof window === 'undefined') return '';
+    const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
+    if (firstSegment && firstSegment.toLowerCase() === 'portfolio-ms') {
+      return '/portfolio-ms';
+    }
+    return '';
+  };
+
   // Parse initial state from URL pathname
   const parsePath = (): { initialLang: Language; initialSection: string } => {
     if (typeof window === 'undefined') {
       return { initialLang: 'ID', initialSection: 'home' };
     }
 
-    const segments = window.location.pathname.split('/').filter(Boolean);
+    const rawSegments = window.location.pathname.split('/').filter(Boolean);
+    const segments =
+      rawSegments[0]?.toLowerCase() === 'portfolio-ms'
+        ? rawSegments.slice(1)
+        : rawSegments;
+
     const langCode = segments[0]?.toLowerCase();
     const slug = segments[1]?.toLowerCase();
 
@@ -240,7 +254,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     (sectionId: string, targetLang?: Language): string => {
       const currentLang = targetLang || lang;
       const slug = SECTION_SLUGS[currentLang][sectionId] || SECTION_SLUGS[currentLang]['home'];
-      return `/${currentLang.toLowerCase()}/${slug}`;
+      const basePath = getBasePath();
+      return `${basePath}/${currentLang.toLowerCase()}/${slug}`;
     },
     [lang]
   );
@@ -249,7 +264,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     (sectionId: string, customLang?: Language, pushHistory: boolean = true) => {
       const targetLang = customLang || lang;
       const targetSlug = SECTION_SLUGS[targetLang][sectionId] || SECTION_SLUGS[targetLang]['home'];
-      const targetUrl = `/${targetLang.toLowerCase()}/${targetSlug}`;
+      const basePath = getBasePath();
+      const targetUrl = `${basePath}/${targetLang.toLowerCase()}/${targetSlug}`;
 
       if (window.location.pathname !== targetUrl) {
         if (pushHistory) {
@@ -286,7 +302,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // Update URL to new language with current active section
     const currentSlug = SECTION_SLUGS[newLang][activeSection] || SECTION_SLUGS[newLang]['home'];
-    const newUrl = `/${newLang.toLowerCase()}/${currentSlug}`;
+    const basePath = getBasePath();
+    const newUrl = `${basePath}/${newLang.toLowerCase()}/${currentSlug}`;
     window.history.pushState({ section: activeSection, lang: newLang }, '', newUrl);
   };
 
@@ -326,7 +343,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // On Initial Mount, if URL has a section or path, normalize URL and scroll
     const { initialLang, initialSection } = parsePath();
-    const normalizedUrl = `/${initialLang.toLowerCase()}/${SECTION_SLUGS[initialLang][initialSection]}`;
+    const basePath = getBasePath();
+    const normalizedUrl = `${basePath}/${initialLang.toLowerCase()}/${SECTION_SLUGS[initialLang][initialSection]}`;
     if (window.location.pathname !== normalizedUrl) {
       window.history.replaceState({ section: initialSection, lang: initialLang }, '', normalizedUrl);
     }
