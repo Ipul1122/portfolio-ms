@@ -14,6 +14,7 @@ export const Navbar: React.FC = () => {
     { name: t('nav.about'), href: '#about', id: 'about' },
     { name: t('nav.skills'), href: '#skill', id: 'skill' },
     { name: t('nav.experience'), href: '#experience', id: 'experience' },
+    { name: t('nav.gallery'), href: '#gallery', id: 'gallery' },
     { name: t('nav.contact'), href: '#contact', id: 'contact' },
   ];
 
@@ -22,7 +23,7 @@ export const Navbar: React.FC = () => {
       setScrolled(window.scrollY > 30);
 
       // Section spy
-      const sections = ['home', 'about', 'skill', 'experience', 'contact'];
+      const sections = ['home', 'about', 'skill', 'experience', 'gallery', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {

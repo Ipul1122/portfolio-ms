@@ -16,6 +16,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about': 'About',
     'nav.skills': 'Skills',
     'nav.experience': 'Experience',
+    'nav.gallery': 'Gallery',
     'nav.contact': 'Get In Touch',
     'nav.letsTalk': "Let's Talk",
     'nav.available': 'Available for Projects',
@@ -70,8 +71,13 @@ const translations: Record<Language, Record<string, string>> = {
     'experience.title': 'Engineering Experience & Projects',
     'experience.desc': 'Proven track record in delivering high-impact web applications, academic mentoring, and management systems.',
 
+    // Gallery
+    'gallery.overline': '04 / VISUAL ARCHIVE',
+    'gallery.title': 'Project & Architecture Gallery',
+    'gallery.desc': 'A curated showcase of deployed web platforms, enterprise systems, community digitalization, and engineering milestones.',
+
     // Contact
-    'contact.overline': '04 / REACH OUT',
+    'contact.overline': '05 / REACH OUT',
     'contact.title': "Let's Build Something Exceptional",
     'contact.desc': 'Have a project in mind, need architectural consulting, or want to discuss full-stack opportunities? Reach out directly.',
     'contact.nameLabel': 'Your Name',
@@ -89,6 +95,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about': 'Tentang',
     'nav.skills': 'Keahlian',
     'nav.experience': 'Pengalaman',
+    'nav.gallery': 'Galeri',
     'nav.contact': 'Kontak',
     'nav.letsTalk': 'Hubungi Saya',
     'nav.available': 'Tersedia untuk Proyek',
@@ -143,8 +150,13 @@ const translations: Record<Language, Record<string, string>> = {
     'experience.title': 'Pengalaman & Portofolio Proyek',
     'experience.desc': 'Rekam jejak terbukti dalam membangun aplikasi web berdampak tinggi, mentoring akademik, dan sistem manajemen.',
 
+    // Gallery
+    'gallery.overline': '04 / ARSIP VISUAL',
+    'gallery.title': 'Galeri Proyek & Arsitektur Sistem',
+    'gallery.desc': 'Dokumentasi visual aplikasi web yang telah dideploy, sistem enterprise, digitalisasi komunitas, dan tonggak pencapaian teknis.',
+
     // Contact
-    'contact.overline': '04 / HUBUNGI',
+    'contact.overline': '05 / HUBUNGI',
     'contact.title': 'Mari Membangun Sesuatu yang Luar Biasa',
     'contact.desc': 'Punya ide proyek, membutuhkan konsultasi arsitektur sistem, atau ingin mendiskusikan peluang kerja sama? Hubungi saya langsung.',
     'contact.nameLabel': 'Nama Anda',
