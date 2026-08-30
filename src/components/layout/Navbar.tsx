@@ -1,38 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, Sparkles, Globe } from 'lucide-react';
 import { Button } from '../ui/button';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage, SECTION_SLUGS } from '../../context/LanguageContext';
 
 export const Navbar: React.FC = () => {
-  const { lang, setLang, t } = useLanguage();
-  const [activeSection, setActiveSection] = useState<string>('home');
+  const {
+    lang,
+    setLang,
+    t,
+    activeSection,
+    setActiveSection,
+    navigateToSection,
+    getUrlForSection,
+  } = useLanguage();
+
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   const navItems = [
-    { name: t('nav.home'), href: '#home', id: 'home' },
-    { name: t('nav.about'), href: '#about', id: 'about' },
-    { name: t('nav.skills'), href: '#skill', id: 'skill' },
-    { name: t('nav.experience'), href: '#experience', id: 'experience' },
-    { name: t('nav.gallery'), href: '#gallery', id: 'gallery' },
-    { name: t('nav.contact'), href: '#contact', id: 'contact' },
+    { name: t('nav.home'), id: 'home' },
+    { name: t('nav.about'), id: 'about' },
+    { name: t('nav.skills'), id: 'skills' },
+    { name: t('nav.experience'), id: 'experience' },
+    { name: t('nav.gallery'), id: 'gallery' },
+    { name: t('nav.contact'), id: 'contact' },
   ];
 
   useEffect(() => {
+    let scrollTimeout: number | null = null;
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
       // Section spy
-      const sections = ['home', 'about', 'skill', 'experience', 'gallery', 'contact'];
-      const scrollPosition = window.scrollY + 200;
+      const sections = ['home', 'about', 'skills', 'experience', 'gallery', 'contact'];
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3;
 
-      for (const section of sections) {
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         const el = document.getElementById(section);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
+          if (scrollPosition >= el.offsetTop) {
+            if (activeSection !== section) {
+              setActiveSection(section);
+
+              // Debounce URL replaceState to prevent excessive browser history writes on fast scrolling
+              if (scrollTimeout) window.clearTimeout(scrollTimeout);
+              scrollTimeout = window.setTimeout(() => {
+                const targetSlug =
+                  SECTION_SLUGS[lang][section] || SECTION_SLUGS[lang]['home'];
+                const targetUrl = `/${lang.toLowerCase()}/${targetSlug}`;
+                if (window.location.pathname !== targetUrl) {
+                  window.history.replaceState({ section, lang }, '', targetUrl);
+                }
+              }, 120);
+            }
             break;
           }
         }
@@ -40,34 +62,47 @@ export const Navbar: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) window.clearTimeout(scrollTimeout);
+    };
+  }, [activeSection, lang, setActiveSection]);
 
-  const scrollToSection = (e: React.MouseEvent, href: string) => {
+  const handleNavClick = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigateToSection(sectionId, lang, true);
   };
+
+  const whatsappNumber = '6285693672730';
+  const whatsappMessage =
+    lang === 'ID'
+      ? 'Halo Syaiful, saya tertarik untuk berdiskusi tentang proyek web / kolaborasi...'
+      : 'Hello Syaiful, I would like to discuss a web project / collaboration...';
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'py-3 bg-[#FDFBF7]/85 backdrop-blur-md border-b border-[#E2DDD5]/60 shadow-2xs' : 'py-5 sm:py-6'
+          scrolled
+            ? 'py-3 bg-[#FDFBF7]/85 backdrop-blur-md border-b border-[#E2DDD5]/60 shadow-2xs'
+            : 'py-5 sm:py-6'
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#home"
-            onClick={(e) => scrollToSection(e, '#home')}
+            href={getUrlForSection('home')}
+            onClick={(e) => handleNavClick(e, 'home')}
             className="group flex items-center gap-3 focus:outline-none"
           >
-            <div className="w-9 h-9 rounded-full bg-[#1E1E1E] text-[#FDFBF7] flex items-center justify-center font-serif font-bold text-base shadow-sm group-hover:bg-[#C25E3E] group-hover:scale-105 transition-all duration-300">
-              MS
+            <div className="w-10 h-10  p-1 flex items-center justify-center shadow-sm  group-hover:scale-105 group-hover:border-[#C25E3E] transition-all duration-300 overflow-hidden">
+              <img
+                src="/logo/logo-syaiful.png"
+                alt="M. Syaiful Logo"
+              />
             </div>
             <div className="hidden sm:flex flex-col">
               <span className="font-serif font-bold text-sm tracking-wider text-[#1E1E1E] leading-tight">
@@ -80,15 +115,16 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Floating Pill Navigation */}
+          {/* Floating Pill Navigation with Semantic URLs */}
           <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#FDFBF7]/80 backdrop-blur-md border border-[#E2DDD5] shadow-sm">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
+              const href = getUrlForSection(item.id);
               return (
                 <a
                   key={item.id}
-                  href={item.href}
-                  onClick={(e) => scrollToSection(e, item.href)}
+                  href={href}
+                  onClick={(e) => handleNavClick(e, item.id)}
                   className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 ${
                     isActive
                       ? 'text-[#FDFBF7] bg-[#1E1E1E] shadow-sm font-semibold'
@@ -130,8 +166,9 @@ export const Navbar: React.FC = () => {
             </div>
 
             <Button
-              href="#contact"
-              onClick={(e) => scrollToSection(e, '#contact')}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
               variant="terracotta"
               size="sm"
               magnetic={true}
@@ -199,22 +236,27 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {navItems.map((item, idx) => (
-            <a
-              key={item.id}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href)}
-              className="font-serif text-2xl text-[#1E1E1E] hover:text-[#C25E3E] font-medium transition-colors flex items-center justify-between border-b border-[#E2DDD5]/70 pb-2.5"
-            >
-              <span>{item.name}</span>
-              <span className="font-mono text-xs text-[#6E6A67]">0{idx + 1}</span>
-            </a>
-          ))}
+          {navItems.map((item, idx) => {
+            const href = getUrlForSection(item.id);
+            return (
+              <a
+                key={item.id}
+                href={href}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className="font-serif text-2xl text-[#1E1E1E] hover:text-[#C25E3E] font-medium transition-colors flex items-center justify-between border-b border-[#E2DDD5]/70 pb-2.5"
+              >
+                <span>{item.name}</span>
+                <span className="font-mono text-xs text-[#6E6A67]">0{idx + 1}</span>
+              </a>
+            );
+          })}
 
           <div className="pt-4">
             <Button
-              href="#contact"
-              onClick={(e) => scrollToSection(e, '#contact')}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               variant="terracotta"
               size="lg"
               className="w-full"

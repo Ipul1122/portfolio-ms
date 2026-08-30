@@ -167,7 +167,7 @@ export const About: React.FC = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-10 mt-[100vh] py-20 sm:py-28 px-5 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5] shadow-[0_-30px_70px_rgba(0,0,0,0.12)] rounded-t-[36px] sm:rounded-t-[52px]"
+      className="relative z-10 mt-[100vh] py-20 sm:py-28 px-5 sm:px-8 lg:px-12 bg-[#FDFBF7] border-t border-[#E2DDD5] shadow-[0_-30px_70px_rgba(0,0,0,0.12)] rounded-t-[36px] sm:rounded-t-[52px] scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto">
         {/* Grid Layout: Left Content (7 cols) + Right Photo (5 cols) */}
