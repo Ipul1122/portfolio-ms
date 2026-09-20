@@ -10,23 +10,23 @@ export interface TechIcon {
 }
 
 const rowOneIcons: TechIcon[] = [
+  { id: 'laravel', name: 'Laravel 12', icon: '/img/laravel.svg' },
+  { id: 'php', name: 'PHP', icon: '/img/php.svg' },
   { id: 'react', name: 'React', icon: '/img/react.svg' },
   { id: 'typescript', name: 'TypeScript', icon: '/img/typescript.svg' },
   { id: 'javascript', name: 'JavaScript', icon: '/img/Javascript.svg' },
   { id: 'tailwindcss', name: 'Tailwind CSS', icon: '/img/tailwindcss.svg' },
   { id: 'html', name: 'HTML5', icon: '/img/html.svg' },
-  { id: 'figma', name: 'Figma', icon: '/img/figma.svg' },
-  { id: 'antigravity', name: 'Antigravity IDE', icon: '/img/antigravity.svg' },
 ];
 
 const rowTwoIcons: TechIcon[] = [
-  { id: 'nodejs', name: 'Node.js', icon: '/img/nodejs.svg' },
   { id: 'mysql', name: 'MySQL', icon: '/img/mysql.svg' },
-  { id: 'cpanel', name: 'cPanel', icon: '/img/cpanel.svg' },
+  { id: 'antigravity', name: 'Antigravity IDE', icon: '/img/antigravity.svg' },
+  { id: 'cpanel', name: 'cPanel Cloud', icon: '/img/cpanel.svg' },
   { id: 'git', name: 'Git', icon: '/img/git-branch.svg' },
   { id: 'github', name: 'GitHub', icon: '/img/github.svg' },
-  { id: 'claude', name: 'Claude AI', icon: '/img/claude.svg' },
-  { id: 'react2', name: 'React Ecosystem', icon: '/img/react.svg' },
+  { id: 'figma', name: 'Figma', icon: '/img/figma.svg' },
+  { id: 'nodejs', name: 'Node.js', icon: '/img/nodejs.svg' },
 ];
 
 export const Skills: React.FC = () => {
