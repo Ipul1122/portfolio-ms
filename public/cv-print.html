@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Muhammad Syaifulloh — Full Stack Developer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --primary: #1E1E1E;
+      --accent: #C25E3E;
+      --muted: #55524F;
+      --light-bg: #FAF8F5;
+      --border: #E2DDD5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--primary);
+      background-color: #EFECE6;
+      line-height: 1.45;
+      font-size: 10pt;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Screen UI Controls */
+    .screen-bar {
+      background: #1E1E1E;
+      color: #FFF;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .screen-bar h1 {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      background: #C25E3E;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #A84E32;
+    }
+
+    .btn-secondary {
+      background: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #444;
+    }
+
+    .page-container {
+      max-width: 210mm;
+      margin: 20px auto 40px;
+      background: #FFF;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 16mm 18mm;
+    }
+
+    /* CV Document Styles */
+    header {
+      text-align: center;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 22pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #111;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    header .subtitle {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    header .contact-row {
+      font-size: 8.8pt;
+      color: var(--muted);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header .contact-row a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    header .contact-row a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    h2.section-title {
+      font-size: 10.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+
+    .summary-text {
+      font-size: 9.2pt;
+      color: #333;
+      text-align: justify;
+      line-height: 1.48;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+      font-size: 9pt;
+    }
+
+    .skill-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      color: #1E1E1E;
+      min-width: 175px;
+    }
+
+    .skill-val {
+      color: #444;
+      flex: 1;
+    }
+
+    .entry {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .entry-title {
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .entry-company {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .entry-date {
+      font-size: 8.8pt;
+      font-family: 'JetBrains Mono', monospace;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .entry-sub {
+      font-size: 8.6pt;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    ul.bullet-list {
+      list-style-type: disc;
+      padding-left: 16px;
+      margin-top: 3px;
+    }
+
+    ul.bullet-list li {
+      font-size: 8.9pt;
+      color: #333;
+      margin-bottom: 3.5px;
+      line-height: 1.4;
+      text-align: justify;
+    }
+
+    ul.bullet-list li strong {
+      color: #111;
+    }
+
+    .thesis-box {
+      background: var(--light-bg);
+      border-left: 3px solid var(--accent);
+      padding: 4px 8px;
+      margin-top: 4px;
+      font-size: 8.6pt;
+      color: #444;
+    }
+
+    /* Print Rules for exact 2 pages */
+    @media print {
+      body {
+        background: transparent;
+      }
+      .screen-bar {
+        display: none !important;
+      }
+      .page-container {
+        margin: 0 !important;
+        padding: 10mm 12mm !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+      @page {
+        size: A4;
+        margin: 10mm 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Navigation Bar -->
+  <div class="screen-bar">
+    <h1>
+      <span>📄 CV Preview & Print Ready</span>
+      <span style="font-size:11px; opacity:0.75;">(A4 Two-Page Standard)</span>
+    </h1>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="toggleLanguage()">
+        🌐 Ganti Bahasa (<span id="lang-label">English</span>)
+      </button>
+      <button class="btn" onclick="window.print()">
+        🖨️ Cetak / Simpan PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="page-container">
+
+    <!-- HEADER -->
+    <header>
+      <h1>Muhammad Syaifulloh</h1>
+      <div class="subtitle">Full Stack Developer | Laravel & React</div>
+      <div class="contact-row">
+        <span>📍 Jakarta, Indonesia</span>
+        <span>📞 +62 856-9367-2730</span>
+        <a href="mailto:msyaifulloh2024@gmail.com">✉️ msyaifulloh2024@gmail.com</a>
+        <a href="https://msyaifulloh.my.id" target="_blank">🌐 msyaifulloh.my.id</a>
+        <a href="https://github.com/ipul1122" target="_blank">💻 github.com/ipul1122</a>
+      </div>
+    </header>
+
+    <!-- BAHASA INDONESIA CONTENT -->
+    <div id="content-id">
+      <!-- TENTANG SAYA -->
+      <section>
+        <h2 class="section-title">Tentang Saya</h2>
+        <p class="summary-text">
+          Full Stack Web Developer berbasis ekosistem Laravel dan React.js/TypeScript dengan latar belakang akademis kuat (IPK 3.82) dan pengalaman sebagai Asisten Dosen. Berpengalaman merancang arsitektur Sistem Informasi Manajemen (SIM) skala enterprise, RESTful API performa tinggi, sistem otentikasi berbasis peran (RBAC), serta otomatisasi alur kerja (payroll & presensi geolocation). Terbiasa mengintegrasikan AI Tools (seperti Antigravity IDE) ke dalam alur kerja untuk mengakselerasi product development dan debugging, dengan tetap mempertahankan standar tinggi pada clean code, arsitektur sistem, dan kolaborasi Git/GitHub.
+        </p>
+      </section>
+
+      <!-- KEAHLIAN TEKNIS -->
+      <section>
+        <h2 class="section-title">Keahlian Teknis (Skills & Tools)</h2>
+        <div class="skills-grid">
+          <div class="skill-row">
+            <span class="skill-label">Bahasa & Framework:</span>
+            <span class="skill-val">PHP, TypeScript, JavaScript (ES6+), HTML5, CSS3, Laravel 12, React.js, Vue.js, Tailwind CSS, Bootstrap.</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Basis Data & API:</span>
+            <span class="skill-val">MySQL, PostgreSQL, Relational DB Modeling, RESTful APIs, Postman, Payment Gateway (Midtrans/Xendit).</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Tools & Infrastruktur:</span>
+            <span class="skill-val">Git, GitHub, cPanel Cloud Hosting, Visual Studio Code, Antigravity IDE, Figma (UI/UX), Vite.</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Metodologi & Soft Skills:</span>
+            <span class="skill-val">SDLC (Waterfall), Code Review, Role-Based Access Control (RBAC), Geolocation API, Clean Architecture, Public Speaking & Mentoring.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PENGALAMAN KERJA -->
+      <section>
+        <h2 class="section-title">Pengalaman Kerja</h2>
+
+        <!-- PT Cakrawala -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Full Stack Developer</span> — <span class="entry-company">PT Cakrawala Parama Internasional</span>
+            </div>
+            <span class="entry-date">Maret 2026 – September 2026</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Arsitektur RESTful API & CMS:</strong> Merancang dan mengimplementasikan 30+ RESTful API endpoints berbasis Laravel dan Vue.js, mengamankan autentikasi token via Laravel Sanctum dengan otorisasi 3-tier Role-Based Access Control (RBAC), serta membangun approval workflow dwibahasa untuk level eksekutif.</li>
+            <li><strong>Aplikasi HRIS & Payroll Engine:</strong> Mengembangkan platform HRIS terpadu menggunakan Laravel dan React TypeScript, mengintegrasikan presensi berbasis Geolocation API (geofencing) serta kalkulasi payroll otomatis yang memangkas waktu rekapitulasi tim HR hingga ~60%.</li>
+            <li><strong>DevOps & Cloud Hosting:</strong> Mengelola isolasi multi-environment (staging dan production), mengonfigurasi dependensi Composer/NPM, serta memelihara stabilitas deployment pada infrastruktur cloud hosting cPanel.</li>
+            <li><strong>Proposal Solusi Enterprise:</strong> Menyusun proposal teknis spesifikasi arsitektur perangkat lunak dan materi presentasi solusi Learning Management System (LMS) skala enterprise untuk tender klien sektor pemerintahan.</li>
+            <li><strong>Standar SDLC Waterfall:</strong> Menjalankan siklus hidup pengembangan perangkat lunak secara terstruktur, mulai dari elisitasi kebutuhan bisnis, perancangan diagram data (DFD, ERD), hingga implementasi rilis.</li>
+          </ul>
+        </div>
+
+        <!-- Asisten Dosen -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Asisten Dosen (Part-Time)</span> — <span class="entry-company">Akademi Teknik Informatika Tunas Bangsa</span>
+            </div>
+            <span class="entry-date">Juli 2025 – Sekarang</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Mentoring Full Stack Web:</strong> Membimbing 10+ mahasiswa dalam penguasaan logika pemrograman, algoritma dasar, dan rekayasa web full-stack menggunakan PHP, MySQL, JavaScript, dan Tailwind CSS.</li>
+            <li><strong>Supervisi Tugas Akhir (Capstone):</strong> Mendampingi mahasiswa secara intensif dalam penyelesaian aplikasi tugas akhir berbasis Waterfall SDLC, mempertahankan rasio kelulusan sidang 100%.</li>
+            <li><strong>Pemodelan Arsitektur Sistem:</strong> Memandu perancangan sistem formal mencakup pembuatan Flowchart, Data Flow Diagram (DFD Level 0–2), dan normalisasi Entity Relationship Diagram (ERD).</li>
+            <li><strong>Code Review & Clean Code:</strong> Menyelenggarakan sesi peninjauan kode berkala dan live debugging untuk menegakkan kepatuhan Clean Code serta mitigasi celah keamanan (SQLi & XSS).</li>
+            <li><strong>Standar Kolaborasi Git:</strong> Mengarahkan praktik kolaborasi version control modern menggunakan Git dan GitHub (branch management, pull request, dan penyelesaian konflik kode).</li>
+            <li><strong>Integrasi AI Tools:</strong> Mengedukasi integrasi AI-assisted coding tools (seperti Antigravity IDE) secara etis guna mempercepat troubleshooting dan penulisan kode terstruktur.</li>
+          </ul>
+        </div>
+
+        <!-- TPA Nurul Haq -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Koordinator Utama & IT Support</span> — <span class="entry-company">TPA Masjid Nurul Haq</span>
+            </div>
+            <span class="entry-date">September 2024 – Sekarang</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Transformasi Digital Web Portal:</strong> Menginisiasi dan meluncurkan platform web resmi (tpanurhaq.com) guna mendigitalkan sistem administrasi lembaga untuk 100+ santri dan tenaga pengajar.</li>
+            <li><strong>Otomatisasi Presensi & Jadwal:</strong> Mengotomatisasi sistem pencatatan presensi santri dan penjadwalan terpadu secara real-time via web, memangkas proses rekapitulasi manual hingga ~70%.</li>
+            <li><strong>Basis Data & Pelaporan:</strong> Mengelola basis data terpusat (registrasi santri, log kehadiran, dan evaluasi hasil belajar) serta menghasilkan pelaporan berkala otomatis untuk yayasan.</li>
+            <li><strong>Pemeliharaan Infrastruktur IT:</strong> Bertanggung jawab penuh atas hosting cPanel, manajemen DNS domain, pemantauan uptime (99%+ availability), dan penanganan kendala teknis mandiri.</li>
+          </ul>
+        </div>
+
+        <!-- PT Radar -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Full Stack Developer Intern (Laravel)</span> — <span class="entry-company">PT Radar Teknologi Komputer</span>
+            </div>
+            <span class="entry-date">Maret 2025 – Mei 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Arsitektur Web Dinamis:</strong> Merancang dan membangun arsitektur website portofolio dinamis menggunakan Laravel 12 dengan implementasi fitur CRUD modular dan optimasi basis data MySQL.</li>
+            <li><strong>Visualisasi Data Lingkungan:</strong> Mengembangkan modul analitik berbasis web untuk memvisualisasikan data lingkungan (Polusi Laut Pantai Selatan), menyajikan data secara interaktif kepada publik.</li>
+            <li><strong>QA & Black Box Testing:</strong> Menjalankan pengujian Black Box Testing pada 20+ skenario fungsi aplikasi sebelum deployment, meminimalisir potensi kegagalan sistem pada tahap produksi.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PROYEK UNGGULAN -->
+      <section>
+        <h2 class="section-title">Proyek Unggulan (Featured Projects)</h2>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Aplikasi Manajemen Presensi Geolocation & Payroll</span>
+            <span class="entry-date">Laravel 12, React TypeScript, MySQL, Tailwind CSS</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Merancang RESTful API performa tinggi untuk pemrosesan presensi harian; mengintegrasikan Geolocation API (radius geofencing) dan otomatisasi kalkulasi gaji (payroll engine) serta verifikasi QR Code; membangun antarmuka SPA modern dan modular berbasis React TypeScript.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Sistem Informasi Akademik & Monitoring Siswa</span>
+            <span class="entry-date">Laravel 12, MySQL, Tailwind CSS</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Mengembangkan sistem informasi terpadu mencakup modul Presensi, PPDB Online, dan penjadwalan terpusat; menerapkan sistem evaluasi poin pelanggaran/prestasi dan otomatisasi generate laporan PDF; mengimplementasikan multi-role access control (Admin, Guru, Siswa).</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Company Profile Content Management System (CMS)</span>
+            <span class="entry-date">Laravel 12, Vue.js, MySQL, Laravel Sanctum</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Membangun RESTful API dengan keamanan token Laravel Sanctum dan RBAC untuk pemisahan panel Admin dan Direktur; merancang manajemen artikel dengan dynamic slug dan approval workflow dwibahasa.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PENDIDIKAN -->
+      <section>
+        <h2 class="section-title">Pendidikan</h2>
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">D3 Manajemen Informatika</span> — <span class="entry-company">Akademi Teknik Informatika Tunas Bangsa</span>
+            </div>
+            <span class="entry-date">2022 – 2025</span>
+          </div>
+          <div class="entry-sub">IPK: 3.82 / 4.00 (Lulus dengan Predikat Sangat Memuaskan)</div>
+          <div class="thesis-box">
+            <strong>Proyek Akhir:</strong> “Sistem Informasi Manajemen Kehadiran Murid TPA Berbasis Web Menggunakan Laravel 12 (Studi Kasus: Masjid Nurul Haq, Jakarta Barat)”
+          </div>
+        </div>
+
+        <div class="entry" style="margin-top:6px;">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Otomatisasi & Tata Kelola Perkantoran</span> — <span class="entry-company">SMK Tanjung Jakarta Barat</span>
+            </div>
+            <span class="entry-date">2019 – 2022</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORGANISASI -->
+      <section>
+        <h2 class="section-title">Pengalaman Organisasi</h2>
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Ketua Risnha (Remaja Islam Nurul Haq)</span> — <span class="entry-company">Masjid Nurul Haq</span>
+            </div>
+            <span class="entry-date">2022 – Sekarang</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Memimpin tim eksekutif merancang program tahunan pembinaan pemuda dan community development; mengarahkan pelaksanaan event sosial-edukasi; bertindak sebagai pengambil keputusan internal dan penghubung komunikasi antara pengurus DKM dan pemuda.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- ENGLISH CONTENT -->
+    <div id="content-en" style="display:none;">
+      <!-- ABOUT ME -->
+      <section>
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary-text">
+          Results-driven Full-Stack Web Developer specializing in the Laravel and React.js/TypeScript ecosystems, backed by a strong academic record (GPA 3.82/4.00) and university teaching assistant experience. Experienced in architecting efficient, secure, and scalable Management Information Systems (MIS), high-throughput RESTful APIs, multi-tier Role-Based Access Control (RBAC), and automated workflows (HRIS geolocation & payroll engines). Adept at integrating AI-assisted developer tools (such as Antigravity IDE) to accelerate product engineering and debugging, while upholding rigorous Clean Code standards, system security best practices, and Git collaboration workflows.
+        </p>
+      </section>
+
+      <!-- TECHNICAL SKILLS -->
+      <section>
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-row">
+            <span class="skill-label">Languages & Frameworks:</span>
+            <span class="skill-val">PHP, TypeScript, JavaScript (ES6+), HTML5, CSS3, Laravel 12, React.js, Vue.js, Tailwind CSS, Bootstrap.</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Databases & APIs:</span>
+            <span class="skill-val">MySQL, PostgreSQL, Relational DB Modeling, RESTful APIs, Postman, Payment Gateways (Midtrans/Xendit).</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Tools & Infrastructure:</span>
+            <span class="skill-val">Git, GitHub, cPanel Cloud Hosting, Visual Studio Code, Antigravity IDE, Figma (UI/UX), Vite.</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Methodologies & Concepts:</span>
+            <span class="skill-val">Waterfall SDLC, Code Reviews, Role-Based Access Control (RBAC), Geolocation / Geofencing API, Clean Architecture, Mentoring.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORK EXPERIENCE -->
+      <section>
+        <h2 class="section-title">Work Experience</h2>
+
+        <!-- PT Cakrawala -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Full-Stack Developer</span> — <span class="entry-company">PT Cakrawala Parama Internasional</span>
+            </div>
+            <span class="entry-date">March 2026 – September 2026</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>RESTful API & CMS Architecture:</strong> Architected and implemented 30+ RESTful API endpoints utilizing Laravel and Vue.js, enforcing token-based security via Laravel Sanctum with a 3-tier Role-Based Access Control (RBAC) model and delivering an executive-level bilingual approval workflow.</li>
+            <li><strong>HRIS & Automated Payroll Engine:</strong> Engineered an enterprise HRIS web application using Laravel and React TypeScript, integrating real-time Geolocation API geofencing validation and an automated payroll calculation engine, reducing monthly HR administrative reconciliation time by ~60%.</li>
+            <li><strong>Cloud Infrastructure & DevOps:</strong> Managed multi-environment isolation (staging and production), automated dependency management (Composer/NPM), and streamlined application releases across cPanel cloud infrastructure maintaining 99.9% uptime.</li>
+            <li><strong>Enterprise LMS Technical Proposal:</strong> Spearheaded system architecture documentation and technical presentation deliverables for an enterprise Learning Management System (LMS) pitched in government-sector procurement tenders.</li>
+            <li><strong>Full-Lifecycle SDLC:</strong> Applied end-to-end Waterfall SDLC practices, governing technical execution from business requirements analysis and system modeling (DFD/ERD) through production release.</li>
+          </ul>
+        </div>
+
+        <!-- Teaching Assistant -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Teaching Assistant (Part-Time)</span> — <span class="entry-company">Tunas Bangsa Informatics Engineering Academy</span>
+            </div>
+            <span class="entry-date">July 2025 – Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Full-Stack Mentorship:</strong> Mentored 10+ undergraduate students in fundamental programming logic, relational data modeling, and modern full-stack web engineering using PHP, MySQL, JavaScript, and Tailwind CSS.</li>
+            <li><strong>Capstone Project Supervision:</strong> Guided students through end-to-end thesis project development using the Waterfall SDLC framework, achieving a 100% on-time graduation defense completion rate.</li>
+            <li><strong>System Architecture & Modeling:</strong> Instructed students in formal software architecture design, including process flowcharts, Data Flow Diagrams (DFD Levels 0–2), and normalized Entity Relationship Diagrams (ERD).</li>
+            <li><strong>Code Reviews & Quality Assurance:</strong> Conducted structured weekly code reviews and live debugging sessions to enforce Clean Code principles, component modularity, and security vulnerability mitigations (SQLi/XSS).</li>
+            <li><strong>Version Control Workflows:</strong> Coached students on professional Git and GitHub collaborative workflows (branching strategies, pull requests, and merge conflict resolution).</li>
+            <li><strong>AI-Augmented Development:</strong> Guided students on ethical and effective adoption of AI-assisted development tools (such as Antigravity IDE) to accelerate troubleshooting and code delivery.</li>
+          </ul>
+        </div>
+
+        <!-- TPA Nurul Haq -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Lead Coordinator & IT Support</span> — <span class="entry-company">TPA Masjid Nurul Haq</span>
+            </div>
+            <span class="entry-date">September 2024 – Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Digital Transformation & Portal Development:</strong> Spearheaded and deployed the official web platform (tpanurhaq.com) to digitize core administrative operations, managing digital records for 100+ students and staff.</li>
+            <li><strong>Attendance & Scheduling Automation:</strong> Automated student attendance tracking and timetable management through the web platform, cutting manual administrative paperwork by ~70%.</li>
+            <li><strong>Database Administration & Reporting:</strong> Administered a centralized relational database covering student enrollments, attendance logs, and academic progress, generating automated progress reports for foundation trustees.</li>
+            <li><strong>Web Infrastructure & Support:</strong> Administered cloud hosting environments on cPanel, managed DNS routing, monitored uptime to sustain 99%+ service availability, and independently resolved server technical issues.</li>
+          </ul>
+        </div>
+
+        <!-- PT Radar -->
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Full-Stack Developer Intern (Laravel)</span> — <span class="entry-company">PT Radar Teknologi Komputer</span>
+            </div>
+            <span class="entry-date">March 2025 – May 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Dynamic Web Engineering:</strong> Designed and built a dynamic portfolio web application using Laravel 12, implementing high-performance CRUD workflows and optimized MySQL database queries.</li>
+            <li><strong>Environmental Data Visualization:</strong> Developed interactive web modules to visualize coastal environmental analytics (Case Study: South Coast Marine Pollution), rendering complex datasets into clear, data-driven public insights.</li>
+            <li><strong>QA Testing & Bug Mitigation:</strong> Executed rigorous black-box testing and code debugging across 20+ functional test cases prior to staging releases, significantly mitigating production error risks.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FEATURED PROJECTS -->
+      <section>
+        <h2 class="section-title">Featured Technical Projects</h2>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Geolocation Attendance & Automated Payroll Management System</span>
+            <span class="entry-date">Laravel 12, React TypeScript, MySQL, Tailwind CSS</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Architected high-throughput RESTful APIs with Laravel 12 and MySQL for daily attendance transactions; integrated Geolocation API geofencing and an automated payroll calculation engine with QR code verification; delivered a modern, modular React TypeScript SPA.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Academic Information & Student Monitoring System</span>
+            <span class="entry-date">Laravel 12, MySQL, Tailwind CSS</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Engineered an integrated school management system featuring daily attendance, online admissions (PPDB), and centralized timetable scheduling; implemented a student conduct tracking module with automated PDF academic report generation; enforced multi-role access control (Admin, Faculty, Student).</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Enterprise Content Management System (CMS) & Company Profile</span>
+            <span class="entry-date">Laravel 12, Vue.js, MySQL, Laravel Sanctum</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Developed secure RESTful APIs authenticated with Laravel Sanctum and RBAC to cleanly decouple Administrator and Executive dashboard privileges; engineered a dynamic article management engine featuring automatic slug generation, multi-stage publishing workflows, and bilingual executive approvals.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section>
+        <h2 class="section-title">Education</h2>
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Associate Degree (D3) in Informatics Management</span> — <span class="entry-company">Tunas Bangsa Informatics Engineering Academy</span>
+            </div>
+            <span class="entry-date">2022 – 2025</span>
+          </div>
+          <div class="entry-sub">GPA: 3.82 / 4.00 (Graduated with High Distinction)</div>
+          <div class="thesis-box">
+            <strong>Final Capstone:</strong> “Web-Based Student Attendance Management Information System Using Laravel 12 (Case Study: Nurul Haq Mosque, West Jakarta)”
+          </div>
+        </div>
+
+        <div class="entry" style="margin-top:6px;">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Office Administration</span> — <span class="entry-company">SMK Tanjung West Jakarta</span>
+            </div>
+            <span class="entry-date">2019 – 2022</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORGANIZATIONAL -->
+      <section>
+        <h2 class="section-title">Organizational Experience</h2>
+        <div class="entry">
+          <div class="entry-header">
+            <div>
+              <span class="entry-title">Chairperson of RISNHA (Youth Organization)</span> — <span class="entry-company">Nurul Haq Mosque</span>
+            </div>
+            <span class="entry-date">2022 – Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Led core executive committees in strategic planning and executing annual youth development programs; directed logistics and budget allocations for educational and social initiatives; acted as primary liaison bridging communication between mosque executive board members (DKM) and adolescent youth.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+    let currentLang = 'id';
+    function toggleLanguage() {
+      const idBlock = document.getElementById('content-id');
+      const enBlock = document.getElementById('content-en');
+      const langLabel = document.getElementById('lang-label');
+
+      if (currentLang === 'id') {
+        idBlock.style.display = 'none';
+        enBlock.style.display = 'block';
+        currentLang = 'en';
+        langLabel.innerText = 'Bahasa Indonesia';
+        document.title = "Resume Muhammad Syaifulloh — Full Stack Developer (English)";
+      } else {
+        idBlock.style.display = 'block';
+        enBlock.style.display = 'none';
+        currentLang = 'id';
+        langLabel.innerText = 'English';
+        document.title = "CV Muhammad Syaifulloh — Full Stack Developer (Indonesia)";
+      }
+    }
+  </script>
+</body>
+</html>

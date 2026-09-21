@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowUpRight, Sparkles, Globe } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useLanguage, SECTION_SLUGS } from '../../context/LanguageContext';
@@ -16,6 +16,14 @@ export const Navbar: React.FC = () => {
 
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const isNavigatingRef = useRef<boolean>(false);
+  const navLockTimerRef = useRef<number | null>(null);
+  const activeSectionRef = useRef<string>(activeSection);
+
+  // Keep activeSectionRef synced with latest state without re-running scroll listener
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
 
   const navItems = [
     { name: t('nav.home'), id: 'home' },
@@ -29,35 +37,58 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     let scrollTimeout: number | null = null;
 
+    const updateUrlDebounced = (section: string) => {
+      if (scrollTimeout) window.clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => {
+        const targetSlug = SECTION_SLUGS[lang][section] || SECTION_SLUGS[lang]['home'];
+        const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
+        const basePath = firstSegment && firstSegment.toLowerCase() === 'portfolio-ms' ? '/portfolio-ms' : '';
+        const targetUrl = `${basePath}/${lang.toLowerCase()}/${targetSlug}`;
+        if (window.location.pathname !== targetUrl) {
+          window.history.replaceState({ section, lang }, '', targetUrl);
+        }
+      }, 120);
+    };
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      // Section spy
-      const sections = ['home', 'about', 'skills', 'experience', 'gallery', 'contact'];
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+      // If user recently clicked a nav link, lock spy to prevent intermediate highlights during smooth scroll
+      if (isNavigatingRef.current) return;
+
+      // 1. When inside Hero / near top of page, active is strictly 'home'
+      const heroThreshold = Math.min(window.innerHeight * 0.45, 360);
+      if (window.scrollY < heroThreshold) {
+        if (activeSectionRef.current !== 'home') {
+          setActiveSection('home');
+          updateUrlDebounced('home');
+        }
+        return;
+      }
+
+      // 2. Check subsequent sections using getBoundingClientRect (reliable against layout/margin collapse)
+      const sections = ['about', 'skills', 'experience', 'gallery', 'contact'];
+      const navOffset = window.innerWidth < 640 ? 80 : 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         const el = document.getElementById(section);
         if (el) {
-          if (scrollPosition >= el.offsetTop) {
-            if (activeSection !== section) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= navOffset + 120) {
+            if (activeSectionRef.current !== section) {
               setActiveSection(section);
-
-              // Debounce URL replaceState to prevent excessive browser history writes on fast scrolling
-              if (scrollTimeout) window.clearTimeout(scrollTimeout);
-              scrollTimeout = window.setTimeout(() => {
-                const targetSlug =
-                  SECTION_SLUGS[lang][section] || SECTION_SLUGS[lang]['home'];
-                const targetUrl = `/${lang.toLowerCase()}/${targetSlug}`;
-                if (window.location.pathname !== targetUrl) {
-                  window.history.replaceState({ section, lang }, '', targetUrl);
-                }
-              }, 120);
+              updateUrlDebounced(section);
             }
-            break;
+            return;
           }
         }
+      }
+
+      // Fallback: If no section matched yet, default to 'home'
+      if (activeSectionRef.current !== 'home') {
+        setActiveSection('home');
+        updateUrlDebounced('home');
       }
     };
 
@@ -66,12 +97,21 @@ export const Navbar: React.FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (scrollTimeout) window.clearTimeout(scrollTimeout);
+      if (navLockTimerRef.current) window.clearTimeout(navLockTimerRef.current);
     };
-  }, [activeSection, lang, setActiveSection]);
+  }, [lang, setActiveSection]);
 
   const handleNavClick = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+
+    // Lock scroll spy to keep target active highlight stable throughout smooth scroll animation
+    isNavigatingRef.current = true;
+    if (navLockTimerRef.current) window.clearTimeout(navLockTimerRef.current);
+    navLockTimerRef.current = window.setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 850);
+
     navigateToSection(sectionId, lang, true);
   };
 
